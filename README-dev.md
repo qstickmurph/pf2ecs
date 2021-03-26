@@ -23,6 +23,7 @@ The project has the following directory structure
                 |   |-- classes
                 |   |   `-- subclasses
                 |   |-- feats
+                |   |-- feat_books
                 |   |-- items
                 |   |-- skills
                 |   |-- spells
