@@ -15,24 +15,38 @@ import java.util.ArrayList;
  * @author Alexander Lomeli-Azoubel
  * @since 03/26/2021
  */
-public class Inventory {
-    
-    /** 
-     *
-     */
+public class Inventory {    
+	
+	/** The items in the inventory */
     private ArrayList<String> items = new ArrayList<String>();
+    
+    /** The items equipped */
     private ArrayList<String> equipped = new ArrayList<String>();
+    
+    /** The items invested */
     private ArrayList<String> invested = new ArrayList<String>();
+    
+    /** The items readied */
     private ArrayList<String> readied = new ArrayList<String>();
+    
+    /** The amount of pp */
     private int pp;
+    
+    /** The amount of gp */
     private int gp;
+    
+    /** The amount of sp */
     private int sp;
+    
+    /** The amount of cp */
     private int cp;
+    
+    /** The amount of total money */
     private String money;
     
     /** Constructor Method
      *  
-     *  @param name (ArrayList<String>) The name of the action
+     *  @param name (ArrayList<String>) The list of items
      */
     public Inventory(ArrayList<String> items){
         this.items = items;
