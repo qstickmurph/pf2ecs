@@ -2,6 +2,7 @@
   "type": "ancestry",
   "name": "dwarf",
   "hitpoints": 10,
+  "size": "medium",
     
   "ability_boosts": [
     "constitution",
