@@ -32,7 +32,7 @@ public class Inventory {
     
     /** Constructor Method
      *  
-     *  @param name (ArrayList<String>) The name of the action
+     *  @param name (ArrayList<String>) The list of items
      */
     public Inventory(ArrayList<String> items){
         this.items = items;
