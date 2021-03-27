@@ -2,8 +2,8 @@ package pf2ecs.model;
 
 import java.util.HashSet;
 import java.util.Hashtable;
-//import pf2ecs.model.Action;
-//import pf2ecs.model.Spell;
+
+import pf2ecs.model.Scenario;
 
 /** The Action class holds all the information about each action including its description, any relevant scenario type, and more
  *
@@ -15,15 +15,25 @@ import java.util.Hashtable;
  */
 public class Action {
     
-    /** 
-     *
-     */
+    /** Holds the name of the Action */
     private String name;
-    //private Scenario scenario;
+
+    /** What type of play the Action can be done*/
+    private Scenario scenario;
+
+    /** Holds the traits of the Action */
     private HashSet<String> traits = new HashSet<String>();
+
+    /** Holds the requirements of the Action */
     private HashSet<String> requirements = new HashSet<String>();
+
+    /** Holds the description of the Action */
     private String description;
+
+    /** Holds the time the Action takes to do*/
     private String time;
+
+    /** Holds the trigger of the Action */
     private String trigger;
     
     /** Constructor Method
@@ -48,6 +58,23 @@ public class Action {
      */
     public void setName(String name){
         this.name = name;
+    }
+    
+
+    /**
+     * Returns this.scenario
+     * @return this.scenario (Scenario)
+     */
+    public Scenario getScenario(){
+        return this.scenario;
+    }
+    
+    /**
+     * Sets this.scenario
+     * @param scenario (Scenario)
+     */
+    public void setScenario(Scenario scenario){
+        this.scenario = scenario;
     }
     
 	/**
