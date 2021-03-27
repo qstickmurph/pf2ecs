@@ -16,17 +16,29 @@ import java.util.ArrayList;
  * @since 03/26/2021
  */
 public class Item {
-    
-    /** 
-     *
-     */
+	
+	/** The name of the item */
 	private String name;
+	
+	/** The level of the item */
 	private int level;
+	
+	/** The traits of the item */
 	private HashSet<String> traits = new HashSet<String>();
+	
+	/** The price of the item */
 	private double price;
+	
+	/** The description of the item */
 	private String description;
+	
+	/** The actions to use the item */
 	private HashSet<Action> actions = new HashSet<Action>();
+	
+	/** The runes on the item */
 	private HashSet<Rune> runes = new HashSet<Rune>();
+	
+	/** Whether item needs to be invested */
 	private boolean requireInvest;
     
     /** Constructor Method
