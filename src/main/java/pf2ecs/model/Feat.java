@@ -2,7 +2,9 @@ package pf2ecs.model;
 
 import java.util.HashSet;
 import java.util.Hashtable;
-//import pf2ecs.model.Action;
+
+import pf2ecs.model.Action;
+import pf2ecs.model.Attribute;
 //import pf2ecs.model.Spell;
 
 /** The Feat class holds all the information about each feat including its description, any relevant actions or spells, and more
@@ -15,19 +17,33 @@ import java.util.Hashtable;
  */
 public class Feat {
     
-    /** 
-     *
-     */
+    /** The name of the feat*/
     private String name;
+
+    /** The level of the feat*/
     private int level;
+
+    /** The traits of the feat*/
     private HashSet<String> traits = new HashSet<String>();
+
+    /** The prerequisites of the feat*/
     private HashSet<String> prerequisites = new HashSet<String>();
+
+    /** The description of the feat*/
     private String description;
+
+    /** Whether the feat can be taken multiple times*/
     private boolean multiple;
-    private Hashtable<String, Integer> attributeBonuses = new Hashtable<String, Integer>();
+
+    /** The attribute bonuses of the feat*/
+    private Hashtable<Attribute, Integer> attributeBonuses = new Hashtable<Attribute, Integer>();
+
+    /** The proficiency bonuses of the feat*/
     private Hashtable<String, Integer> proficiencyBonuses = new Hashtable<String,Integer>();
-    
-//    private HashSet<Action> actions = new HashSet<Actions>;
+
+    /** The actions the feat gives */
+    private HashSet<Action> actions = new HashSet<Actions>;
+
 //    private HashSet<Spell> spells = new HashSet<Spells>;
     
     /** Constructor Method
@@ -174,7 +190,7 @@ public class Feat {
 	 * Getter for this.attributeBonuses.
 	 * @return Returns this.attributeBonuses
 	 */
-	public Hashtable<String, Integer> getAttributeBonuses(){
+	public Hashtable<Attribute, Integer> getAttributeBonuses(){
 		return this.attributeBonuses;
 	}
 
@@ -182,24 +198,24 @@ public class Feat {
 	 * Setter for this.attributeBonuses.
 	 * @param name Sets this.attributeBonuses to attributeBonuses
 	 */
-	public void setAttributeBonuses(Hashtable<String, Integer> attributeBonuses){
+	public void setAttributeBonuses(Hashtable<Attribute, Integer> attributeBonuses){
 		this.attributeBonuses = attributeBonuses;
 	}
 
     /**
 	 * Adds attribute, bonus to this.attributeBonuses.
-	 * @param attribute (String) 
+	 * @param attribute (Attribute) 
 	 * @param bonus (int) 
 	 */
-    public void addAttributeBonus(String attribute, int bonus){
+    public void addAttributeBonus(Attribute attribute, int bonus){
         this.attributeBonuses.put(attribute, bonus);
     }
 
 	/**
 	 * Removes attribute from this.attributeBonuses if present.
-	 * @param attribute (HashSet<String>)
+	 * @param attribute (Attribute)
 	 */
-    public void removeAttributeBonus(String attribute){
+    public void removeAttributeBonus(Attribute attribute){
         if(this.attributeBonuses.contains(attribute)){
             this.attributeBonuses.remove(attribute);
         }
@@ -236,6 +252,39 @@ public class Feat {
     public void removeProficiencyBonus(String proficiency){
         if(this.proficiencyBonuses.contains(proficiency)){
             this.proficiencyBonuses.remove(proficiency);
+        }
+    }
+
+    /**
+	 * Getter for this.actions.
+	 * @return Returns this.actions
+	 */
+	public HashSet<Action> getActions(){
+		return this.actions;
+	}
+
+	/**
+	 * Setter for this.actions.
+	 * @param name Sets this.actions to actions*/
+	public void setActions(HashSet<Action> actions){
+		this.actions= actions;
+	}
+
+    /**
+	 * Adds actionto this.actions.
+	 * @param action (Action) 
+	 */
+    public void addAction(Action action){
+        this.actions.add(action);
+    }
+
+	/**
+	 * Removes proficiency from this.proficiencyBonuses if present.
+	 * @param proficiency (HashSet<String>)
+	 */
+    public void removeAction(Action action){
+        if(this.actions.contains(action)){
+            this.actions.remove(action);
         }
     }
 }
