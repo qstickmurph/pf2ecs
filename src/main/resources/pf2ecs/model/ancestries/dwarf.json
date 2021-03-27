@@ -128,7 +128,7 @@
     {
     "type": "feat",
     "name": "dwarven_weapon_expertise",
-    "level": 9,
+    "level": 13,
     "traits": "dwarf",
     "prerequisites": "dwarven_weapon_familiarity",
     "description":"Your dwarven affinity blends with your training,granting you great skill with dwarven weapons. Whenever you gain a class feature that grants you expert or greater proficiency in certain weapons, you also gain that proficiency for battle axes, picks, warhammers, and all dwarven weapons in which you are trained."
