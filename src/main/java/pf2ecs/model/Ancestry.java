@@ -199,7 +199,7 @@ public class Ancestry {
 	 * @param feat (Feat) 
 	 */
     public void addFeats(Feat feat){
-        this.features.add(feat);
+        this.feats.add(feat);
     }
 
 	/**
@@ -207,8 +207,8 @@ public class Ancestry {
 	 * @param feat (Feat)
 	 */
     public void removeFeat(Feat feat){
-        if(this.features.contains(feat)){
-            this.features.remove(feat);
+        if(this.feats.contains(feat)){
+            this.feats.remove(feat);
         }
     }
     
