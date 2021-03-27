@@ -1,0 +1,99 @@
+{
+  "type": "class",
+  "name": "class_name",
+  "hitpoints": "class hp",
+  
+  "key_ability": "key ability",
+  
+  "initial_proficiencies": [
+    "saving_throws:(saving throw)=TEML",
+      
+    "skills:(skill)=TEML",
+      
+    "attacks:(weapon type)=TEML",
+      
+    "armor:(armor type)=TEML",
+    
+    "spell_traditions:(spell tradition if caster)=TEML",
+      
+    "class_DC=TEML"
+  ],
+  "spellcaster_type": "(Spontaneous or Prepared if caster)",
+  "subclasses": [
+    {
+    "type": "subclass",
+    "name": "Subclass name",
+    "description": "Subclass description",
+    "subclass_feats": [
+        {
+        "type": "feat",
+        "name": "feat name",
+        "level": "level of feat",
+        "description": "Description of feat"
+        }
+      ]
+    }
+  ],
+  "features": [
+    [
+        "lvl 1"  
+    ],
+    [
+        "lvl 2"  
+    ],
+    [
+      "lvl 3"
+    ],
+    [
+      "lvl 4"
+    ],
+    [
+      "lvl 5"
+    ],
+    [
+      "lvl 6"
+    ],
+    [
+      "lvl 7"
+    ],
+    [
+      "lvl 8"
+    ],
+    [
+      "lvl 9"
+    ],
+    [
+      "lvl 10"
+    ],
+    [
+      "lvl 11"
+    ],
+    [
+      "lvl 12"
+    ],
+    [
+      "lvl 13"
+    ],
+    [
+      "lvl 14"
+    ],
+    [
+      "lvl 15"
+    ],
+    [
+      "lvl 16"
+    ],
+    [
+      "lvl 17"
+    ],
+    [
+      "lvl 18"
+    ],
+    [
+      "lvl 19"
+    ],
+    [
+      "lvl 20"
+    ]
+  ]
+}

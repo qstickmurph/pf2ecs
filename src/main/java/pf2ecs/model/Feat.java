@@ -208,9 +208,9 @@ public class Feat {
     /**
 	 * Adds attribute, bonus to this.attributeBonuses.
 	 * @param attribute (Attribute) 
-	 * @param bonus (int) 
+	 * @param bonus (Integer) 
 	 */
-    public void addAttributeBonus(Attribute attribute, int bonus){
+    public void addAttributeBonus(Attribute attribute, Integer bonus){
         this.attributeBonuses.put(attribute, bonus);
     }
 
@@ -242,9 +242,9 @@ public class Feat {
     /**
 	 * Adds proficiency, bonus to this.proficiencyBonuses.
 	 * @param proficiency (String) 
-	 * @param bonus (int) 
+	 * @param bonus (Integer) 
 	 */
-    public void addProficiencyBonus(String proficiency, int bonus){
+    public void addProficiencyBonus(String proficiency, Integer bonus){
         this.proficiencyBonuses.put(proficiency, bonus);
     }
 
