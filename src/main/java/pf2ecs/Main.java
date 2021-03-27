@@ -4,7 +4,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;                                                                                                                                                                                                                                                                                                                                                                                                   
- 
+
+import pf2ecs.model.Feat;
  
 public class Main extends Application{
     @Override
