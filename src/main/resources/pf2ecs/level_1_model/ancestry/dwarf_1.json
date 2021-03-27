@@ -1,0 +1,40 @@
+{
+    "type": "ancestry",
+    "name": "dwarf",
+    "hitpoints": 10,
+    
+    "ability_boosts": [
+      "constitution",
+      "wisdom",
+      "free"
+    ],
+    "ability_flaw": "Charisma",
+    "languages": [
+      "common",
+      "dwarven"
+   ],
+   "traits": [
+        "dwarf",
+        "humanoid"
+      ],
+      "features": [
+        "feats:darkvision",
+        "feats:clan_dagger"
+      ],
+    "heritages": [
+      {
+          "type": "heritage",
+          "name": "death_warden_dwarf",
+          "description":"Your ancestors have been tomb guardians for generations, and the power they cultivated to ward off necromancy has passed on to you. If you roll a success on a saving throw against a necromancy effect, you get a critical success instead."
+      }
+      ],
+    "ancestry_feats": [
+      {
+        "type": "feat",
+        "name": "dwarven_lore",
+        "level": 1,
+        "traits": "dwarf",
+        "description":"You eagerly absorbed the old stories and traditions of your ancestors, your gods, and your people, studying in subjects and techniques passed down for generation upon generation. You gain the trained proficiency rank in Crafting and Religion. If you would automatically become trained in one of those skills (from your background or class, for example), you instead become trained in a skill of your choice. You also become trained in Dwarven Lore."
+      }
+    ]
+}

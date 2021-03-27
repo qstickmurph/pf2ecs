@@ -1,0 +1,10 @@
+{
+  "type": "feat",
+  "name": "hefty_hauler",
+  "traits": [
+    "general",
+    "skill"
+  ],
+  "prerequisites": "athletics=trained",
+  "description": "You can carry more than your frame implies. Increase your maximum and encumbered Bulk limits by 2"
+}
