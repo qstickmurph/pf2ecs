@@ -1,3 +1,5 @@
+package pf2ecs.model;
+
 public enum Size{
     TINY,
     SMALL,
