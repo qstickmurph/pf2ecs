@@ -165,7 +165,7 @@ public class Item {
     
 	/**
 	 * Adds action to this.actions.
-	 * @param trait (Action) 
+	 * @param action (Action) 
 	 */
     public void addAction(Action action){
         this.actions.add(action);
