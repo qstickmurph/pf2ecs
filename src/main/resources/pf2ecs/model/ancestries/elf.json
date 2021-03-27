@@ -3,6 +3,7 @@
   "name": "elf",
   "hitpoints": "6",
   "size": "medium",
+  "speed": "30 ft",
     
   "ability_boosts": [
    "dexterity",

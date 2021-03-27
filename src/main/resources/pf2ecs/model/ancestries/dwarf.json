@@ -3,6 +3,7 @@
   "name": "dwarf",
   "hitpoints": 10,
   "size": "medium",
+  "speed": "20 ft",
     
   "ability_boosts": [
     "constitution",
