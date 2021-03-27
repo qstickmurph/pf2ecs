@@ -42,7 +42,10 @@ public class Feat {
     private Hashtable<String, Integer> proficiencyBonuses = new Hashtable<String,Integer>();
 
     /** The actions the feat gives */
-    private HashSet<Action> actions = new HashSet<Actions>;
+    private HashSet<Action> actions = new HashSet<Actions>();
+
+    /** The choices of the feat */
+    private HashSet<Feat> choices = new HashSet<Feat>();
 
 //    private HashSet<Spell> spells = new HashSet<Spells>;
     
@@ -265,13 +268,13 @@ public class Feat {
 
 	/**
 	 * Setter for this.actions.
-	 * @param name Sets this.actions to actions*/
+	 * @param actions Sets this.actions to actions*/
 	public void setActions(HashSet<Action> actions){
 		this.actions= actions;
 	}
 
     /**
-	 * Adds actionto this.actions.
+	 * Adds action to this.actions.
 	 * @param action (Action) 
 	 */
     public void addAction(Action action){
@@ -279,12 +282,45 @@ public class Feat {
     }
 
 	/**
-	 * Removes proficiency from this.proficiencyBonuses if present.
-	 * @param proficiency (HashSet<String>)
+	 * Removes action from this.actions if present.
+	 * @param action (Action)
 	 */
     public void removeAction(Action action){
         if(this.actions.contains(action)){
             this.actions.remove(action);
+        }
+    }
+
+    /**
+	 * Getter for this.choices.
+	 * @return Returns this.choices
+	 */
+	public HashSet<Feat> getChoices(){
+		return this.choices;
+	}
+
+	/**
+	 * Setter for this.choices.
+	 * @param choices Sets this.choices to choices*/
+	public void setChoices(HashSet<Feat> choices){
+		this.choices = choices;
+	}
+
+    /**
+	 * Adds action to this.choices.
+	 * @param choice (Feat) 
+	 */
+    public void addAction(Feat choice){
+        this.choices.add(choice);
+    }
+
+	/**
+	 * Removes choices from this.proficiencyBonuses if present.
+	 * @param choice (Feat)
+	 */
+    public void removeChoice(Feat choice){
+        if(this.choices.contains(choice)){
+            this.choices.remove(choice);
         }
     }
 }
