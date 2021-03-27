@@ -27,7 +27,7 @@ The project has the following directory structure
                 |   |-- items
                 |   |-- skills
                 |   |-- spells
-                |   `-- spellTraditions
+                |   `-- spell_books
                 `-- view
 ```
 ./doc : contains all of the documentation for pf2cs in .html files created with javadocs \
@@ -39,3 +39,8 @@ The project has the following directory structure
 ./src/main/resources/pf2ecs/controller : idk yet tbh \
 ./src/main/resources/pf2ecs/model : contains all the data files used by the program's model such as .json files storing pathfinder data \
 ./src/main/resources/pf2ecs/view : contains all the data files used in creating the view such as .fxml files and images \
+
+## Git Structure
+master - Main branch, only ever merged onto for a full release
+develop - Branch where all the feature branches are merged into and eventually merges into master for a release
+feature-<feature_name> - Each feature branch is unique for the specific feature being added. Eventually merged onto develop when feature is complete.
