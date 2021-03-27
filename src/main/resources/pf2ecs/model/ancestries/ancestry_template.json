@@ -1,0 +1,45 @@
+{
+  "type": "ancestry",
+  "name": "ancestry_name",
+  "hitpoints": "hp for ancestry",
+  "size": "ancestry size",
+  "speed": "ancestry speed"
+    
+  "ability_boosts": [
+   "ability boost",
+   "ability boost",
+   "free"
+ ],
+ 
+ "ability_flaw": "ability flaw",
+ "languages": [
+    "common",
+    "other"
+ ],
+ 
+  "traits": [
+    "ancestry",
+    "humanoid"
+ ],
+ 
+  "features": [
+    "Ancestry features"
+ ],
+ 
+  "heritages": [
+  {
+   "type": "heritage",
+   "name": "heritage_name",
+   "description": "heritage description"
+  }
+  ],
+  "ancestry_feats": [
+    {
+    "type": "feat",
+    "name": "feat_name",
+    "level": "feat level",
+    "traits": "ancestry",
+    "description": "feat description"
+   }
+  ]
+}

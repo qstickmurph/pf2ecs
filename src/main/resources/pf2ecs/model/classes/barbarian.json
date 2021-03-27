@@ -1,0 +1,408 @@
+{
+    "type": "class",
+    "name": "barbarian",
+    "hitpoints": 12,
+    
+    "key_ability": "strength",
+    
+    "initial_proficiencies": [
+      "saving_throws:fortutude=expert",
+      "saving_throws:reflex=trained",
+      "saving_throws:will=expert",
+      "saving_throws:perception=expert",
+      
+      "skills:athletics=trained",
+      "skills:free=trained",
+      "skills",
+      
+      "attacks:simple_weapons=trained",
+      "attacks:martial_weapons=trained",
+      "attacks:unarmed_attacks=trained",
+      
+      "armor:light_armor=trained",
+      "armor:medium_armor=trained",
+      "armor:unarmored_defense=trained",
+      
+      "class_DC=trained"
+    ],
+    
+    "subclasses": [
+      {
+        "type": "subclass",
+        "name": "animal_instinct",
+        "description": "The fury of a wild predator fills you when you Rage, granting you ferocious unarmed attacks. Cultures that revere vicious animals (such as apes or bears) give rise to barbarians with this instinct. You might also be at war with an uncontrollable, animalistic side of your personality, or you might be a descendant of a werewolf or another werecreature. Select an Animal Instincts that best matches your chosen animal.",
+        "subclass_feats": [
+          {
+            "type": "feat",
+            "name": "animal_instincts",
+            "level": 1,
+            "choices": [
+              {
+                "type": "feat",
+                "name": "animal_instincts_ape",
+                "actions": "animal_instincts_fist"
+              },
+              {
+                "type": "feat",
+                "name": "animal_instincts_bear",
+                "actions": [
+                  "animal_instinct_jaws1",
+                  "animal_instincts_claw"
+                ]
+              },
+              {
+                "type": "feat",
+                "name": "animal_instincts_bull",
+                "actions": "animal_instincts_horn"
+              },
+              {
+                "type": "feat",
+                "name": "animal_instincts_cat",
+                "actions": [
+                  "animal_instincts_jaws1",
+                  "animal_instincts_claws"
+                ]
+              },
+              {
+                "type": "feat",
+                "name": "animal_instincts_deer",
+                "actions": "animal_instincts_antler"
+              },
+              {
+                "type": "feat",
+                "name": "frog",
+                "actions": [
+                  "animal_instincts_jaws1",
+                  "animal_instincts_tongue"
+                  ]
+              },
+              {
+                "type": "feat",
+                "name": "animal_instincts_shark",
+                "actions": "animal_instinct_jaws2"
+              },
+              {
+                "type": "feat",
+                "name": "animal_instincts_snake",
+                "actions": "animal_instincts_fangs"
+              },
+              {
+                "type": "feat",
+                "name": "animal_instincts_wolf",
+                "actions": "animal_instincts_jaws3"
+              }
+            ]
+          }, 
+          {
+            "type": "feat",
+            "name": "animal_instinct_anathema",
+            "level": 1,
+            "description": "Flagrantly disrespecting an animal of your chosen kind is anathema to your instinct, as is using weapons while raging"
+          },
+          {
+            "type": "feat",
+            "name": "bestial_rage",
+            "level": 1,
+            "description": "When you Rage, you gain your chosen animal’s unarmed attack (or attacks). The specific attack gained, the damage it deals, and its traits are listed. These attacks are in the brawling group. Your Rage action gains the morph, primal, and transmutation traits."
+          },
+          {
+            "type": "feat",
+            "name": "animal_instinct_specialization_ability",
+            "level": 7,
+            "description": "Increase the damage die size for the unarmed attacks granted by your chosen animal by one step, and increase the additional damage from Rage from 2 to 5 for your chosen animal’s unarmed attacks. The frog’s tongue attack and deer’s antler attack gain reach 10 feet. If you have greater weapon specialization, increase the damage from Rage from 5 to 12 for your chosen animal’s unarmed attacks."
+          },
+          {
+            "type": "feat",
+            "name": "animal_instinct_raging_restistance",
+            "level": 9,
+            "description": "You resist piercing and slashing damage"
+          }
+        ]
+      },
+      {
+        "type": "subclass",
+        "name": "dragon_instinct",
+        "description": "You summon the fury of a mighty dragon and manifestincredible abilities. Perhaps your culture reveres draconicmajesty, or you gained insights by drinking or bathing indragon’s blood or watching a marauding wyrm burn your village. Select a type of Dragon Instincts as your instinct’s dragon type. Chromatic dragons tend to be evil, and metallic dragons tend to be good.",
+        "subclass_feats": [
+          {
+            "type": "feat",
+            "name": "dragon_instincts",
+            "level": 1,
+            "choices": [
+              {
+                "type": "feat",
+                "name": "dragon_instincts_black",
+                "description": "Category: Chromatic, Breath Weapon: Line of Acid"
+              },
+              {
+                "type": "feat",
+                "name": "dragon_instincts_blue",
+                "description": "Category: Chromatic, Breath Weapon: Line of Electricity"
+              },
+              {
+                "type": "feat",
+                "name": "dragon_instincts_green",
+                "description": "Category: Chromatic, Breath Weapon: Cone of Poison"
+              },
+              {
+                "type": "feat",
+                "name": "dragon_instincts_red",
+                "description": "Category: Chromatic, Breath Weapon: Cone of Fire"
+              },
+              {
+                "type": "feat",
+                "name": "dragon_instincts_white",
+                "description": "Category: Chromatic, Breath Weapon: Cone of Cold"
+              },
+              {
+                "type": "feat",
+                "name": "dragon_instincts_brass",
+                "description": "Category: Metallic, Breath Weapon: Line of Fire"
+              },
+              {
+                "type": "feat",
+                "name": "dragon_instincts_bronze",
+                "description": "Category: Metallic, Breath Weapon: Line of Electricity"
+              },
+              {
+                "type": "feat",
+                "name": "dragon_instincts_copper",
+                "description": "Category: Metallic, Breath Weapon: Line of Acid"
+              },
+              {
+                "type": "feat",
+                "name": "dragon_instincts_gold",
+                "description": "Category: Metallic, Breath Weapon: Cone of Fire"
+              },
+              {
+                "type": "feat",
+                "name": "dragon_instincts_silver",
+                "description": "Category: Metallic, Breath Weapon: Cone of Cold"
+              }
+            ]
+          },
+          {
+            "type": "feat",
+            "name": "dragon_instinct_anathema",
+            "level": 1,
+            "description": "Letting a personal insult against you slide is anathema toyour instinct. Choose whether your character respects orabhors your dragon type. If you respect it, defying such adragon is anathema, and if you abhor it, failing to defeatsuch a dragon you come across is anathema."
+          },
+          {
+            "type": "feat",
+            "name": "draconic_rage",
+            "level": 1,
+            "description": "While raging, you can increase the additional damage from Rage from 2 to 4 and change its damage type to match that of your dragon’s breath weapon instead of the damage type for your weapon or unarmed attack. If you do this, your Rage action gains the arcane and evocation traits, as well as the trait matching the damage type."
+          },
+          {
+            "type": "feat",
+            "name": "dragon_instinct_specialization_ability",
+            "level": 7,
+            "description": "When you use draconic rage, you increase the additional damage from Rage from 4 to 8. If you have greater weapon specialization, instead increase the damage from Rage when using draconic rage from 8 to 16."
+          },
+          {
+            "type": "feat",
+            "name": "dragon_instinct_raging_resistance",
+            "level": 9,
+            "description": "You resist piercing damage and the damage type of your dragon’s breath weapon."
+          }
+        ]
+      },
+      {
+       "type": "subclass",
+       "name": "fury_instinct",
+       "description": "Your rage comes from a deep and purely personal well within you. You use your rage as you choose.",
+       "subclass_feats": [
+         {
+         "type": "feat",
+         "name": "fury_instinct_anamthema",
+         "level": 1,
+         "description": "You don't have an anathema"
+         },
+         {
+           "type": "feat",
+           "name": "instinct_ability",
+           "level": 1,
+           "description": "feat_books_barbarian"
+         },
+         {
+           "type": "feat",
+           "name": "fury_instinct_specialization_ability",
+           "level": 7,
+           "description": "Increase the additional damage from Rage from 2 to 6. If you have greater weapon specialization, instead increase the additional damage from Rage to 12."
+         },
+         {
+           "type": "feat",
+           "name": "fury_instinct_raging_resistance",
+           "level": 9,
+           "description": "You resist physical weapon damage, but not physicaldamage from other sources (such as unarmed attacks)."
+          }
+        ]
+      },
+      {
+        "type": "subclass",
+        "name": "giant_instinct",
+        "description": "Your rage gives you the raw power and size of a giant. This doesn’t necessarily mean you revere giants—you might scoff at them or even aspire to slay them! You could instead seem like a giant to other people due to your exceptional strength or larger-than-life emotions and ego.",
+        "subclass_feats": [
+          {
+            "type": "feat",
+            "name": "titan_instinct_anathema",
+            "level": 1,
+            "description": "Failing to face a personal challenge of strength is anathema."
+          },
+          {
+            "type": "feat",
+            "name": "titan_mauler",
+            "level": 1,
+            "description": "You can use a weapon built for a Large creature if you are Small or Medium (both normally and when raging). If you’re not Small or Medium, you can use a weapon built for a creature one size larger than you. You gain access to this larger weapon, which can be of any weapon type otherwise available at character creation. It has the normal Price and Bulk for a weapon of its size (page 295). When wielding such a weapon in combat, increase your additional damage from Rage from 2 to 6, but you have the clumsy 1 condition (page 618) because of the weapon’s unwieldy size. You can’t remove this clumsy condition or ignore its penalties by anymeans while wielding the weapon"
+          },
+          {
+            "type": "feat",
+            "name": "giant_instinct_specialization_ability",
+            "level": 7,
+            "description": "Increase the damage from Rage when using a larger weapon from 6 to 10; if you have greater weapon specialization, increase it from 10 to 18."
+          },
+          {
+            "type": "feat",
+            "name": "giant_instinct_raging_resistance",
+            "level": 9,
+            "description": "You resist bludgeoning damage and your choice of cold, electricity, or fire, chosen when you gain raging resistance."
+          }
+        ]
+      },
+      {
+        "type": "subclass",
+        "name": "spirit_instinct",
+        "description": "Whether you are emotionally sensitive to the spirits around you; worship ancestors or apparitions; or are haunted by the specter of an ancestor, relative, friend, or foe, your rage takes the form of a spiritual possession.",
+        "class_feats": [
+          {
+            "type": "feat",
+            "name": "spirit_instinct_anathema",
+            "level": 1,
+            "description": "Disrespecting corpses or spirits is anathema to your instinct; defending yourself against undead creatures is not."
+          },
+          {
+            "type": "feat",
+            "name": "spirit_rage",
+            "level": 1,
+            "description": "While raging, you can increase the additional damage from Rage from 2 to 3 and change its damage type to negative or positive, instead of the damage type for your weapon or unarmed attack (choose each time you Rage). If you choose to deal negative or positive damage, your weapon or unarmed attack gains the effects of the ghost touch property rune, which makes it more effective against incorporeal creatures, and your Rage action gains the divine and necromancy traits, plus negative or positive, as appropriate."
+          },
+          {
+            "type": "feat",
+            "name": "spirit_instinct_specialization_ability",
+            "level": 7,
+            "description": "When using spirit rage, increase the damage from Rage from 3 to 7. If you have greater weapon specialization, instead increase the damage when using spirit rage to 13."
+          },
+          {
+            "type": "feat",
+            "name": "spirit_instinct_raging_resistance",
+            "level": 9,
+            "description": "You resist negative damage, as well as damage dealt by the attacks and abilities of undead creatures, regardless of the damage type."
+          }
+        ]
+      }
+    ],
+    
+    "features": [
+      [
+        "classes:features:rage",
+        "subclass",
+        "feat_books:barbarian"
+      ],
+      [
+        "feat_books:barbarian",
+        "feat_books:skill"
+      ],
+      [
+        "classes:featuress:deny_advantage",
+        "feat_books:general",
+        "classes:features:skill_increases"
+      ],
+      [
+        "feat_books:barbarian",
+        "feat_books:skill"
+      ],
+      [
+        "classes:features:ability_boost",
+        "classes:features:skill_increases",
+        "feat_books:ancestry",
+        "classes:features:brutality"
+      ],
+      [
+        "feat_books:barbarian",
+        "feat_books:skill"
+      ],
+      [
+        "classes:features:skill_increases",
+        "feat_books:general",
+        "classes:features:juggernaut",
+        "classes:features:weapon_specialization"
+      ],
+      [
+        "feat_books:skill",
+        "feat_books:barbarian"
+      ],
+      [
+        "classes:features:skill_increases",
+        "feat_books:ancestry",
+        "classes:features:lightning_reflexes",
+        "classes:features:raging_resistance"
+      ],
+      [
+        "feat_books:skill",
+        "feat_books:barbarian",
+        "classes:features:ability_boosts"
+      ],
+      [
+        "feat_books:general",
+        "classes:features:skill_increases",
+        "classes:features:might_rage"
+      ],
+      [
+        "feat_books:skill",
+        "feat_books:barbarian"
+      ],
+      [
+        "classes:features:skill_increases",
+        "feat_books:ancestry",
+        "classes:features:greater_juggernaut",
+        "classes:features:medium_armor_expertise",
+        "classes:features:weapon_fury"
+      ],
+      [
+        "feat_books:skill",
+        "feat_books:barbarian"
+      ],
+      [
+        "feat_books:general",
+        "classes:features:skill_increase",
+        "classes:features:ability_boosts",
+        "classes:features:greater_weapon_specialization",
+        "classes:features:indomitable_will"
+      ],
+      [
+        "feat_books:skill",
+        "feat_books:barbarian"
+      ],
+      [
+        "classes:features:skill_increases",
+        "classes:features:heightened_senses",
+        "classes:features:armor_of_fury"
+      ],
+      [
+        "feat_books:barbarian",
+        "feat_books:skill"
+      ],
+      [
+        "feat_books:general",
+        "classes:features:skill_increases",
+        "classes:features:armor_of_fury",
+        "classes:features:devestator"
+      ],
+      [
+        "feat_books:barbarian",
+        "feat_books:skill",
+        "classes:features:ability_boosts"
+      ]
+    ]
+    
+}
