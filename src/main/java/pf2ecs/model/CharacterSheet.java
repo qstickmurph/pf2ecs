@@ -4,8 +4,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import pf2ecs.model.Attribute;
 import pf2ecs.model.Alignment;
@@ -112,7 +118,15 @@ public class CharacterSheet {
         this.diety = "";
         this.alignment = Alignment.N;
         this.heroPoints = 0;
+        
         this.attributes = new Hashtable<>();
+        this.attributes.put(Attribute.STR, 10);
+        this.attributes.put(Attribute.DEX, 10);
+        this.attributes.put(Attribute.CON, 10);
+        this.attributes.put(Attribute.INT, 10);
+        this.attributes.put(Attribute.WIS, 10);
+        this.attributes.put(Attribute.CHA, 10);
+
         this.proficiencies = new Hashtable<>();
         this.ac = 0;
         this.maxHp = 0;
@@ -122,40 +136,15 @@ public class CharacterSheet {
         this.languages = "";
     }
 
-    /**
-     * Constructor Method making a CharacterSheet from a json file.
-     *
-     * @param json (JsonObject) 
-     */
-    public CharacterSheet(JsonObject json){
-        this.name = "";
-        this.ancestry = new Ancestry();
-        this.pfClass = new PfClass();
-        this.background = new Background();
-        this.inventory = new Inventory();
-        this.actions = new HashSet<>();
-        this.feats = new HashSet<>();
-        this.xp = 0;
-        this.level = 1;
-        this.size = Size.MEDIUM;
-        this.diety = "";
-        this.alignment = Alignment.N;
-        this.heroPoints = 0;
-        this.attributes = new Hashtable<>();
-        this.proficiencies = new Hashtable<>();
-        this.ac = 0;
-        this.maxHp = 0;
-        this.hp = 0;
-        this.tempHp = 0;
-        this.speed = "";
-        this.languages = "";
-        this.readJson(json);
+    public static PfClass fromJson(JsonObject json){
+        Gson gson = new Gson();
+        return gson.fromJson(json, PfClass.class);
     }
-    
-    /**
+/*   
+    /
      * Reads a JsonObject and applies the changes to the CharacterSheet object
      * @param json (JsonObject)
-     */
+     /
     public void readJson(JsonObject json){
         if(json.has("name")){
             // Put name from json into this.name
@@ -349,12 +338,26 @@ public class CharacterSheet {
             this.languages = json.get("languages").getAsString();
         }
     }
-    
+  */  
     /**
      * Exports the character sheet as a json file
      */
-    public void printJson(){
+    public void saveJson() {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try {
+            File directory = new File("character_sheets");
+            if (! directory.exists()){
+                directory.mkdir();
+            }
 
+            File file = new File("character_sheets/character_sheet.json");
+            file.createNewFile();
+            FileWriter writer = new FileWriter(file);
+            writer.write("Heyo");
+            //gson.toJson(this, writer);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
     
     /**
@@ -607,6 +610,22 @@ public class CharacterSheet {
      */
     public Hashtable<Attribute, Integer> getAttributes(){
         return this.attributes;
+    }
+    
+    /**
+     * @param attribute (Attribute)
+     * @return score (int) 
+     */
+    public int getAttributeScore(Attribute attribute){
+        return (int) this.attributes.get(attribute);
+    }
+    
+    /**
+     * @param attribute (Attribute)
+     * @return mod (int)
+     */
+    public int getAttributeMod(Attribute attribute){
+        return (int) (this.attributes.get(attribute) - 10)/2;
     }
 
     /**
