@@ -1,5 +1,5 @@
 {
-  "name": "Bob the builder",
+  "name": "",
   "ancestry": {
     "hitpoints": 0,
     "attributeBonuses": {},
@@ -27,27 +27,25 @@
   },
   "actions": [],
   "feats": [],
-  "xp": 540,
-  "level": 12,
+  "xp": 0,
+  "level": 19,
   "size": "MEDIUM",
   "diety": "",
-  "alignment": "LE",
-  "heroPoints": 1,
+  "alignment": "N",
+  "heroPoints": 0,
   "attributes": {
-    "DEX": 10,
     "CHA": 10,
-    "INT": 10,
-    "CON": 10,
     "WIS": 10,
-    "STR": 10
+    "DEX": 10,
+    "STR": 10,
+    "INT": 10,
+    "CON": 10
   },
   "proficiencies": {},
-  "ac": 20,
-  "maxHp": 100,
-  "hp": 90,
+  "ac": 0,
+  "maxHp": 0,
+  "hp": 0,
   "tempHp": 0,
-  "dying": 1,
-  "wounded": 0,
-  "speed": "30",
-  "languages": "French"
+  "speed": "",
+  "languages": ""
 }

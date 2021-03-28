@@ -7,6 +7,8 @@ import java.util.Hashtable;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.FileReader;
+import java.io.Reader;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
@@ -79,7 +81,7 @@ public class CharacterSheet {
     private Hashtable<Attribute, Integer> attributes;
 
     /** The character's proficiencies */
-    private Hashtable<String, Integer> proficiencies;
+    private Hashtable<String, SkillTraining> proficiencies;
 
     /** The ac of the character */
     private int ac;
@@ -92,6 +94,12 @@ public class CharacterSheet {
 
     /** The character's temporary hp */
     private int tempHp;
+
+    /** The character's dying condition */
+    private int dying;
+
+    /** The character's wouded condition */
+    private int wounded;
 
     /** The character's speed */
     private String speed;
@@ -134,11 +142,21 @@ public class CharacterSheet {
         this.tempHp = 0;
         this.speed = "";
         this.languages = "";
+    }   
+
+    public static CharacterSheet fromFile(File file){
+        Gson gson = new Gson();
+        try(Reader reader = new FileReader(file)){
+            return gson.fromJson(reader, CharacterSheet.class);
+        } catch (IOException e) { 
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public static PfClass fromJson(JsonObject json){
+    public static CharacterSheet fromJson(JsonObject json){
         Gson gson = new Gson();
-        return gson.fromJson(json, PfClass.class);
+        return gson.fromJson(json, CharacterSheet.class);
     }
 /*   
     /
@@ -353,13 +371,30 @@ public class CharacterSheet {
             File file = new File("character_sheets/character_sheet.json");
             file.createNewFile();
             FileWriter writer = new FileWriter(file);
-            writer.write("Heyo");
-            //gson.toJson(this, writer);
+            //writer.write("Heyo");
+            gson.toJson(this, writer);
+            writer.close();
         } catch (IOException e){
             e.printStackTrace();
         }
     }
     
+    /**
+     * Exports the character sheet as a json file
+     */
+    public void saveJson(File file) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try {
+            file.createNewFile();
+            FileWriter writer = new FileWriter(file);
+            //writer.write("Heyo");
+            gson.toJson(this, writer);
+            writer.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
     /**
      * Getter for this.name
      * @return this.name (String)
@@ -648,17 +683,38 @@ public class CharacterSheet {
 
     /**
      * Getter for this.proficiencies
-     * @return this.proficiencies (Hashtable<String, Integer>)
+     * @return this.proficiencies (Hashtable<String, SkillTraining>)
      */
-    public Hashtable<String, Integer> getProficiencies(){
+    public Hashtable<String, SkillTraining> getProficiencies(){
         return this.proficiencies;
     }
 
     /**
-     * Setter for this.proficiencies
-     * @param proficiencies (Hashtable<String, Integer>)
+     *
+     *
      */
-    public void setProficiencies(Hashtable<String, Integer> proficiencies){
+    public SkillTraining getProficiency(String proficiency){
+        if (this.proficiencies.contains(proficiency)){
+            return this.proficiencies.get(proficiency);
+        }else{
+            return SkillTraining.UNTRAINED;
+        }
+    }
+
+    /**
+     *
+     *
+     */
+    public int getProficiencyMod(String proficiency){
+        // TODO FIX
+        return 0;
+    }
+
+    /**
+     * Setter for this.proficiencies
+     * @param proficiencies (Hashtable<String, SkillTraining>)
+     */
+    public void setProficiencies(Hashtable<String, SkillTraining> proficiencies){
         this.proficiencies = proficiencies;
     }
 
@@ -667,8 +723,19 @@ public class CharacterSheet {
      * @param proficiency (String)
      * @param bonus (Integer)
      */
-    public void setProficiency(String proficiency, Integer bonus){
+    public void setProficiency(String proficiency, SkillTraining bonus){
         this.proficiencies.put(proficiency, bonus);
+    }
+    
+    /**
+     * Returns the classDc of this character
+     * @return classDc (int)
+     */
+    public int getClassDc(){
+        if(this.proficiencies.contains("class_dc")){
+            return 10 + this.proficiencies.get("class_dc").label + this.level;
+        }
+        return 10;
     }
 
     /**
@@ -758,4 +825,36 @@ public class CharacterSheet {
     public void setLanguages(String languages){
         this.languages = languages;
     }
+
+	/**
+	 * Getter for this.dying.
+	 * @return Returns this.dying.
+	 */
+	public int getDying(){
+		return this.dying;
+	}
+
+	/**
+	 * Setter for this.dying.
+	 * @param dying Sets this.dying to dying 
+	 */
+	public void setDying(int dying){
+		this.dying = dying;
+	}
+
+	/**
+	 * Getter for this.wounded.
+	 * @return Returns this.wounded
+	 */
+	public int getWounded(){
+		return this.wounded;
+	}
+
+	/**
+	 * Setter for this.wounded.
+	 * @param wounded Sets this.wounded to wounded
+	 */
+	public void setWounded(int wounded){
+		this.wounded = wounded;
+	}
 }
