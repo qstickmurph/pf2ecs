@@ -24,29 +24,35 @@ public class Ancestry {
 	private int hitpoints;
 	
 	/** The attribute bonuses of the ancestry */
-	private Hashtable<Attribute, Integer> attributeBonuses = new Hashtable<Attribute, Integer>();
+	private Hashtable<Attribute, Integer> attributeBonuses;
 	
 	/** The traits of the ancestry */
-	private HashSet<String> traits = new HashSet<String>();
+	private HashSet<String> traits;
 	
 	/** The features of the ancestry */
-	private HashSet<Feat> features = new HashSet<Feat>();
+	private HashSet<Feat> features;
 	
 	/** The heritages of the ancestry */
-	private HashSet<Heritage> heritages = new HashSet<Heritage>();
+	private HashSet<Heritage> heritages;
 	
 	/** The feats of the ancestry */
-	private HashSet<Feat> feats = new HashSet<Feat>();
+	private HashSet<Feat> feats;
 	
 	/** The size of the ancestry */
 	private Size size;
 	
-	/** Constructor Method
-     *  
-     *  @param name (String) The name of the ancestry
+	/** 
+     *  Empty Constructor Method
      */
     public Ancestry(){
-
+    	this.name = "";
+    	this.hitpoints = 0;
+    	this.attributeBonuses = new Hashtable<>();
+    	this.traits = new HashSet<>();
+    	this.features = new HashSet<>();
+    	this.heritages = new HashSet<>();
+    	this.feats = new HashSet<>();
+    	this.size = null;
     }
     
 	/** Json Constructor Method
@@ -54,7 +60,15 @@ public class Ancestry {
      *  @param json (JsonObject)
      */
     public Ancestry(JsonObject json){
-
+    	this.name = "";
+    	this.hitpoints = 0;
+    	this.attributeBonuses = new Hashtable<>();
+    	this.traits = new HashSet<>();
+    	this.features = new HashSet<>();
+    	this.heritages = new HashSet<>();
+    	this.feats = new HashSet<>();
+    	this.size = null;
+    	this.readJson(json);
     }
 
 	/** Json read
@@ -62,7 +76,134 @@ public class Ancestry {
      *  @param json (JsonObject)
      */
     public void readJson(JsonObject json){
+    	if(json.has("name")){
+            // Put name from json into this.name
+            this.name = json.get("name").getAsString();
+        }
 
+        if(json.has("hitpoints")){
+            // Put hitpoints from json into this.hitpoints 
+            this.hitpoints = json.get("hitpoints").getAsInt();
+        }
+        
+        if(json.has("ability_boosts")){
+            // Read the array of Strings
+            JsonArray attributeBonusesArray = (JsonArray) json.get("ability_boosts");
+            for(int i = 0; i< attributeBonusesArray.size(); i++){
+                // Get next String
+                String str = attributeBonusesArray.get(i).getAsString();
+
+                // Set attribute based on str
+                Attribute attribute = Attribute.STR;
+                switch(str){
+                    case "strength":
+                        attribute = Attribute.STR;
+                        break;
+                    case "dexterity":
+                        attribute = Attribute.DEX;
+                        break;
+                    case "constitution":
+                        attribute = Attribute.CON;
+                        break;
+                    case "intelligence":
+                        attribute = Attribute.INT;
+                        break;
+                    case "wisdom":
+                        attribute = Attribute.WIS;
+                        break;
+                    case "charisma":
+                        attribute = Attribute.CHA;
+                        break;
+                }
+
+                if(attributeBonuses.contains(attribute)){ // if already has a bonus on this attribute increment it by 1
+                    this.attributeBonuses.put(attribute, this.attributeBonuses.get(attribute) + 1);
+                }else{ // else set to 1
+                    this.attributeBonuses.put(attribute, 1);
+                }
+            }
+        }
+        
+        if(json.has("traits")){
+            // Read the array of Strings 
+            JsonArray traitsArray = (JsonArray) json.get("traits");
+            for(int i = 0; i < traitsArray.size(); i++){ // put each trait into this.traits
+                this.traits.add(traitsArray.get(i).getAsString());
+            }
+        }
+        
+        if(json.has("features")){
+            // Read the array of Strings
+            JsonArray featuresArray = (JsonArray) json.get("features");
+            for(int i = 0; i < featuresArray.size(); i++){
+                // Parse feat JsonObject
+                JsonObject featureJson = (JsonObject) featuresArray.get(i);
+
+                // Create new feat based on JsonObject
+                Feat feature = new Feat(featureJson);
+
+                // Add feat to this.features
+                this.features.add(feature);
+            }
+        }
+        
+        if(json.has("heritages")){
+            // Read the array of Strings
+            JsonArray heritagesArray = (JsonArray) json.get("heritages");
+            for(int i = 0; i < heritagesArray.size(); i++){
+                // Parse heritage JsonObject
+                JsonObject heritageJson = (JsonObject) heritagesArray.get(i);
+
+                // Create new heritage based on JsonObject
+                Heritage heritage = new Heritage(heritageJson);
+
+                // Add heritage to this.heritagesx
+                this.heritages.add(heritage);
+            }
+        }
+        
+        if(json.has("ancestry_feats")){
+            // Read the array of Strings
+            JsonArray featsArray = (JsonArray) json.get("ancestry_feats");
+            for(int i = 0; i < featsArray.size(); i++){
+                // Parse feat JsonObject
+                JsonObject featJson = (JsonObject) featsArray.get(i);
+
+                // Create new feat based on JsonObject
+                Feat feat = new Feat(featJson);
+
+                // Add feat to this.feats
+                this.feats.add(feat);
+            }
+        }
+        
+        if(json.has("size")){
+            // Read the size attribute
+             String size = json.get("size").getAsString();
+
+                // Set size based on TINY
+                Size characterSize = Size.TINY;
+                switch(size){
+                    case "tiny":
+                        characterSize = Size.TINY;
+                        break;
+                    case "small":
+                        characterSize = Size.SMALL;
+                        break;
+                    case "medium":
+                        characterSize = Size.MEDIUM;
+                        break;
+                    case "large":
+                        characterSize = Size.LARGE;
+                        break;
+                    case "huge":
+                        characterSize = Size.HUGE;
+                        break;
+                    case "gargantum":
+                        characterSize = Size.GARGANTUAN;
+                        break;
+                }
+        }
     }
 
     /** 
