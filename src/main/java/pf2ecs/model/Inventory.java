@@ -3,8 +3,9 @@ package pf2ecs.model;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.ArrayList;
-//import pf2ecs.model.Item;
-//import pf2ecs.model.Action;
+
+import pf2ecs.model.PfItem;
+import pf2ecs.model.Action;
 //import pf2ecs.model.Spell;
 
 /** The Action class holds all the information about each action including its description, any relevant scenario type, and more
@@ -18,16 +19,16 @@ import java.util.ArrayList;
 public class Inventory {    
 	
 	/** The items in the inventory */
-    private ArrayList<String> items = new ArrayList<String>();
+    private ArrayList<PfItem> items;
     
     /** The items equipped */
-    private ArrayList<String> equipped = new ArrayList<String>();
+    private ArrayList<PfItem> equipped;
     
     /** The items invested */
-    private ArrayList<String> invested = new ArrayList<String>();
+    private ArrayList<PfItem> invested;
     
     /** The items readied */
-    private ArrayList<String> readied = new ArrayList<String>();
+    private ArrayList<PfItem> readied;
     
     /** The amount of pp */
     private int pp;
@@ -41,22 +42,22 @@ public class Inventory {
     /** The amount of cp */
     private int cp;
     
-    /** The amount of total money */
+    /** The amount of total money in String form */
     private String money;
     
     /** Constructor Method
      *  
-     *  @param name (ArrayList<String>) The list of items
+     *  @param name (ArrayList<PfItem>) The list of items
      */
-    public Inventory(ArrayList<String> items){
-        this.items = items;
+    public Inventory(){
+
     }
     
     /** 
      * Returns this.items
-     *  @return this.items (ArrayList<String>)
+     *  @return this.items (ArrayList<PfItem>)
      */
-    public ArrayList<String> getItems(){
+    public ArrayList<PfItem> getItems(){
         return this.items;
     }
 
@@ -65,25 +66,25 @@ public class Inventory {
      * @param item (String)
      */
     
-    public void addItem(String pf2ecs.model.Item){
-    	this.items.add(pf2ecs.model.Item);
+    public void addItem(PfItem pfItem){
+    	this.items.add(pfItem);
     }
     
     /** 
      * Removes item from this.items
      * @param item (String)
      */
-    public void removeItem(String pf2ecs.model.Item){
-    	if(this.items.contains(pf2ecs.model.Item)){
-    		this.items.remove(pf2ecs.model.Item);
+    public void removeItem(PfItem pfItem){
+    	if(this.items.contains(pfItem)){
+    		this.items.remove(pfItem);
     	}
     }
 
     /** 
      * Returns this.equipped
-     *  @return this.equipped (ArrayList<String>)
+     *  @return this.equipped (ArrayList<PfItem>)
      */
-    public ArrayList<String> getEquipped(){
+    public ArrayList<PfItem> getEquipped(){
         return this.equipped;
     }
     
@@ -91,10 +92,10 @@ public class Inventory {
      * Adds item to this.equipped and removes item from this.items
      * @param item (String)
      */
-    public void equipItem(String pf2ecs.model.Item){
-    	if(this.items.contains(pf2ecs.model.Item)){
-    		this.equipment.add(pf2ecs.model.Item);
-    		this.items.remove(pf2ecs.model.Item);
+    public void equipItem(PfItem pfItem){
+    	if(this.items.contains(pfItem)){
+    		this.equipped.add(pfItem);
+    		this.items.remove(pfItem);
     	}
     }
 
@@ -102,18 +103,18 @@ public class Inventory {
      * Removes item from this.equipped and adds item to this.items
      * @param item (String)
      */
-    public void unequipItem(String pf2ecs.model.Item){
-    	if(this.equipped.contains(pf2ecs.model.Item)){
-    		this.items.add(pf2ec.model.Item);
-    		this.equipment.remove(pf2ecs.model.Item);
+    public void unequipItem(PfItem pfItem){
+    	if(this.equipped.contains(pfItem)){
+    		this.items.add(pfItem);
+    		this.equipped.remove(pfItem);
     	}
     }
     
     /** 
      * Returns this.invested
-     *  @return this.invested (ArrayList<String>)
+     *  @return this.invested (ArrayList<PfItem>)
      */
-    public ArrayList<String> getInvested(){
+    public ArrayList<PfItem> getInvested(){
         return this.invested;
     }
     
@@ -121,11 +122,11 @@ public class Inventory {
      * Adds item to this.invested and this.equipped and removes item from this.items
      * @param item (String)
      */
-    public void investItem(String pf2ecs.model.Item){
-    	if(this.items.contains(pf2ecs.model.Item)){
-    		this.invested.add(pf2ecs.model.Item);
-    		this.equipment.add(pf2ecs.model.Item);
-    		this.items.remove(pf2ecs.model.Item);
+    public void investItem(PfItem pfItem){
+    	if(this.items.contains(pfItem)){
+    		this.invested.add(pfItem);
+    		this.equipped.add(pfItem);
+    		this.items.remove(pfItem);
     	}
     }
     
@@ -133,19 +134,19 @@ public class Inventory {
      * Removes item from this.invested and this.equipped and adds item to this.items
      * @param item (String)
      */
-    public void uninvestItem(String pf2ecs.model.Item){
-    	if(this.invested.contains(pf2ecs.model.Item)){
-    		this.items.add(pf2ec.model.Item);
-    		this.invested.remove(pf2ecs.model.Item);
-    		this.equipped.remove(pf2ecs.model.Item);
+    public void uninvestItem(PfItem pfItem){
+    	if(this.invested.contains(pfItem)){
+    		this.items.add(pfItem);
+    		this.invested.remove(pfItem);
+    		this.equipped.remove(pfItem);
     	}
     }
     
     /** 
      * Returns this.readied
-     *  @return this.readied (ArrayList<String>)
+     *  @return this.readied (ArrayList<PfItem>)
      */
-    public ArrayList<String> getReadied(){
+    public ArrayList<PfItem> getReadied(){
         return this.readied;
     }
     
@@ -153,10 +154,10 @@ public class Inventory {
      * Adds item to this.readied and removes item from this.items
      * @param item (String)
      */
-    public void readyItem(String pf2ecs.model.Item){
-    	if(this.items.contains(pf2ecs.model.Item)){
-    		this.readied.add(pf2ecs.model.Item);
-    		this.items.remove(pf2ecs.model.Item);
+    public void readyItem(PfItem pfItem){
+    	if(this.items.contains(pfItem)){
+    		this.readied.add(pfItem);
+    		this.items.remove(pfItem);
     	}
     }
 
@@ -164,10 +165,10 @@ public class Inventory {
      * Removes item from this.readied and adds item to this.items
      * @param item (String)
      */
-    public void unreadyItem(String pf2ecs.model.Item){
-    	if(this.readied.contains(pf2ecs.model.Item)){
-    		this.items.add(pf2ec.model.Item);
-    		this.readied.remove(pf2ecs.model.Item);
+    public void unreadyItem(PfItem pfItem){
+    	if(this.readied.contains(pfItem)){
+    		this.items.add(pfItem);
+    		this.readied.remove(pfItem);
     	}
     }
     

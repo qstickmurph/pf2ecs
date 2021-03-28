@@ -11,7 +11,7 @@ import java.util.Hashtable;
 * @author Alexander Lomeli-Azoubel
 * @since 03/26/2021
 */
-public class Class {
+public class PfClass {
 
 	/** The name of the class */
 	private String name;
@@ -38,7 +38,7 @@ public class Class {
      *  
      *  @param name (String) The name of the ancestry
      */
-    public Class(String name){
+    public PfClass(String name){
         this.name = name;
     }
     

@@ -3,6 +3,9 @@ package pf2ecs.model;
 import java.util.HashSet;
 import java.util.Hashtable;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+
 import pf2ecs.model.Scenario;
 
 /** The Action class holds all the information about each action including its description, any relevant scenario type, and more
@@ -40,8 +43,16 @@ public class Action {
      *  
      *  @param name (String) The name of the action
      */
-    public Action(String name){
-        this.name = name;
+    public Action(){
+        this.name = "";
+    }
+
+    /**
+     * Parse JsonObject into Action Object
+     * @param json (JsonObject)
+     */
+    public Action(JsonObject json){
+
     }
     
     /** 

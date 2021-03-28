@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * @author Alexander Lomeli-Azoubel
  * @since 03/26/2021
  */
-public class Item {
+public class PfItem {
 	
 	/** The name of the item */
 	private String name;
@@ -45,7 +45,7 @@ public class Item {
      *  
      *  @param name (String) The name of the item
      */
-    public Item(String name){
+    public PfItem(String name){
         this.name = name;
     }
     

@@ -9,8 +9,8 @@ import pf2ecs.model.Alignment;
 import pf2ecs.model.Scenario;
 import pf2ecs.model.SkillTraining;
 import pf2ecs.model.Size;
-import pf2ecs.model.Class;
-import pf2ecs.model.Ancestry
+import pf2ecs.model.PfClass;
+import pf2ecs.model.Ancestry;
 import pf2ecs.model.Skill;
 import pf2ecs.model.Background;
 //import pf2ecs.model.Spell;
@@ -34,8 +34,8 @@ public class CharacterSheet {
     /** The Ancestry object of the character */
     private Ancestry ancestry;
 
-    /** The Class object of the character */
-    private Class playerClass;
+    /** The PfClass object of the character */
+    private PfClass pfClass;
 
     /** The Background object of the character */
     private Background background;
@@ -44,7 +44,7 @@ public class CharacterSheet {
     private Inventory inventory;
 
     /** The actions the player has */
-    private HashSet<Action> name;
+    private HashSet<Action> actions;
 
     /** The feats the player has */
     private HashSet<Feat> feats;
@@ -137,24 +137,24 @@ public class CharacterSheet {
      * Setter for this.ancestry
      * @param ancestry (Ancestry)
      */
-    public void setAncestry(Ancestry){
+    public void setAncestry(Ancestry ancestry){
         this.ancestry = ancestry;
     }
     
     /**
-     * Getter for this.playerClass
-     * @return this.playerClass (Class)
+     * Getter for this.pfClass
+     * @return this.pfClass (PrClass)
      */
-    public Class getClass(){
-        return this.playerClass;
+    public PfClass getPfClass(){
+        return this.pfClass;
     }
 
     /**
-     * Settter for this.playerClass
-     * @param playerClass (Class)
+     * Settter for this.PfClass
+     * @param pfClass (PfClass)
      */
-    public void setClass(Class playerClass){
-        this.playerClass = playerClass
+    public void setPfClass(PfClass pfClass){
+        this.pfClass = pfClass;
     }
 
     /**
@@ -185,7 +185,7 @@ public class CharacterSheet {
      * Setter for this.inventory
      * @param inventory (Inventory)
      */
-    public void setInventory(Inventory){
+    public void setInventory(Inventory inventory){
         this.inventory = inventory;
     }
     
@@ -217,7 +217,7 @@ public class CharacterSheet {
      * Removes an action from this.actions;
      * @param action (Action)
      */
-    public void removeAction(Action){
+    public void removeAction(Action action){
         if(this.actions.contains(action)){
             this.actions.remove(action);
         }
@@ -252,7 +252,7 @@ public class CharacterSheet {
      * @param feat (Feat)
      */
     public void removeFeat(Feat feat){
-        if(this.feats.contains(feat){
+        if(this.feats.contains(feat)){
             this.feats.remove(feat);
         }
     }
@@ -318,7 +318,7 @@ public class CharacterSheet {
      * @param diety (String)
      */
     public void setDiety(String diety){
-        this.diety = diety
+        this.diety = diety;
     }
 
     /**
@@ -355,10 +355,10 @@ public class CharacterSheet {
 
     /**
      * Getter for this.attributes
-     * @return attributes (Hashtable<Attribute, Integer>
+     * @return this.attributes (Hashtable<Attribute, Integer>
      */
     public Hashtable<Attribute, Integer> getAttributes(){
-
+        return this.attributes;
     }
 
     /**
@@ -391,7 +391,7 @@ public class CharacterSheet {
      * Setter for this.proficiencies
      * @param proficiencies (Hashtable<String, Integer>)
      */
-    public void setProficiencies(Hashtable<String, Integer>){
+    public void setProficiencies(Hashtable<String, Integer> proficiencies){
         this.proficiencies = proficiencies;
     }
 
@@ -401,7 +401,7 @@ public class CharacterSheet {
      * @param bonus (Integer)
      */
     public void setProficiency(String proficiency, Integer bonus){
-        this.proficiency.put(proficiency, bonus);
+        this.proficiencies.put(proficiency, bonus);
     }
 
     /**
@@ -440,7 +440,7 @@ public class CharacterSheet {
      * Setter for this.hp
      * @param hp (int)
      */
-    public int setHp(int hp){
+    public void setHp(int hp){
         this.hp = hp;
     }
 
@@ -456,7 +456,7 @@ public class CharacterSheet {
      * Setter for this.tempHp
      * @param tempHp (int)
      */
-    public int setTempHp(){
+    public void setTempHp(){
         this.tempHp = tempHp;
     }
 
@@ -488,7 +488,7 @@ public class CharacterSheet {
      * Setter for this.languages
      * @param languages (String)
      */
-    public getLanguages(String languages){
+    public void setLanguages(String languages){
         this.languages = languages;
     }
 }

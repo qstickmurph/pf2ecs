@@ -3,9 +3,13 @@ package pf2ecs.model;
 import java.util.HashSet;
 import java.util.Hashtable;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+
 import pf2ecs.model.Action;
 import pf2ecs.model.Attribute;
 //import pf2ecs.model.Spell;
+
 
 /** The Feat class holds all the information about each feat including its description, any relevant actions or spells, and more
  *
@@ -24,10 +28,10 @@ public class Feat {
     private int level;
 
     /** The traits of the feat*/
-    private HashSet<String> traits = new HashSet<String>();
+    private HashSet<String> traits;
 
     /** The prerequisites of the feat*/
-    private HashSet<String> prerequisites = new HashSet<String>();
+    private HashSet<String> prerequisites;
 
     /** The description of the feat*/
     private String description;
@@ -36,25 +40,193 @@ public class Feat {
     private boolean multiple;
 
     /** The attribute bonuses of the feat*/
-    private Hashtable<Attribute, Integer> attributeBonuses = new Hashtable<Attribute, Integer>();
+    private Hashtable<Attribute, Integer> attributeBonuses;
 
     /** The proficiency bonuses of the feat*/
-    private Hashtable<String, Integer> proficiencyBonuses = new Hashtable<String,Integer>();
+    private Hashtable<String, SkillTraining> proficiencyBonuses;
 
     /** The actions the feat gives */
-    private HashSet<Action> actions = new HashSet<Actions>();
+    private HashSet<Action> actions;
 
     /** The choices of the feat */
-    private HashSet<Feat> choices = new HashSet<Feat>();
+    private HashSet<Feat> choices;
 
 //    private HashSet<Spell> spells = new HashSet<Spells>;
     
-    /** Constructor Method
-     *  
-     *  @param name (String) The name of the feat
+    /** 
+     * Empty Constructor Method
      */
-    public Feat(String name){
-        this.name = name;
+    public Feat(){
+        // First, go delete any of the variable initialization that we did earlier (Ex = new Hashtable<String, Integer>)
+        // Second, initialize them in this constructor function
+        this.name = "";
+        this.level = 0;
+        this.traits = new HashSet<>();
+        this.prerequisites = new HashSet<>();
+        this.description = "";
+        this.multiple = false;
+        this.attributeBonuses = new Hashtable<>();
+        this.proficiencyBonuses = new Hashtable<>();
+        this.actions = new HashSet<>();
+        this.choices = new HashSet<>();
+    }
+    
+    /**
+     * Json Reader Constructor Method
+     *
+     * Parses the feat JsonObject into a Feat object
+     * @param json (JsonObject)
+     */
+    public Feat(JsonObject json){
+        this.name = "";
+        this.level = 0;
+        this.traits = new HashSet<>();
+        this.prerequisites = new HashSet<>();
+        this.description = "";
+        this.multiple = false;
+        this.attributeBonuses = new Hashtable<>();
+        this.proficiencyBonuses = new Hashtable<>();
+        this.actions = new HashSet<>();
+        this.choices = new HashSet<>();
+        this.readJson(json);
+    }
+    
+    /**
+     * Reads a JsonObject and applies that object to the Feat
+     * @param json (JsonObject)
+     */
+    public void readJson(JsonObject json){
+        if(json.has("name")){
+            // Put name from json into this.name
+            this.name = json.get("name").getAsString();
+        }
+
+        if(json.has("level")){
+            // Put level from json into this.level 
+            this.level = json.get("level").getAsInt();
+        }
+
+        if(json.has("traits")){
+            // Read the array of Strings 
+            JsonArray traitsArray = (JsonArray) json.get("traits");
+            for(int i = 0; i < traitsArray.size(); i++){ // put each trait into this.traits
+                this.traits.add(traitsArray.get(i).getAsString());
+            }
+        }
+        
+        if(json.has("prerequisites")){
+            // Read the array of Strings
+            JsonArray prerequisitesArray = (JsonArray) json.get("prerequisites");
+            for(int i = 0; i < prerequisitesArray.size(); i++){ // put each prerequisite into this.prerequisites
+                this.prerequisites.add(prerequisitesArray.get(i).getAsString());
+            }
+        }
+        
+        if(json.has("prerequisites")){
+            // Put multiple from json into this.multiple
+            this.multiple = Boolean.parseBoolean(json.get("multiple").getAsString());
+        }
+
+        if(json.has("ability_boosts")){
+            // Read the array of Strings
+            JsonArray attributeBonusesArray = (JsonArray) json.get("ability_boosts");
+            for(int i = 0; i< attributeBonusesArray.size(); i++){
+                // Get next String
+                String str = attributeBonusesArray.get(i).getAsString();
+
+                // Set attribute based on str
+                Attribute attribute = Attribute.STR;
+                switch(str){
+                    case "strength":
+                        attribute = Attribute.STR;
+                        break;
+                    case "dexterity":
+                        attribute = Attribute.DEX;
+                        break;
+                    case "constitution":
+                        attribute = Attribute.CON;
+                        break;
+                    case "intelligence":
+                        attribute = Attribute.INT;
+                        break;
+                    case "wisdom":
+                        attribute = Attribute.WIS;
+                        break;
+                    case "charisma":
+                        attribute = Attribute.CHA;
+                        break;
+                }
+
+                if(attributeBonuses.contains(attribute)){ // if already has a bonus on this attribute increment it by 1
+                    this.attributeBonuses.put(attribute, this.attributeBonuses.get(attribute) + 1);
+                }else{ // else set to 1
+                    this.attributeBonuses.put(attribute, 1);
+                }
+            }
+        }
+
+        if(json.has("profiencies")){
+            // Read the array of Strings
+            JsonArray proficiencyBonusesArray = (JsonArray) json.get("proficiencies");
+            for(int i = 0; i < proficiencyBonusesArray.size(); i++){
+                // Get next String and split it at '='
+                String[] stringArray = (proficiencyBonusesArray.get(i).getAsString()).split("=");
+
+                SkillTraining bonus = SkillTraining.UNTRAINED;
+                switch(stringArray[1].charAt(0)){ // set the skill bonus accordingly
+                    case 't':
+                    case 'T':
+                        bonus = SkillTraining.TRAINED;
+                        break;
+                    case 'e':
+                    case 'E':
+                        bonus = SkillTraining.EXPERT;
+                        break;
+                    case 'm':
+                    case 'M':
+                        bonus = SkillTraining.MASTER;
+                        break;
+                    case 'l':
+                    case 'L':
+                        bonus = SkillTraining.LEGENDARY;
+                        break;
+                }
+
+                // put it into proficiencyBonuses
+                this.proficiencyBonuses.put(stringArray[0], bonus);
+            }
+        }
+
+        if(json.has("actions")){
+            // Read the array of Strings
+            JsonArray actionsArray = (JsonArray) json.get("actions");
+            for(int i = 0; i < actionsArray.size(); i++){
+                // Parse action JsonObject
+                JsonObject actionJson = (JsonObject) actionsArray.get(i);
+
+                // Create new action based on JsonObject
+                Action action = new Action(actionJson);
+
+                // Add action to this.actions
+                this.actions.add(action);
+            }
+        }
+
+        /*
+        if(json.has("spells"){
+            // Read the array of Strings
+            spellsArray = (JsonArray) json.get("spells");
+            while(spellsArray.hasNext()){
+                // Parse action JsonObject
+                JsonObject spellJson = (JsonObject) spellArray.next();
+
+                // Create new spell based on JsonObject
+                Spell spell = new Spell(spellJson);
+
+                // Add action to this.actions
+                this.spells.add(spell);
+            }
+        } */
     }
     
     /** 
@@ -228,14 +400,14 @@ public class Feat {
 	 * Getter for this.proficiencyBonuses.
 	 * @return Returns this.proficiencyBonuses
 	 */
-	public Hashtable<String, Integer> getProficiencyBonuses(){
+	public Hashtable<String, SkillTraining> getProficiencyBonuses(){
 		return this.proficiencyBonuses;
 	}
 
 	/**
 	 * Setter for this.proficiencyBonuses.
 	 * @param name Sets this.proficiencyBonuses to proficiencyBonuses */
-	public void setProficiencyBonuses(Hashtable<String, Integer> proficiencyBonuses){
+	public void setProficiencyBonuses(Hashtable<String, SkillTraining> proficiencyBonuses){
 		this.proficiencyBonuses = proficiencyBonuses;
 	}
 
@@ -244,7 +416,7 @@ public class Feat {
 	 * @param proficiency (String) 
 	 * @param bonus (Integer) 
 	 */
-    public void addProficiencyBonus(String proficiency, Integer bonus){
+    public void addProficiencyBonus(String proficiency, SkillTraining bonus){
         this.proficiencyBonuses.put(proficiency, bonus);
     }
 
