@@ -3,6 +3,9 @@ package pf2ecs.model;
 import java.util.HashSet;
 import java.util.Hashtable;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+
 /** The Class class holds all the information about class including its hitpoints, key attribute, and more.
 *
 * @author Quinn Murphey
@@ -36,12 +39,26 @@ public class PfClass {
 
 	/** Constructor Method
      *  
-     *  @param name (String) The name of the ancestry
      */
-    public PfClass(String name){
+    public PfClass(){
         this.name = name;
     }
     
+	/** Json Constructor Method
+     *  @param json (JsonObject)
+     */
+    public PfClass(JsonObject json){
+
+    }
+
+	/** Json read
+     *  
+     *  @param json (JsonObject)
+     */
+    public void readJson(JsonObject json){
+
+    }
+
     /** 
      * Returns this.name
      *  @return this.name (String)

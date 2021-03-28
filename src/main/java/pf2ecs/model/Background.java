@@ -3,6 +3,10 @@ package pf2ecs.model;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.ArrayList;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+
 import pf2ecs.model.Attribute;
 import pf2ecs.model.SkillTraining;
 
@@ -30,12 +34,26 @@ public class Background {
 	
 	/** Constructor Method
      *  
-     *  @param name (String) The name of the background
      */
-    public Background(String name){
-        this.name = name;
+    public Background(){
+
     }
     
+	/** Json Constructor Method
+     *  @param json (JsonObject)
+     */
+    public Background(JsonObject json){
+
+    }
+
+	/** Json read
+     *  
+     *  @param json (JsonObject)
+     */
+    public void readJson(JsonObject json){
+
+    }
+
     /** 
      * Returns this.name
      *  @return this.name (String)

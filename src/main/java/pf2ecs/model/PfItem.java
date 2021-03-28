@@ -3,6 +3,10 @@ package pf2ecs.model;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.ArrayList;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+
 //import pf2ecs.model.Item;
 //import pf2ecs.model.Action;
 //import pf2ecs.model.Spell;
@@ -43,12 +47,26 @@ public class PfItem {
     
     /** Constructor Method
      *  
-     *  @param name (String) The name of the item
      */
-    public PfItem(String name){
+    public PfItem(){
         this.name = name;
     }
     
+    /** Json Constructor Method
+     *  @param json (JsonObject)
+     */
+    public PfItem(JsonObject json){
+
+    }
+
+	/** Json read
+     *  
+     *  @param json (JsonObject)
+     */
+    public void readJson(JsonObject json){
+
+    }
+
     /** 
      * Returns this.name
      *  @return this.name (String)

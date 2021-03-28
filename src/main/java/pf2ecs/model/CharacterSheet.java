@@ -110,7 +110,7 @@ public class CharacterSheet {
         this.level = 1;
         this.size = Size.MEDIUM;
         this.diety = "";
-        this.alignment = ALIGNMENT.N;
+        this.alignment = Alignment.N;
         this.heroPoints = 0;
         this.attributes = new Hashtable<>();
         this.proficiencies = new Hashtable<>();
@@ -139,7 +139,7 @@ public class CharacterSheet {
         this.level = 1;
         this.size = Size.MEDIUM;
         this.diety = "";
-        this.alignment = ALIGNMENT.N;
+        this.alignment = Alignment.N;
         this.heroPoints = 0;
         this.attributes = new Hashtable<>();
         this.proficiencies = new Hashtable<>();
@@ -286,9 +286,9 @@ public class CharacterSheet {
         if(json.has("attributes")){
             JsonArray attributesArray = (JsonArray) json.get("attributes");
 
-            for(int i = 0; i< attributeArray.size(); i++){
+            for(int i = 0; i < attributesArray.size(); i++){
                 // Get next String
-                String[] stringArray = attributeArray.get(i).getAsString().split("=");
+                String[] stringArray = attributesArray.get(i).getAsString().split("=");
 
                 // Set attribute based on stringArray 
                 Attribute attribute = Attribute.STR;
@@ -315,7 +315,7 @@ public class CharacterSheet {
                 
                 int score = Integer.parseInt(stringArray[1]);
 
-                this.attributeBonuses.put(attribute, score);
+                this.attributes.put(attribute, score);
             }
         }
 
@@ -348,6 +348,13 @@ public class CharacterSheet {
             // Put languages from json into this.languages
             this.languages = json.get("languages").getAsString();
         }
+    }
+    
+    /**
+     * Exports the character sheet as a json file
+     */
+    public void printJson(){
+
     }
     
     /**

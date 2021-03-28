@@ -4,6 +4,9 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.ArrayList;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+
 import pf2ecs.model.PfItem;
 import pf2ecs.model.Action;
 //import pf2ecs.model.Spell;
@@ -47,12 +50,27 @@ public class Inventory {
     
     /** Constructor Method
      *  
-     *  @param name (ArrayList<PfItem>) The list of items
      */
     public Inventory(){
 
     }
+
+    /** Json Constructor Method
+     *  
+     *  @param json (JsonObject) The list of items
+     */
+    public Inventory(JsonObject json){
+
+    }
     
+	/** Json read
+     *  
+     *  @param json (JsonObject)
+     */
+    public void readJson(JsonObject json){
+
+    }
+
     /** 
      * Returns this.items
      *  @return this.items (ArrayList<PfItem>)

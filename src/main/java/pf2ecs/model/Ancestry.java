@@ -4,6 +4,9 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.ArrayList;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+
 /** The Ancestry class holds all the information about character ancestry including its hitpoints, attribute bonuses, and more.
 *
 * @author Quinn Murphey
@@ -42,10 +45,26 @@ public class Ancestry {
      *  
      *  @param name (String) The name of the ancestry
      */
-    public Ancestry(String name){
-        this.name = name;
+    public Ancestry(){
+
     }
     
+	/** Json Constructor Method
+     *  
+     *  @param json (JsonObject)
+     */
+    public Ancestry(JsonObject json){
+
+    }
+
+	/** Json read
+     *  
+     *  @param json (JsonObject)
+     */
+    public void readJson(JsonObject json){
+
+    }
+
     /** 
      * Returns this.name
      *  @return this.name (String)
