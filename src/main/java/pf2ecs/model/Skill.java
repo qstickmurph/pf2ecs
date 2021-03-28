@@ -2,6 +2,10 @@ package pf2ecs.model;
 
 import java.util.HashSet;
 import java.util.Hashtable;
+
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+
 import java.util.ArrayList;
 
 /** The Skill class holds all the information about skills including its description, key attribute, and more
@@ -24,17 +28,109 @@ public class Skill {
 	private Attribute keyAttribute;
 	
 	/** The untrained actions of a skill */
-	private HashSet<Action> untrainedActions = new HashSet<Action>();
+	private HashSet<Action> untrainedActions;
 	
 	/** The trained actions of a skill */
-	private HashSet<Action> trainedActions = new HashSet<Action>();
+	private HashSet<Action> trainedActions;
 	
-	/** Constructor Method
-     *  
-     *  @param name (String) The name of the skill
+	/** 
+     *  Empty Constructor Method
      */
-    public Skill(String name){
-        this.name = name;
+    public Skill(){
+    	this.name = "";
+        this.description = "";
+        this.keyAttribute = null;
+        this.untrainedActions = new HashSet<>();
+        this.trainedActions = new HashSet<>();
+    }
+    
+    /**
+     * Json Reader Constructor Method
+     *
+     * Parses the skill JsonObject into a skill object
+     * @param json (JsonObject)
+     */
+    public Skill(JsonObject json){
+    	this.name = "";
+        this.description = "";
+        this.keyAttribute = null;
+        this.untrainedActions = new HashSet<>();
+        this.trainedActions = new HashSet<>();
+        this.readJson(json);
+    }
+    
+    /**
+     * Reads a JsonObject and applies that object to the Skill
+     * @param json (JsonObject)
+     */
+    public void readJson(JsonObject json){
+        if(json.has("name")){
+            // Put name from json into this.name
+            this.name = json.get("name").getAsString();
+        }
+
+        if(json.has("description")){
+            // Put description from json into this.description 
+            this.description = json.get("description").getAsString();
+        }
+
+        if(json.has("key_ability")){
+            // Read the key attribute
+             String keyAbility = json.get("key_ability").getAsString();
+
+                // Set attribute based on str
+                Attribute attribute = Attribute.STR;
+                switch(keyAbility){
+                    case "strength":
+                        attribute = Attribute.STR;
+                        break;
+                    case "dexterity":
+                        attribute = Attribute.DEX;
+                        break;
+                    case "constitution":
+                        attribute = Attribute.CON;
+                        break;
+                    case "intelligence":
+                        attribute = Attribute.INT;
+                        break;
+                    case "wisdom":
+                        attribute = Attribute.WIS;
+                        break;
+                    case "charisma":
+                        attribute = Attribute.CHA;
+                        break;
+                }
+
+                
+                this.keyAttribute = attribute;              
+                
+        }
+        if(json.has("actions")){
+            // Read the array of Strings
+        	JsonArray actionArrays = (JsonArray) json.get("actions");
+        	JsonArray untrainedActionsJson = (JsonArray) actionArrays.get(0);
+            JsonArray trainedActionsJson = (JsonArray) actionArrays.get(1);
+            for(int i = 0; i < untrainedActionsJson.size(); i++){
+                // Parse action JsonObject
+                JsonObject actionJson = (JsonObject) untrainedActionsJson.get(i);
+
+                // Create new action based on JsonObject
+                Action action = new Action(actionJson);
+
+                // Add action to this.actions
+                this.untrainedActions.add(action);
+            }
+            for(int i = 0; i < trainedActionsJson.size(); i++){
+                // Parse action JsonObject
+                JsonObject actionJson = (JsonObject) trainedActionsJson.get(i);
+
+                // Create new action based on JsonObject
+                Action action = new Action(actionJson);
+
+                // Add action to this.actions
+                this.trainedActions.add(action);
+            }
+        }
     }
     
     /** 
