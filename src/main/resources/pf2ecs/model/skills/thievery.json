@@ -1,0 +1,16 @@
+{
+  "type": "skill",
+  "name": "thievery",
+  "description": "You are trained in a particular set of skills favored by thieves and miscreants. ",
+  "key_ability": "dexterity",
+  "actions": [
+    [
+      "actions:skills:palm_an_object",
+      "actions:skills:steal"
+    ],
+    [
+      "actions:skills:disable_an_object",
+      "actions:skills:pick_a_lock"
+    ]
+  ]
+}

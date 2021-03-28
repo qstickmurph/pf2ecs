@@ -1,0 +1,16 @@
+{
+  "type": "skill",
+  "name": "deception",
+  "description": "You can trick and mislead others using disguises, lies, andother forms of subterfuge.",
+  "key_ability": "charisma",
+  "actions": [
+    [
+      "actions:skills:create_diversion",
+      "actions:skills:impersonate",
+      "actions:skills:lie"
+    ],
+    [
+      "actions:skills:feint"  
+    ]
+  ]
+}

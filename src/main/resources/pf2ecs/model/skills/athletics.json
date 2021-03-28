@@ -1,0 +1,21 @@
+{
+  "type": "skill",
+  "name": "athletics",
+  "description": "Athletics allows you to perform deeds of physical prowess. When you use the Escape basic action (page 470), you can use your Athletics modifier instead of your unarmed attack modifier.",
+  "key_ability": "strength",
+  "actions": [
+    [
+      "actions:skills:climb",
+      "actions:skills:force_open",
+      "actions:skills:grapple",
+      "actions:skills:high_jump",
+      "actions:skills:long_jump",
+      "actions:skills:shove",
+      "actions:skills:swim",
+      "actions:skills:trip"
+    ],
+    [
+      "actions:skills:disarm"  
+    ]
+  ]
+}

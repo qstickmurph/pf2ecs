@@ -1,0 +1,17 @@
+{
+  "type": "skill",
+  "name": "arcana",
+  "description": "Arcana measures how much you know about arcane magic and creatures. Even if you’re untrained, you can Recall Knowledge.",
+  "key_ability": "Intelligence",
+  "actions": [
+    [
+      "actions:skills:recall_knowledge"
+    ],
+    [
+      "actions:skills:decipher_writing",
+      "actions:skills:identify_magic",
+      "actions:skills:learn_an_arcane_spell",
+      "actions:skills:borrow_an_arcane_spell"
+    ]
+  ]
+}

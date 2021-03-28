@@ -1,0 +1,14 @@
+{
+  "type": "skill",
+  "name": "performance",
+  "description": "You are skilled at a form of performance, using your talents to impress a crowd or make a living",
+  "key_ability": "charisma",
+  "actions": [
+    [
+      "actions:skills:perform"
+    ],
+    [
+      "actions:skills:earn_income"  
+    ]
+  ]
+}

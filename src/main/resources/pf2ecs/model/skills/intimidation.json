@@ -1,0 +1,13 @@
+{
+  "type": "skill",
+  "name": "intimidation",
+  "description": "You bend others to your will using threats.",
+  "key_ability": "charisma",
+  "actions": [
+    [
+      "actions:skills:coerce",
+      "actions:skills:demoralize"
+    ],
+    []
+  ]
+}

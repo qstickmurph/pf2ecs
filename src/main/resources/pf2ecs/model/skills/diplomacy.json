@@ -1,0 +1,14 @@
+{
+  "type": "skill",
+  "name": "diplomacy",
+  "description": "You influence others through negotiation and flattery.",
+  "key_ability": "charisma",
+  "actions": [
+    [
+      "actions:skills:gather_information",
+      "actions:skills:make_an_imoression",
+      "actions:skills:request"
+    ],
+    []
+  ]
+}
