@@ -2,6 +2,11 @@ package pf2ecs.model;
 
 import java.util.HashSet;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 /** The Subclass class holds all the information about subclass including its description and feats.
 *
 * @author Quinn Murphey
@@ -25,10 +30,19 @@ public class Subclass {
      *  
      *  @param name (String) The name of the background
      */
-    public Subclass(String name){
-        this.name = name;
+    public Subclass(){
+
     }
     
+	/** Constructor Method
+     *  
+     *  @param json (String) The name of the background
+     */
+    public static Subclass fromJson(JsonObject json){
+        Gson gson = new Gson(); 
+        return gson.fromJson(json, Subclass.class);
+    }
+
     /** 
      * Returns this.name
      *  @return this.name (String)

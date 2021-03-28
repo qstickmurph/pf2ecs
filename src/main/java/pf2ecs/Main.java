@@ -15,6 +15,7 @@ public class Main extends Application{
     public void start(Stage stage) throws Exception{
         try {
             Parent root = FXMLLoader.load(getClass().getResource("view/Character_Sheet.fxml"));
+            //Parent root = FXMLLoader.load(getClass().getResource("view/character_create/Ancestry.fxml"));
             Scene scene = new Scene(root);
             stage.setTitle("Pathfinder 2e Character Sheet");
             //scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

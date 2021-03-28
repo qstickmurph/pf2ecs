@@ -3,9 +3,16 @@ package pf2ecs.model;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.ArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileReader;
+import java.io.Reader;
+import java.io.IOException;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 /** The Ancestry class holds all the information about character ancestry including its hitpoints, attribute bonuses, and more.
 *
@@ -30,7 +37,7 @@ public class Ancestry {
 	private HashSet<String> traits;
 	
 	/** The features of the ancestry */
-	private HashSet<Feat> features;
+	private HashSet<String> features;
 	
 	/** The heritages of the ancestry */
 	private HashSet<Heritage> heritages;
@@ -70,6 +77,22 @@ public class Ancestry {
     	this.size = null;
     	this.readJson(json);
     }
+
+    public static Ancestry fromFile(File file){
+        Gson gson = new Gson();
+        try(Reader reader = new FileReader(file)){
+            return gson.fromJson(reader, Ancestry.class);
+        } catch (IOException e) { 
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Ancestry fromJson(JsonObject json){
+        Gson gson = new Gson();
+        return gson.fromJson(json, Ancestry.class);
+    }
+
 
 	/** Json read
      *  
@@ -143,7 +166,7 @@ public class Ancestry {
                 Feat feature = new Feat(featureJson);
 
                 // Add feat to this.features
-                this.features.add(feature);
+                //this.features.add(feature);
             }
         }
         
@@ -155,7 +178,7 @@ public class Ancestry {
                 JsonObject heritageJson = (JsonObject) heritagesArray.get(i);
 
                 // Create new heritage based on JsonObject
-                Heritage heritage = new Heritage(heritageJson);
+                Heritage heritage = Heritage.fromJson(heritageJson);
 
                 // Add heritage to this.heritagesx
                 this.heritages.add(heritage);
@@ -308,7 +331,7 @@ public class Ancestry {
 	 * Getter for this.features.
 	 * @return Returns this.features.
 	 */
-	public HashSet<Feat> getFeatures(){
+	public HashSet<String> getFeatures(){
 		return this.features;
 	}
 
@@ -316,7 +339,7 @@ public class Ancestry {
 	 * Setter for this.features.
 	 * @param features (HashSet<Feat>)
 	 */
-	public void setFeatures(HashSet<Feat> features){
+	public void setFeatures(HashSet<String> features){
 		this.features = features;
 	}
     
@@ -324,7 +347,7 @@ public class Ancestry {
 	 * Adds feature to this.features.
 	 * @param feature (Feat) 
 	 */
-    public void addFeature(Feat feature){
+    public void addFeature(String feature){
         this.features.add(feature);
     }
 
@@ -332,7 +355,7 @@ public class Ancestry {
 	 * Removes feature from this.features if present.
 	 * @param feature (Feat)
 	 */
-    public void removeFeature(Feat feature){
+    public void removeFeature(String feature){
         if(this.features.contains(feature)){
             this.features.remove(feature);
         }

@@ -1,5 +1,10 @@
 package pf2ecs.model;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 /** The Heritage class holds the description of a character heritage
 *
 * @author Quinn Murphey
@@ -24,6 +29,15 @@ public class Heritage {
         this.name = name;
     }
     
+	/** Constructor Method
+     *  
+     *  @param json (String) The name of the background
+     */
+    public static Heritage fromJson(JsonObject json){
+        Gson gson = new Gson(); 
+        return gson.fromJson(json, Heritage.class);
+    }
+
     /** 
      * Returns this.name
      *  @return this.name (String)

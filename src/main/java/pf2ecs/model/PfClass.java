@@ -156,7 +156,7 @@ public class PfClass {
                 JsonObject subclassJson = (JsonObject) subclassesArray.get(i);
 
                 // Create new subclass based on JsonObject
-                Subclass subclass = new Subclass(subclassJson);
+                Subclass subclass = Subclass.fromJson(subclassJson);
 
                 // Add subclass to this.subclasses
                 this.subclasses.add(subclass);
