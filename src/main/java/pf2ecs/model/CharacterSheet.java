@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+
 import pf2ecs.model.Attribute;
 import pf2ecs.model.Alignment;
 import pf2ecs.model.Scenario;
@@ -27,7 +30,6 @@ import pf2ecs.model.Feat;
   * @since 03/26/2021
   */
 public class CharacterSheet {
-
     /** Holds the name of the character */
     private String name;
 
@@ -97,16 +99,255 @@ public class CharacterSheet {
      * @param name (String)
      */
     public CharacterSheet(){
-        
+        this.name = "";
+        this.ancestry = new Ancestry();
+        this.pfClass = new PfClass();
+        this.background = new Background();
+        this.inventory = new Inventory();
+        this.actions = new HashSet<>();
+        this.feats = new HashSet<>();
+        this.xp = 0;
+        this.level = 1;
+        this.size = Size.MEDIUM;
+        this.diety = "";
+        this.alignment = ALIGNMENT.N;
+        this.heroPoints = 0;
+        this.attributes = new Hashtable<>();
+        this.proficiencies = new Hashtable<>();
+        this.ac = 0;
+        this.maxHp = 0;
+        this.hp = 0;
+        this.tempHp = 0;
+        this.speed = "";
+        this.languages = "";
     }
 
     /**
      * Constructor Method making a CharacterSheet from a json file.
      *
-     * @param filename (String) This is the String used to create the character sheet.
+     * @param json (JsonObject) 
      */
-    public CharacterSheet(String filename){
+    public CharacterSheet(JsonObject json){
+        this.name = "";
+        this.ancestry = new Ancestry();
+        this.pfClass = new PfClass();
+        this.background = new Background();
+        this.inventory = new Inventory();
+        this.actions = new HashSet<>();
+        this.feats = new HashSet<>();
+        this.xp = 0;
+        this.level = 1;
+        this.size = Size.MEDIUM;
+        this.diety = "";
+        this.alignment = ALIGNMENT.N;
+        this.heroPoints = 0;
+        this.attributes = new Hashtable<>();
+        this.proficiencies = new Hashtable<>();
+        this.ac = 0;
+        this.maxHp = 0;
+        this.hp = 0;
+        this.tempHp = 0;
+        this.speed = "";
+        this.languages = "";
+        this.readJson(json);
+    }
+    
+    /**
+     * Reads a JsonObject and applies the changes to the CharacterSheet object
+     * @param json (JsonObject)
+     */
+    public void readJson(JsonObject json){
+        if(json.has("name")){
+            // Put name from json into this.name
+            this.name = json.get("name").getAsString();
+        }
 
+        this.ancestry.readJson(json);
+        this.pfClass.readJson(json);
+        this.background.readJson(json);
+        this.inventory.readJson(json);
+        
+        if(json.has("actions")){
+            // Read the array of actions
+            JsonArray actionsArray = (JsonArray) json.get("actions");
+            for(int i = 0; i < actionsArray.size(); i++){
+                // create JsonObject from actionsArray
+                JsonObject actionJson = (JsonObject) actionsArray.get(i);
+
+                // create Action from actionJson
+                Action action = new Action(actionJson);
+
+                // add action to this.actions
+                this.actions.add(action);
+            }
+
+        }
+
+        if(json.has("feats")){
+            // Read the array of feats 
+            JsonArray featsArray = (JsonArray) json.get("feats");
+            for(int i = 0; i < featsArray.size(); i++){
+                // create JsonObject from featsArray
+                JsonObject featJson = (JsonObject) featsArray.get(i);
+
+                // create Feat from featJson
+                Feat feat = new Feat(featJson);
+
+                // add feat to this.feats
+                this.feats.add(feat);
+            }
+
+        }
+
+        if(json.has("xp")){
+            // Put xp from json into this.xp
+            this.xp = json.get("xp").getAsInt();
+        }
+
+        if(json.has("level")){
+            // Put level from json into this.level 
+            this.level = json.get("level").getAsInt();
+        }
+
+        if(json.has("size")){
+            // Put size from json into this.size
+            String sizeString = json.get("size").getAsString();
+            Size size = this.size;
+            switch(sizeString){
+                case "tiny":
+                    size = Size.TINY;
+                    break;
+                case "small":
+                    size = Size.SMALL;
+                    break;
+                case "medium":
+                    size = Size.MEDIUM;
+                    break;
+                case "large":
+                    size = Size.LARGE;
+                    break;
+                case "huge":
+                    size = Size.HUGE;
+                    break;
+                case "gargantuan":
+                    size = Size.GARGANTUAN;
+                    break;
+            }
+            this.size = size;
+        }
+
+        if(json.has("alignment")){
+            // Put alignment from json into this.alignment
+            String alignmentString = json.get("alignment").getAsString();
+            Alignment alignment = this.alignment;
+            switch(alignmentString){
+                case "lg":
+                    alignment = Alignment.LG;
+                    break;
+                case "ng":
+                    alignment = Alignment.NG;
+                    break;
+                case "cg":
+                    alignment = Alignment.CG;
+                    break;
+                case "ln":
+                    alignment = Alignment.LN;
+                    break;
+                case "n":
+                    alignment = Alignment.N;
+                    break;
+                case "cn":
+                    alignment = Alignment.CN;
+                    break;
+                case "le":
+                    alignment = Alignment.LE;
+                    break;
+                case "ne":
+                    alignment = Alignment.NE;
+                    break;
+                case "ce":
+                    alignment = Alignment.CE;
+                    break;
+            }
+
+            this.alignment = alignment;
+        }
+
+        if(json.has("diety")){
+            // Put diety from json into this.diety
+            this.diety = json.get("diety").getAsString();
+        }
+
+        if(json.has("heroPoints")){
+            // Put level from json into this.level 
+            this.heroPoints = json.get("heroPoints").getAsInt();
+        }
+
+        if(json.has("attributes")){
+            JsonArray attributesArray = (JsonArray) json.get("attributes");
+
+            for(int i = 0; i< attributeArray.size(); i++){
+                // Get next String
+                String[] stringArray = attributeArray.get(i).getAsString().split("=");
+
+                // Set attribute based on stringArray 
+                Attribute attribute = Attribute.STR;
+                switch(stringArray[0]){
+                    case "strength":
+                        attribute = Attribute.STR;
+                        break;
+                    case "dexterity":
+                        attribute = Attribute.DEX;
+                        break;
+                    case "constitution":
+                        attribute = Attribute.CON;
+                        break;
+                    case "intelligence":
+                        attribute = Attribute.INT;
+                        break;
+                    case "wisdom":
+                        attribute = Attribute.WIS;
+                        break;
+                    case "charisma":
+                        attribute = Attribute.CHA;
+                        break;
+                }
+                
+                int score = Integer.parseInt(stringArray[1]);
+
+                this.attributeBonuses.put(attribute, score);
+            }
+        }
+
+        if(json.has("ac")){
+            // Put level from json into this.level 
+            this.ac = json.get("ac").getAsInt();
+        }
+
+        if(json.has("maxHp")){
+            // Put maxHp from json into this.maxHp
+            this.maxHp = json.get("maxHp").getAsInt();
+        }
+
+        if(json.has("hp")){
+            // Put hp from json into this.hp
+            this.hp = json.get("hp").getAsInt();
+        }
+
+        if(json.has("tempHp")){
+            // Put tempHp from json into this.tempHp
+            this.tempHp = json.get("tempHp").getAsInt();
+        }
+
+        if(json.has("speed")){
+            // Put speed from json into this.speed
+            this.speed= json.get("speed").getAsString();
+        }
+        
+        if(json.has("languages")){
+            // Put languages from json into this.languages
+            this.languages = json.get("languages").getAsString();
+        }
     }
     
     /**
