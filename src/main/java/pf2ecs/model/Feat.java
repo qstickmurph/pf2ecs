@@ -122,7 +122,7 @@ public class Feat {
             }
         }
         
-        if(json.has("prerequisites")){
+        if(json.has("multiple")){
             // Put multiple from json into this.multiple
             this.multiple = Boolean.parseBoolean(json.get("multiple").getAsString());
         }

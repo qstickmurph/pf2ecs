@@ -21,9 +21,6 @@ public class Action {
     /** Holds the name of the Action */
     private String name;
 
-    /** What type of play the Action can be done*/
-    private Scenario scenario;
-
     /** Holds the traits of the Action */
     private HashSet<String> traits = new HashSet<String>();
 
@@ -45,6 +42,11 @@ public class Action {
      */
     public Action(){
         this.name = "";
+        this.traits = new HashSet<>();
+        this.requirements = new HashSet<>();
+        this.description = "";
+        this.time = "";
+        this.trigger = "";
     }
 
     /**
@@ -52,6 +54,55 @@ public class Action {
      * @param json (JsonObject)
      */
     public Action(JsonObject json){
+        this.name = "";
+        this.traits = new HashSet<>();
+        this.requirements = new HashSet<>();
+        this.description = "";
+        this.time = "";
+        this.trigger = "";
+        this.readJson(json);
+    }
+    
+    /**
+     * Reads a JsonObject and applies that object to the Feat
+     * @param json (JsonObject)
+     */
+    public void readJson(JsonObject json){
+        if(json.has("name")){
+            // Put name from json into this.name
+            this.name = json.get("name").getAsString();
+        }
+
+        if(json.has("traits")){
+            // Read the array of Strings 
+            JsonArray traitsArray = (JsonArray) json.get("traits");
+            for(int i = 0; i < traitsArray.size(); i++){ // put each trait into this.traits
+                this.traits.add(traitsArray.get(i).getAsString());
+            }
+        }
+
+        if(json.has("requirements")){
+            // Read the array of Strings
+            JsonArray requirementsArray = (JsonArray) json.get("requirements");
+            for(int i = 0; i < requirementsArray.size(); i++){ // put each prerequisite into this.prerequisites
+                this.requirements.add(requirementsArray.get(i).getAsString());
+            }
+        }
+
+        if(json.has("description")){
+            // Put description from json into this.description.
+            this.description= json.get("description").getAsString();
+        }
+
+        if(json.has("time")){
+            // Put time from json into this.time.
+            this.time = json.get("time").getAsString();
+        }
+
+        if(json.has("trigger")){
+            // Put trigger from json into this.trigger.
+            this.trigger = json.get("trigger").getAsString();
+        }
 
     }
     
@@ -69,23 +120,6 @@ public class Action {
      */
     public void setName(String name){
         this.name = name;
-    }
-    
-
-    /**
-     * Returns this.scenario
-     * @return this.scenario (Scenario)
-     */
-    public Scenario getScenario(){
-        return this.scenario;
-    }
-    
-    /**
-     * Sets this.scenario
-     * @param scenario (Scenario)
-     */
-    public void setScenario(Scenario scenario){
-        this.scenario = scenario;
     }
     
 	/**
