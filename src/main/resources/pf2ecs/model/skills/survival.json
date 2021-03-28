@@ -1,0 +1,16 @@
+{
+  "type": "skill",
+  "name": "survival",
+  "description": "You are adept at living in the wilderness, foraging for food and building shelter, and with training you discover the secrets of tracking and hiding your trail. Even if you’re untrained, you can still use Survival to Subsist.",
+  "key_ability": "wisdom",
+  "actions": [
+    [
+      "actions:skills:subsist",
+      "actions:skills:sense_direction"
+    ],
+    [
+      "actions:skills:cover_tracks",
+      "actions:skills:track"
+    ]
+  ]
+}

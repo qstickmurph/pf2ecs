@@ -1,0 +1,19 @@
+{
+  "type": "background",
+  "name": "background name",
+  "description": "background description",
+  "ability_boosts": [
+    "free",
+    [
+      "choice 1",
+      "choice 2"
+    ]
+  ],
+  "proficiencies": [
+    "skills:(background skill)=t",
+    "skills:(background skill)=t"
+  ],
+  "feats": [
+    "background feat"
+  ]
+}

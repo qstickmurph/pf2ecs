@@ -1,0 +1,14 @@
+{
+  "type": "item",
+  "name": "Item name",
+  "level": "Item level",
+  "traits": "Any item traits",
+  "price": "price of item",
+  "description": "description of item",
+  "actions": "If the item gives the user an action",
+  "runes": "Any runes on the item",
+  "Investment": "if it needs to be invested",
+  "bulk": "bulk of item",
+  "ability_boosts": "If it gives any ability boosts",
+  "proficiencies": "If the item gives proficiencies"
+}

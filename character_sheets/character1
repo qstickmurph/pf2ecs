@@ -1,0 +1,51 @@
+{
+  "name": "",
+  "ancestry": {
+    "hitpoints": 0,
+    "attributeBonuses": {},
+    "traits": [],
+    "features": [],
+    "heritages": [],
+    "feats": []
+  },
+  "pfClass": {
+    "hitpoints": 0,
+    "proficiencyBonuses": {},
+    "freeSkills": 0,
+    "subclasses": [],
+    "features": []
+  },
+  "background": {
+    "attributeBonuses": {},
+    "proficiencyBonuses": {}
+  },
+  "inventory": {
+    "pp": 0,
+    "gp": 0,
+    "sp": 0,
+    "cp": 0
+  },
+  "actions": [],
+  "feats": [],
+  "xp": 0,
+  "level": 19,
+  "size": "MEDIUM",
+  "diety": "",
+  "alignment": "N",
+  "heroPoints": 0,
+  "attributes": {
+    "CHA": 10,
+    "WIS": 10,
+    "DEX": 10,
+    "STR": 10,
+    "INT": 10,
+    "CON": 10
+  },
+  "proficiencies": {},
+  "ac": 0,
+  "maxHp": 0,
+  "hp": 0,
+  "tempHp": 0,
+  "speed": "",
+  "languages": ""
+}

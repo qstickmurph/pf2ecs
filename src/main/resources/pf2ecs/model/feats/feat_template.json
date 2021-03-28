@@ -1,0 +1,15 @@
+{
+  "type": "feat",
+  "name": "feat name",
+  "level": "feat level",
+  "traits": [
+    "feat traits"
+  ],
+  "prerequisites": "prerequisites, if any",
+  "description": "feat description",
+  "multiple": "if the feat allows to be taken more than once",
+  "ability_boosts": "Any ability boosts",
+  "proficiencies": "any proficiencies",
+  "actions": "any given actions",
+  "spells": "any spells"
+}

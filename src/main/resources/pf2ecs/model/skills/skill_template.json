@@ -1,0 +1,14 @@
+{
+  "type": "skill",
+  "name": "skill name",
+  "description": "skill description",
+  "key_ability": "the skills dedicated ability",
+  "actions": [
+    [
+      "Any untrained skill actions"
+    ],
+    [
+      "Any trained skill actions"  
+    ]
+  ]
+}

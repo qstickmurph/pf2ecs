@@ -1,0 +1,10 @@
+{
+  "type": "action",
+  "name": "name of action",
+  "scenario": "encounter, exploration, or downtime",
+  "traits": "any traits on the action",
+  "time": "amount of time, or actions needed to do action",
+  "trigger": "needed trigger to do action",
+  "requirements": "any requirements needed for the action",
+  "description": "description of action"
+}

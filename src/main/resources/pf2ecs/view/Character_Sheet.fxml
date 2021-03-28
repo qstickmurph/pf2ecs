@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pf2ecs.controller.CharacterSheetController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints fillHeight="false" maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="NEVER" />
+    <RowConstraints maxHeight="1050.0" minHeight="10.0" prefHeight="1050.0" vgrow="ALWAYS" />
+  </rowConstraints>
+   <children>
+      <MenuBar fx:id="menuBar" maxHeight="30.0" minHeight="30.0" prefHeight="30.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <Menu mnemonicParsing="false" text="New...">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Character Sheet" />
+                    </items>
+                  </Menu>
+                  <MenuItem fx:id="saveMenuItem" mnemonicParsing="false" onAction="#saveMenuItemPressed" text="Save" />
+                  <MenuItem fx:id="openMenuItem" mnemonicParsing="false" onAction="#openMenuItemPressed" text="Open" />
+              <MenuItem mnemonicParsing="false" text="Quit" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Edit Character Sheet" />
+                  <MenuItem mnemonicParsing="false" text="Level Up" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+                  <MenuItem mnemonicParsing="false" text="GitHub" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <GridPane GridPane.rowIndex="1">
+        <columnConstraints>
+          <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" prefWidth="0.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="NEVER" minWidth="1920.0" prefWidth="1920.0" />
+          <ColumnConstraints hgrow="ALWAYS" minWidth="0.0" prefWidth="0.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="0.0" prefHeight="0.0" vgrow="ALWAYS" />
+          <RowConstraints minHeight="1050.0" prefHeight="1050.0" valignment="CENTER" vgrow="NEVER" />
+          <RowConstraints minHeight="0.0" prefHeight="0.0" vgrow="ALWAYS" />
+        </rowConstraints>
+         <children>
+            <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #d8d0c3;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <ImageView fitHeight="100.0" fitWidth="200.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@pf2ecs_Logo.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="200.0" layoutY="14.0" text="Character Name" />
+                  <Label fx:id="characterName" layoutX="200.0" layoutY="30.0" prefHeight="85.0" prefWidth="478.0" style="-fx-font-size: 22; -fx-background-color: white;" text="CHARACTER_NAME_CHARACTER_NAME_CHARACTER_NAME_CHARACTER_NAME_CHARACTER_NAME" wrapText="true" />
+                  <Label layoutX="694.0" layoutY="18.0" text="Ancestry and Heritage" />
+                  <Label fx:id="ancestryAndHeritage" layoutX="694.0" layoutY="34.0" prefHeight="30.0" prefWidth="400.0" style="-fx-font-size: 18; -fx-background-color: white;" text="ANCESTRY_HERITAGE" wrapText="true" />
+                  <Label layoutX="694.0" layoutY="68.0" text="Background" />
+                  <Label fx:id="background" layoutX="694.0" layoutY="85.0" prefHeight="30.0" prefWidth="400.0" style="-fx-font-size: 18; -fx-background-color: white;" text="BACKGROUND" wrapText="true" />
+                  <Label layoutX="1109.0" layoutY="18.0" text="Class" />
+                  <Label fx:id="classLabel" layoutX="1109.0" layoutY="34.0" prefHeight="30.0" prefWidth="400.0" style="-fx-font-size: 18; -fx-background-color: white;" text="CLASS" wrapText="true" />
+                  <Label layoutX="1109.0" layoutY="68.0" text="Diety" />
+                  <Label fx:id="diety" layoutX="1109.0" layoutY="85.0" prefHeight="30.0" prefWidth="190.0" style="-fx-font-size: 18; -fx-background-color: white;" text="DIETY" wrapText="true" />
+                  <Label fx:id="size" layoutX="1319.0" layoutY="85.0" prefHeight="30.0" prefWidth="190.0" style="-fx-font-size: 18; -fx-background-color: white;" text="SIZE" wrapText="true" />
+                  <Label layoutX="1319.0" layoutY="68.0" text="Size" />
+                  <Label layoutX="1779.0" layoutY="39.0" style="-fx-font-size: 18;" text="Level" />
+                  <Label fx:id="level" layoutX="1838.0" layoutY="28.0" prefHeight="43.0" prefWidth="68.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="0" wrapText="true" />
+                  <Label layoutX="1525.0" layoutY="19.0" text="Alignment" />
+                  <Label fx:id="alignment" layoutX="1525.0" layoutY="34.0" prefHeight="30.0" prefWidth="190.0" style="-fx-font-size: 18; -fx-background-color: white;" text="ALIGNMENT" wrapText="true" />
+                  <Label layoutX="1525.0" layoutY="68.0" text="Experience Points" />
+                  <Label layoutX="1727.0" layoutY="90.0" style="-fx-font-size: 18;" text="Hero Points" />
+                  <BorderPane layoutX="11.0" layoutY="152.0" prefHeight="457.0" prefWidth="366.0" style="-fx-background-color: 98513d;">
+                     <center>
+                        <GridPane prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #98513d;" BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="80.0" prefWidth="80.0" />
+                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="80.0" prefWidth="80.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label fx:id="strengthLabel" text="Strength" textAlignment="RIGHT" textFill="WHITE" underline="true" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="strengthScore" prefHeight="40.0" prefWidth="70.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="10" wrapText="true" GridPane.columnIndex="2" />
+                              <Label fx:id="strengthMod" prefHeight="40.0" prefWidth="70.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="0" textAlignment="CENTER" wrapText="true" />
+                              <Label fx:id="dexterityLabel" text="Dexterity" textAlignment="RIGHT" textFill="WHITE" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="constitutionLabel" text="Constitution" textAlignment="RIGHT" textFill="WHITE" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="intelligenceLabel" text="Intelligence" textAlignment="RIGHT" textFill="WHITE" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="wisdomLabel" text="Wisdom" textAlignment="RIGHT" textFill="WHITE" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="charismaLabel" text="Charisma" textAlignment="RIGHT" textFill="WHITE" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="dexterityScore" prefHeight="40.0" prefWidth="70.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="10" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <Label fx:id="constitutionScore" prefHeight="40.0" prefWidth="70.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="10" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <Label fx:id="intelligenceScore" prefHeight="40.0" prefWidth="70.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="10" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <Label fx:id="wisdomScore" prefHeight="40.0" prefWidth="70.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="10" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                              <Label fx:id="charismaScore" prefHeight="40.0" prefWidth="70.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="10" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                              <Label fx:id="dexterityMod" prefHeight="40.0" prefWidth="70.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="0" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1" />
+                              <Label fx:id="constitutionMod" prefHeight="40.0" prefWidth="70.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="0" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2" />
+                              <Label fx:id="wisdomMod" prefHeight="40.0" prefWidth="70.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="0" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="4" />
+                              <Label fx:id="intelligenceMod" prefHeight="40.0" prefWidth="70.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="0" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="3" />
+                              <Label fx:id="charismaMod" prefHeight="40.0" prefWidth="70.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="0" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="5" />
+                           </children>
+                        </GridPane>
+                     </center>
+                     <top>
+                        <Pane prefHeight="37.0" prefWidth="353.0" style="-fx-background-color: #002664;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label layoutX="4.0" layoutY="6.0" prefHeight="16.0" prefWidth="346.0" style="-fx-alignment: center; -fx-font-size: 22;" text="Ability Scores" textAlignment="CENTER" textFill="WHITE" />
+                           </children>
+                        </Pane>
+                     </top>
+                  </BorderPane>
+                  <BorderPane layoutX="11.0" layoutY="613.0" prefHeight="100.0" prefWidth="366.0" style="-fx-background-color: 98513d;">
+                     <top>
+                        <Pane prefHeight="37.0" prefWidth="353.0" style="-fx-background-color: #002664;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label fx:id="classDcLabel" layoutX="4.0" layoutY="6.0" prefHeight="16.0" prefWidth="346.0" style="-fx-alignment: center; -fx-font-size: 22;" text="Class DC" textAlignment="CENTER" textFill="WHITE" underline="true" />
+                           </children>
+                        </Pane>
+                     </top>
+                     <center>
+                        <Pane prefHeight="131.0" prefWidth="353.0" style="-fx-background-color: #98513d;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label fx:id="classDc" layoutX="22.0" layoutY="16.0" prefHeight="40.0" prefWidth="70.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="10" wrapText="true" />
+                              <Label fx:id="classKeyAbility" layoutX="102.0" layoutY="25.0" prefHeight="30.0" prefWidth="234.0" style="-fx-font-size: 18; -fx-background-color: white;" text="ABILITY" wrapText="true" />
+                              <Label layoutX="105.0" layoutY="4.0" prefHeight="21.0" prefWidth="146.0" text="Key Ability" textAlignment="RIGHT" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="11.0" layoutY="717.0" prefHeight="319.0" prefWidth="366.0" style="-fx-background-color: 98513d;">
+                     <center>
+                        <GridPane prefHeight="300.0" prefWidth="300.0" style="-fx-background-color: #98513d;" BorderPane.alignment="CENTER">
+                           <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="80.0" minWidth="80.0" prefWidth="80.0" />
+                              <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="300.0" minWidth="0.0" prefWidth="11.0" />
+                              <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="300.0" minWidth="100.0" prefWidth="262.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="50.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label fx:id="fortitudeLabel" prefHeight="21.0" prefWidth="287.0" text="Fortitude" textAlignment="RIGHT" textFill="WHITE" underline="true" GridPane.columnIndex="2">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="fortitudeMod" prefHeight="40.0" prefWidth="70.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="0" textAlignment="CENTER" wrapText="true" />
+                              <Label fx:id="reflexLabel" prefHeight="21.0" prefWidth="274.0" text="Reflex" textAlignment="RIGHT" textFill="WHITE" underline="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="willLabel" prefHeight="21.0" prefWidth="293.0" text="Will" textAlignment="RIGHT" textFill="WHITE" underline="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="reflexMod" prefHeight="40.0" prefWidth="70.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="0" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1" />
+                              <Label fx:id="willMod" prefHeight="40.0" prefWidth="70.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="0" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2" />
+                              <Label fx:id="perceptionMod" prefHeight="40.0" prefWidth="70.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="0" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="3" />
+                              <Label fx:id="perceptionLabel" prefHeight="21.0" prefWidth="290.0" text="Perception" textAlignment="RIGHT" textFill="WHITE" underline="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </GridPane>
+                     </center>
+                     <top>
+                        <Pane prefHeight="37.0" prefWidth="353.0" style="-fx-background-color: #002664;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label fx:id="savingThrowsLabel" layoutX="4.0" layoutY="6.0" prefHeight="16.0" prefWidth="346.0" style="-fx-alignment: center; -fx-font-size: 22;" text="Saving Throws" textAlignment="CENTER" textFill="WHITE" />
+                           </children>
+                        </Pane>
+                     </top>
+                  </BorderPane>
+                  <BorderPane layoutX="390.0" layoutY="303.0" prefHeight="629.0" prefWidth="272.0" style="-fx-background-color: 98513d;">
+                     <top>
+                        <Pane prefHeight="37.0" prefWidth="353.0" style="-fx-background-color: #002664;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label layoutX="4.0" layoutY="6.0" prefHeight="26.0" prefWidth="265.0" style="-fx-alignment: center; -fx-font-size: 22;" text="Skills" textAlignment="CENTER" textFill="WHITE" />
+                           </children>
+                        </Pane>
+                     </top>
+                     <center>
+                        <ScrollPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #98513d;" BorderPane.alignment="CENTER">
+                          <content>
+                            <AnchorPane fx:id="skillsAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="253.0" style="-fx-background-color: #98513d;">
+                                 <children>
+                                    <GridPane fx:id="skillsGridPane" layoutX="6.0" layoutY="7.0" prefHeight="26.0" prefWidth="236.0" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="167.0" minWidth="10.0" prefWidth="167.0" />
+                                          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="94.0" minWidth="10.0" prefWidth="30.0" />
+                                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="87.0" minWidth="10.0" prefWidth="39.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                    </GridPane>
+                                 </children></AnchorPane>
+                          </content>
+                        </ScrollPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="390.0" layoutY="936.0" prefHeight="100.0" prefWidth="548.0" style="-fx-background-color: 98513d;">
+                     <top>
+                        <Pane prefHeight="37.0" prefWidth="353.0" style="-fx-background-color: #002664;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label fx:id="languagesLabel" layoutX="4.0" layoutY="6.0" prefHeight="26.0" prefWidth="537.0" style="-fx-alignment: center; -fx-font-size: 22;" text="Languages" textAlignment="CENTER" textFill="WHITE" underline="true" />
+                           </children>
+                        </Pane>
+                     </top>
+                     <center>
+                        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #98513d;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label fx:id="languages" layoutX="4.0" layoutY="4.0" prefHeight="54.0" prefWidth="540.0" style="-fx-font-size: 18; -fx-background-color: white;" text="Language" wrapText="true" />
+                           </children>
+                        </Pane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="390.0" layoutY="152.0" prefHeight="147.0" prefWidth="272.0" style="-fx-background-color: 98513d;">
+                     <top>
+                        <Pane prefHeight="37.0" prefWidth="353.0" style="-fx-background-color: #002664;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label layoutX="4.0" layoutY="6.0" prefHeight="26.0" prefWidth="266.0" style="-fx-alignment: center; -fx-font-size: 22;" text="Hit Points" textAlignment="CENTER" textFill="WHITE" />
+                           </children>
+                        </Pane>
+                     </top>
+                     <center>
+                        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #98513d;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label layoutX="79.0" layoutY="31.0" text="/" textFill="WHITE">
+                                 <font>
+                                    <Font size="40.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="maxHp" layoutX="97.0" layoutY="36.0" prefHeight="43.0" prefWidth="78.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="100" wrapText="true" />
+                              <Label layoutX="4.0" layoutY="15.0" prefHeight="21.0" prefWidth="81.0" text="Current" textAlignment="RIGHT" textFill="WHITE">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="maxHpLabel" layoutX="97.0" layoutY="15.0" prefHeight="21.0" prefWidth="81.0" text="Max" textAlignment="RIGHT" textFill="WHITE" underline="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="hp" layoutX="6.0" layoutY="36.0" prefHeight="43.0" prefWidth="68.0" style="-fx-background-color: white; -fx-alignment: center; -fx-font-size: 22;" text="100" />
+                              <Label fx:id="tempHpLabel" layoutX="194.0" layoutY="16.0" prefHeight="21.0" prefWidth="67.0" text="Temp" textAlignment="RIGHT" textFill="WHITE" underline="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="tempHp" layoutX="197.0" layoutY="42.0" prefHeight="21.0" prefWidth="68.0" style="-fx-background-color: white; -fx-alignment: center; -fx-font-size: 16;" />
+                              <Label layoutX="176.0" layoutY="45.0" text="+" textFill="WHITE">
+                                 <font>
+                                    <Font size="22.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </center>
+                  </BorderPane>
+                  <TextField layoutX="1525.0" layoutY="88.0" prefHeight="26.0" prefWidth="190.0" style="-fx-background-color: white;" text="XP" fx:id="xp" />
+                  <BorderPane layoutX="666.0" layoutY="303.0" prefHeight="147.0" prefWidth="272.0" style="-fx-background-color: 98513d;">
+                     <top>
+                        <Pane prefHeight="37.0" prefWidth="353.0" style="-fx-background-color: #002664;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label layoutX="4.0" layoutY="6.0" prefHeight="26.0" prefWidth="266.0" style="-fx-alignment: center; -fx-font-size: 22;" text="Speed" textAlignment="CENTER" textFill="WHITE" />
+                           </children>
+                        </Pane>
+                     </top>
+                     <center>
+                        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #98513d;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label fx:id="speed" layoutX="71.0" layoutY="4.0" prefHeight="21.0" prefWidth="78.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="30" wrapText="true" />
+                              <Label fx:id="feetLabel" layoutX="153.0" layoutY="6.0" prefHeight="21.0" prefWidth="48.0" text="Feet" textAlignment="RIGHT" textFill="WHITE" underline="true">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="movementTypes" layoutX="6.0" layoutY="50.0" prefHeight="55.0" prefWidth="260.0" style="-fx-background-color: white; -fx-font-size: 16;" />
+                              <Label layoutX="5.0" layoutY="32.0" prefHeight="21.0" prefWidth="175.0" text="Movement Types &amp; Notes" textAlignment="RIGHT" textFill="WHITE" underline="true">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="666.0" layoutY="152.0" prefHeight="147.0" prefWidth="272.0" style="-fx-background-color: 98513d;">
+                     <top>
+                        <Pane prefHeight="37.0" prefWidth="353.0" style="-fx-background-color: #002664;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label layoutX="4.0" layoutY="6.0" prefHeight="26.0" prefWidth="266.0" style="-fx-alignment: center; -fx-font-size: 22;" text="Death" textAlignment="CENTER" textFill="WHITE" />
+                           </children>
+                        </Pane>
+                     </top>
+                     <center>
+                        <GridPane style="-fx-background-color: #98513d;" BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="NEVER" minWidth="5.0" prefWidth="5.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="NEVER" minWidth="10.0" prefWidth="10.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="NEVER" minWidth="5.0" prefWidth="10.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="49.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="81.0" minHeight="10.0" prefHeight="81.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label fx:id="dyingLabel" prefHeight="21.0" prefWidth="55.0" text="Dying" textAlignment="RIGHT" textFill="WHITE" underline="true" GridPane.columnIndex="1">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="woundedLabel" prefHeight="21.0" prefWidth="88.0" text="Wounded" textAlignment="RIGHT" textFill="WHITE" underline="true" GridPane.columnIndex="3">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="dying" prefHeight="63.0" prefWidth="131.0" style="-fx-background-color: white; -fx-alignment: center; -fx-font-size: 22;" text="0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="wounded" minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="131.0" style="-fx-background-color: white; -fx-alignment: center; -fx-font-size: 22;" text="0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="666.0" layoutY="453.0" prefHeight="276.0" prefWidth="272.0" style="-fx-background-color: 98513d;">
+                     <top>
+                        <Pane prefHeight="37.0" prefWidth="353.0" style="-fx-background-color: #002664;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label layoutX="4.0" layoutY="6.0" prefHeight="26.0" prefWidth="266.0" style="-fx-alignment: center; -fx-font-size: 18;" text="Resistances and Immunities" textAlignment="CENTER" textFill="WHITE" />
+                           </children>
+                        </Pane>
+                     </top>
+                     <center>
+                        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #98513d;" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField fx:id="resistances" layoutX="6.0" layoutY="24.0" prefHeight="93.0" prefWidth="260.0" style="-fx-background-color: white; -fx-font-size: 16;" />
+                              <Label fx:id="resistancesLabel" layoutX="6.0" layoutY="1.0" prefHeight="21.0" prefWidth="175.0" text="Resistances" textAlignment="RIGHT" textFill="WHITE" underline="true">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="immunitiesLabel" layoutX="6.0" layoutY="118.0" prefHeight="21.0" prefWidth="175.0" text="Immunities" textAlignment="RIGHT" textFill="WHITE" underline="true">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="immunities" layoutX="6.0" layoutY="141.0" prefHeight="93.0" prefWidth="260.0" style="-fx-background-color: white; -fx-font-size: 16;" />
+                           </children>
+                        </Pane>
+                     </center>
+                  </BorderPane>
+                  <BorderPane layoutX="666.0" layoutY="732.0" prefHeight="200.0" prefWidth="272.0" style="-fx-background-color: 98513d;">
+                     <top>
+                        <Pane prefHeight="37.0" prefWidth="353.0" style="-fx-background-color: #002664;" BorderPane.alignment="CENTER">
+                           <children>
+                              <Label fx:id="conditionsLabel" layoutX="3.0" layoutY="6.0" prefHeight="26.0" prefWidth="266.0" style="-fx-alignment: center; -fx-font-size: 22;" text="Conditions" textAlignment="CENTER" textFill="WHITE" underline="true" />
+                           </children>
+                        </Pane>
+                     </top>
+                     <center>
+                        <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #98513d;" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField fx:id="conditions" layoutX="6.0" layoutY="9.0" prefHeight="147.0" prefWidth="260.0" style="-fx-background-color: white; -fx-font-size: 16;" />
+                           </children>
+                        </Pane>
+                     </center>
+                  </BorderPane>
+                  <TabPane layoutX="943.0" layoutY="152.0" prefHeight="883.0" prefWidth="967.0" tabClosingPolicy="UNAVAILABLE">
+                    <tabs>
+                      <Tab text="Actions">
+                           <content>
+                              <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                                <content>
+                                  <AnchorPane fx:id="actionsAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="851.0" prefWidth="950.0" style="-fx-background-color: #98513d;">
+                                       <children>
+                                          <GridPane fx:id="actionsGridPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="311.0" minWidth="10.0" prefWidth="295.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="354.0" minWidth="10.0" prefWidth="339.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                          </GridPane>
+                                          <ToolBar fx:id="actionsToolBar" prefHeight="50.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </ScrollPane>
+                           </content>
+                      </Tab>
+                      <Tab text="Feats">
+                           <content>
+                              <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                                <content>
+                                  <AnchorPane fx:id="featsAnchorPage" minHeight="0.0" minWidth="0.0" prefHeight="851.0" prefWidth="950.0" style="-fx-background-color: #98513d;">
+                                       <children>
+                                          <ToolBar fx:id="featsToolBar" prefHeight="50.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <GridPane fx:id="featsGridPane" layoutX="14.0" layoutY="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="311.0" minWidth="10.0" prefWidth="295.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="354.0" minWidth="10.0" prefWidth="339.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </ScrollPane>
+                           </content></Tab>
+                        <Tab text="Inventory">
+                           <content>
+                              <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                                <content>
+                                  <AnchorPane fx:id="inventoryAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="851.0" prefWidth="950.0" style="-fx-background-color: #98513d;">
+                                       <children>
+                                          <ToolBar fx:id="inventoryToolBar" prefHeight="50.0" prefWidth="200.0" AnchorPane.bottomAnchor="801.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <GridPane fx:id="inventoryGridPane" layoutX="7.0" layoutY="50.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="311.0" minWidth="10.0" prefWidth="295.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="354.0" minWidth="10.0" prefWidth="339.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </ScrollPane>
+                           </content></Tab>
+                        <Tab text="Description">
+                           <content>
+                              <ScrollPane prefHeight="200.0" prefWidth="200.0">
+                                <content>
+                                  <AnchorPane fx:id="descriptionAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="851.0" prefWidth="950.0" style="-fx-background-color: #98513d;">
+                                       <children>
+                                          <ToolBar fx:id="descriptionToolBar" prefHeight="50.0" prefWidth="200.0" AnchorPane.bottomAnchor="801.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <GridPane fx:id="descriptionGridPane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="311.0" minWidth="10.0" prefWidth="295.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="354.0" minWidth="10.0" prefWidth="339.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                              </ScrollPane>
+                           </content></Tab>
+                        <Tab disable="true" text="Spells" />
+                    </tabs>
+                  </TabPane>
+                  <TextField fx:id="heroPoints" layoutX="1838.0" layoutY="80.0" prefHeight="43.0" prefWidth="68.0" style="-fx-background-color: white; -fx-alignment: center; -fx-font-size: 22;" text="0" />
+               </children>
+            </Pane>
+         </children>
+      </GridPane>
+   </children>
+</GridPane>

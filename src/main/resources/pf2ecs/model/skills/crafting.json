@@ -1,0 +1,16 @@
+{
+  "type": "skill",
+  "name": "crafting",
+  "description": "You can use this skill to create and repair items. Even if you’re untrained, you can Recall Knowledge.",
+  "key_ability": "intelligence",
+  "actions": [
+    [
+      "actions:skills:recall_knowledge",
+      "actions:skills:repair"
+    ],
+    [
+      "actions:skills:craft",
+      "actions:skills:identify_alchemy"
+    ]
+  ]
+}
