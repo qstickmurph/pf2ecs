@@ -3,8 +3,10 @@ package pf2ecs.model;
 import java.util.HashSet;
 import java.util.Hashtable;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonArray;
+import com.google.gson.JsonParseException;
 
 /** The Class class holds all the information about class including its hitpoints, key attribute, and more.
 *
@@ -15,7 +17,6 @@ import com.google.gson.JsonArray;
 * @since 03/26/2021
 */
 public class PfClass {
-
 	/** The name of the class */
 	private String name;
 	
@@ -49,134 +50,58 @@ public class PfClass {
     	this.subclasses = new HashSet<>();
     	this.features = new HashSet<>();
     }
-    
-	/** Json Constructor Method
-     *  @param json (JsonObject)
+
+    /** 
+     * Reads a json file containing a class and creates that PfClass 
+     * @param file (File)
      */
-    public PfClass(JsonObject json){
-    	this.name = "";
-        this.hitpoints = 0;
-    	this.keyAttribute = null;
-    	this.proficiencyBonuses = new Hashtable<>();
-    	this.freeSkills = 0;
-    	this.subclasses = new HashSet<>();
-    	this.features = new HashSet<>();
-    	this.readJson(json);
+    public static PfClass fromFile(File file){
+        Gson gson = new Gson();
+        try(Reader reader = new FileReader(file)){
+            return gson.fromJson(reader, PfClass.getClass());
+        } catch (IOException e) { 
+            e.printStackTrace();
+        } catch (JsonParseException e) { 
+            e.printStackTrace();
+        }
+        return new PfClass();
     }
 
-	/** Json read
-     *  
-     *  @param json (JsonObject)
+    /**
+     * Reads a JsonObject and creates that PfClass 
+     * @param json (JsonObject)
      */
-    public void readJson(JsonObject json){
-    	if(json.has("name")){
-            // Put name from json into this.name
-            this.name = json.get("name").getAsString();
+    public static PfClass fromJson(JsonObject json){
+        Gson gson = new Gson();
+        try{
+            return gson.fromJson(json, PfClass.getClass());
+        } catch(JsonParseException e){
+            e.printStackTrace();
         }
-
-    	if(json.has("hitpoints")){
-            // Put hitpoints from json into this.hitpoints 
-            this.hitpoints = json.get("hitpoints").getAsInt();
+        return new PfClass();
+    }
+    
+    /**
+     * Exports the class as a json file
+     */
+    public void save(File file) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try {
+            file.createNewFile();
+            FileWriter writer = new FileWriter(file);
+            //writer.write("Heyo");
+            gson.toJson(this, writer);
+            writer.close();
+        } catch (IOException e){
+            e.printStackTrace();
         }
-    	
-    	if(json.has("key_ability")){
-            // Read the key attribute
-             String keyAbility = json.get("key_ability").getAsString();
-
-                // Set attribute based on str
-                Attribute attribute = Attribute.STR;
-                switch(keyAbility){
-                    case "strength":
-                        attribute = Attribute.STR;
-                        break;
-                    case "dexterity":
-                        attribute = Attribute.DEX;
-                        break;
-                    case "constitution":
-                        attribute = Attribute.CON;
-                        break;
-                    case "intelligence":
-                        attribute = Attribute.INT;
-                        break;
-                    case "wisdom":
-                        attribute = Attribute.WIS;
-                        break;
-                    case "charisma":
-                        attribute = Attribute.CHA;
-                        break;
-                }
-
-                
-                this.keyAttribute = attribute;              
-                
-        }
-    	
-    	if(json.has("profiencies")){
-            // Read the array of Strings
-            JsonArray proficiencyBonusesArray = (JsonArray) json.get("proficiencies");
-            for(int i = 0; i < proficiencyBonusesArray.size(); i++){
-                // Get next String and split it at '='
-                String[] stringArray = (proficiencyBonusesArray.get(i).getAsString()).split("=");
-
-                SkillTraining bonus = SkillTraining.UNTRAINED;
-                switch(stringArray[1].charAt(0)){ // set the skill bonus accordingly
-                    case 't':
-                    case 'T':
-                        bonus = SkillTraining.TRAINED;
-                        break;
-                    case 'e':
-                    case 'E':
-                        bonus = SkillTraining.EXPERT;
-                        break;
-                    case 'm':
-                    case 'M':
-                        bonus = SkillTraining.MASTER;
-                        break;
-                    case 'l':
-                    case 'L':
-                        bonus = SkillTraining.LEGENDARY;
-                        break;
-                }
-
-                // put it into proficiencyBonuses
-                this.proficiencyBonuses.put(stringArray[0], bonus);
-            }
-        }
-    	
-    	if(json.has("free_skills")){
-            // Put free skills from json into this.freeSkills 
-            this.freeSkills = json.get("free_skills").getAsInt();
-        }
-    	
-    	if(json.has("subclasses")){
-            // Read the array of Strings
-            JsonArray subclassesArray = (JsonArray) json.get("subclasses");
-            for(int i = 0; i < subclassesArray.size(); i++){
-                // Parse subclass JsonObject
-                JsonObject subclassJson = (JsonObject) subclassesArray.get(i);
-
-                // Create new subclass based on JsonObject
-                Subclass subclass = Subclass.fromJson(subclassJson);
-
-                // Add subclass to this.subclasses
-                this.subclasses.add(subclass);
-            }
-        }
-    	
-    	if(json.has("features")){
-            // Read the array of Strings
-            JsonArray featuresArray = (JsonArray) json.get("features");
-            for(int i = 0; i < featuresArray.size(); i++){
-                // Parse feat JsonObject
-                JsonObject featureJson = (JsonObject) featuresArray.get(i);
-
-                // Create new feat based on JsonObject
-                Feat feature = new Feat(featureJson);
-
-                // Add feat to this.features
-                this.features.add(feature);
-            }
-        }
+    }
+    
+    /**
+     * Turns this PfClass into a JsonObject
+     */
+    public JsonObject toJson(){
+        return null;
     }
 
     /** 

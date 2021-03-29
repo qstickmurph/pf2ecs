@@ -3,8 +3,10 @@ package pf2ecs.model;
 import java.util.HashSet;
 import java.util.Hashtable;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonArray;
+import com.google.gson.JsonParseException;
 
 import java.util.ArrayList;
 
@@ -43,95 +45,59 @@ public class Skill {
         this.untrainedActions = new HashSet<>();
         this.trainedActions = new HashSet<>();
     }
-    
+
+    /** 
+     * Reads a json file containing a class and creates that Skill 
+     * @param file (File)
+     */
+    public static Skill fromFile(File file){
+        Gson gson = new Gson();
+        try(Reader reader = new FileReader(file)){
+            return gson.fromJson(reader, Skill.getClass());
+        } catch (IOException e) { 
+            e.printStackTrace();
+        } catch (JsonParseException e) { 
+            e.printStackTrace();
+        }
+        return new Skill();
+    }
+
     /**
-     * Json Reader Constructor Method
-     *
-     * Parses the skill JsonObject into a skill object
+     * Reads a JsonObject and creates that Skill 
      * @param json (JsonObject)
      */
-    public Skill(JsonObject json){
-    	this.name = "";
-        this.description = "";
-        this.keyAttribute = null;
-        this.untrainedActions = new HashSet<>();
-        this.trainedActions = new HashSet<>();
-        this.readJson(json);
+    public static Skill fromJson(JsonObject json){
+        Gson gson = new Gson();
+        try{
+            return gson.fromJson(json, Skill.getClass());
+        } catch(JsonParseException e){
+            e.printStackTrace();
+        }
+        return new Skill();
     }
     
     /**
-     * Reads a JsonObject and applies that object to the Skill
-     * @param json (JsonObject)
+     * Exports the class as a json file
      */
-    public void readJson(JsonObject json){
-        if(json.has("name")){
-            // Put name from json into this.name
-            this.name = json.get("name").getAsString();
-        }
-
-        if(json.has("description")){
-            // Put description from json into this.description 
-            this.description = json.get("description").getAsString();
-        }
-
-        if(json.has("key_ability")){
-            // Read the key attribute
-             String keyAbility = json.get("key_ability").getAsString();
-
-                // Set attribute based on str
-                Attribute attribute = Attribute.STR;
-                switch(keyAbility){
-                    case "strength":
-                        attribute = Attribute.STR;
-                        break;
-                    case "dexterity":
-                        attribute = Attribute.DEX;
-                        break;
-                    case "constitution":
-                        attribute = Attribute.CON;
-                        break;
-                    case "intelligence":
-                        attribute = Attribute.INT;
-                        break;
-                    case "wisdom":
-                        attribute = Attribute.WIS;
-                        break;
-                    case "charisma":
-                        attribute = Attribute.CHA;
-                        break;
-                }
-
-                
-                this.keyAttribute = attribute;              
-                
-        }
-        if(json.has("actions")){
-            // Read the array of Strings
-        	JsonArray actionArrays = (JsonArray) json.get("actions");
-        	JsonArray untrainedActionsJson = (JsonArray) actionArrays.get(0);
-            JsonArray trainedActionsJson = (JsonArray) actionArrays.get(1);
-            for(int i = 0; i < untrainedActionsJson.size(); i++){
-                // Parse action JsonObject
-                JsonObject actionJson = (JsonObject) untrainedActionsJson.get(i);
-
-                // Create new action based on JsonObject
-                Action action = new Action(actionJson);
-
-                // Add action to this.actions
-                this.untrainedActions.add(action);
-            }
-            for(int i = 0; i < trainedActionsJson.size(); i++){
-                // Parse action JsonObject
-                JsonObject actionJson = (JsonObject) trainedActionsJson.get(i);
-
-                // Create new action based on JsonObject
-                Action action = new Action(actionJson);
-
-                // Add action to this.actions
-                this.trainedActions.add(action);
-            }
+    public void save(File file) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try {
+            file.createNewFile();
+            FileWriter writer = new FileWriter(file);
+            //writer.write("Heyo");
+            gson.toJson(this, writer);
+            writer.close();
+        } catch (IOException e){
+            e.printStackTrace();
         }
     }
+    
+    /**
+     * Turns this Skill into a JsonObject
+     */
+    public JsonObject toJson(){
+        return null;
+    }   
     
     /** 
      * Returns this.name

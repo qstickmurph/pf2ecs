@@ -3,8 +3,10 @@ package pf2ecs.model;
 import java.util.HashSet;
 import java.util.Hashtable;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonArray;
+import com.google.gson.JsonParseException;
 
 import pf2ecs.model.Scenario;
 
@@ -22,10 +24,10 @@ public class Action {
     private String name;
 
     /** Holds the traits of the Action */
-    private HashSet<String> traits = new HashSet<String>();
+    private HashSet<String> traits;
 
     /** Holds the requirements of the Action */
-    private HashSet<String> requirements = new HashSet<String>();
+    private HashSet<String> requirements;
 
     /** Holds the description of the Action */
     private String description;
@@ -49,63 +51,61 @@ public class Action {
         this.trigger = "";
     }
 
+    /** 
+     * Reads a json file containing a feat and creates that Feat
+     * @param file (File)
+     */
+    public static Action fromFile(File file){
+        Gson gson = new Gson();
+        try(Reader reader = new FileReader(file)){
+            return gson.fromJson(reader, Action.getClass());
+        } catch (IOException e) { 
+            e.printStackTrace();
+        }catch (JsonParseException e){
+            e.printStackTrace();
+        }
+        return new Action();
+
+    }
+
     /**
-     * Parse JsonObject into Action Object
+     * Reads a JsonObject and creates that Feat
      * @param json (JsonObject)
      */
-    public Action(JsonObject json){
-        this.name = "";
-        this.traits = new HashSet<>();
-        this.requirements = new HashSet<>();
-        this.description = "";
-        this.time = "";
-        this.trigger = "";
-        this.readJson(json);
+    public static Action fromJson(JsonObject json){
+        try{
+            Gson gson = new Gson();
+            return gson.fromJson(json, Action.getClass());
+        }catch (JsonParseException e){
+            e.printStackTrace();
+        }
+        return new Action();
+    }
+
+    /**
+     * Prints and saves this Feat as a json file
+     * @param file (File)
+     */
+    public void save(File file){
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try {
+            file.createNewFile();
+            FileWriter writer = new FileWriter(file);
+            //writer.write("Heyo");
+            gson.toJson(this, writer);
+            writer.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
     
     /**
-     * Reads a JsonObject and applies that object to the Feat
-     * @param json (JsonObject)
+     * Turns this feat into a JsonObject
      */
-    public void readJson(JsonObject json){
-        if(json.has("name")){
-            // Put name from json into this.name
-            this.name = json.get("name").getAsString();
-        }
-
-        if(json.has("traits")){
-            // Read the array of Strings 
-            JsonArray traitsArray = (JsonArray) json.get("traits");
-            for(int i = 0; i < traitsArray.size(); i++){ // put each trait into this.traits
-                this.traits.add(traitsArray.get(i).getAsString());
-            }
-        }
-
-        if(json.has("requirements")){
-            // Read the array of Strings
-            JsonArray requirementsArray = (JsonArray) json.get("requirements");
-            for(int i = 0; i < requirementsArray.size(); i++){ // put each prerequisite into this.prerequisites
-                this.requirements.add(requirementsArray.get(i).getAsString());
-            }
-        }
-
-        if(json.has("description")){
-            // Put description from json into this.description.
-            this.description= json.get("description").getAsString();
-        }
-
-        if(json.has("time")){
-            // Put time from json into this.time.
-            this.time = json.get("time").getAsString();
-        }
-
-        if(json.has("trigger")){
-            // Put trigger from json into this.trigger.
-            this.trigger = json.get("trigger").getAsString();
-        }
-
+    public JsonObject toJson(){
+        return null;
     }
-    
+   
     /** 
      * Returns this.name
      *  @return this.name (String)

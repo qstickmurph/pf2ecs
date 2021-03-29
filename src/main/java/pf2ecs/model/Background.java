@@ -4,8 +4,10 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonArray;
+import com.google.gson.JsonParseException;
 
 import pf2ecs.model.Attribute;
 import pf2ecs.model.SkillTraining;
@@ -41,16 +43,59 @@ public class Background {
         this.attributeBonuses = new Hashtable<>();
         this.proficiencyBonuses = new Hashtable<>();
     }
-    
-	/** Json Constructor Method
-     *  @param json (JsonObject)
+
+    /** 
+     * Reads a json file containing a feat and creates that Feat
+     *
      */
-    public Background(JsonObject json){
-    	this.name = "";
-        this.description = "";
-        this.attributeBonuses = new Hashtable<>();
-        this.proficiencyBonuses = new Hashtable<>();
-    	this.readJson(json);
+    public static Background fromFile(File file){
+        Gson gson = new Gson();
+        try(Reader reader = new FileReader(file)){
+            return gson.fromJson(reader, Background.getClass());
+        } catch (IOException e) { 
+            e.printStackTrace();
+        } catch (JsonParseException e){
+            e.printStackTrace();
+        }
+        return new Background();
+    }
+
+    /**
+     * Reads a JsonObject and creates that Feat
+     * @param json (JsonObject)
+     */
+    public static Background fromJson(JsonObject json){
+        try{
+            Gson gson = new Gson();
+            return gson.fromJson(json, Background.getClass());
+        }catch (JsonParseException e){
+            e.printStackTrace();
+        }
+        return new Background();
+    }
+
+    /**
+     * Prints and saves this Feat as a json file
+     * @param file (File)
+     */
+    public void save(File file){
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try {
+            file.createNewFile();
+            FileWriter writer = new FileWriter(file);
+            //writer.write("Heyo");
+            gson.toJson(this, writer);
+            writer.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }   
+
+    /**
+     * Turns this feat into a JsonObject
+     */
+    public JsonObject toJson(){
+        return null;
     }
 
 	/** Json read

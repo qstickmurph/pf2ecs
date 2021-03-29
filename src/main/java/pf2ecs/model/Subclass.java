@@ -2,10 +2,10 @@ package pf2ecs.model;
 
 import java.util.HashSet;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonArray;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 
 /** The Subclass class holds all the information about subclass including its description and feats.
 *
@@ -24,23 +24,68 @@ public class Subclass {
 	private String description;
 	
 	/** The feats of the subclass */
-	private HashSet<Feat> feats = new HashSet<Feat>();
+	private HashSet<Feat> feats;
 	
-	/** Constructor Method
-     *  
-     *  @param name (String) The name of the background
+	/** 
+     * Constructor Method
      */
     public Subclass(){
+        this.name = "";
+        this.description = "";
+	    this.feats = new HashSet<>();
+    }
 
+    /** 
+     * Reads a json file containing a class and creates that SubClass 
+     * @param file (File)
+     */
+    public static SubClass fromFile(File file){
+        Gson gson = new Gson();
+        try(Reader reader = new FileReader(file)){
+            return gson.fromJson(reader, SubClass.getClass());
+        } catch (IOException e) { 
+            e.printStackTrace();
+        } catch (JsonParseException e) { 
+            e.printStackTrace();
+        }
+        return new SubClass();
+    }
+
+    /**
+     * Reads a JsonObject and creates that SubClass 
+     * @param json (JsonObject)
+     */
+    public static SubClass fromJson(JsonObject json){
+        Gson gson = new Gson();
+        try{
+            return gson.fromJson(json, SubClass.getClass());
+        } catch(JsonParseException e){
+            e.printStackTrace();
+        }
+        return new SubClass();
     }
     
-	/** Constructor Method
-     *  
-     *  @param json (String) The name of the background
+    /**
+     * Exports the class as a json file
      */
-    public static Subclass fromJson(JsonObject json){
-        Gson gson = new Gson(); 
-        return gson.fromJson(json, Subclass.class);
+    public void save(File file) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try {
+            file.createNewFile();
+            FileWriter writer = new FileWriter(file);
+            //writer.write("Heyo");
+            gson.toJson(this, writer);
+            writer.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Turns this SubClass into a JsonObject
+     */
+    public JsonObject toJson(){
+        return null;
     }
 
     /** 

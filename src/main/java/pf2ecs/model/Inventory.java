@@ -4,8 +4,10 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonArray;
+import com.google.gson.JsonParseException;
 
 import pf2ecs.model.PfItem;
 import pf2ecs.model.Action;
@@ -45,30 +47,71 @@ public class Inventory {
     /** The amount of cp */
     private int cp;
     
-    /** The amount of total money in String form */
-    private String money;
-    
     /** Constructor Method
      *  
      */
     public Inventory(){
-
+        this.items = new ArrayList<>();
+        this.equipped = new ArrayList<>();
+        this.invested = new ArrayList<>();
+        this.readied = new ArrayList<>();
+        this.pp = 0;
+        this.gp = 0;;
+        this.sp = 0;
+        this.cp = 0;
     }
 
-    /** Json Constructor Method
-     *  
-     *  @param json (JsonObject) The list of items
+    /** 
+     * Reads a json file containing a feat and creates that Feat
+     * @param file (File)
      */
-    public Inventory(JsonObject json){
+    public static Inventory fromFile(File file){
+        Gson gson = new Gson();
+        try(Reader reader = new FileReader(file)){
+            return gson.fromJson(reader, Inventory.getClass());
+        } catch (IOException e) { 
+            e.printStackTrace();
+        } catch (JsonParseException e) { 
+            e.printStackTrace();
+        }
+        return new Inventory();
+    }
 
+    /**
+     * Reads a JsonObject and creates that Feat
+     * @param json (JsonObject)
+     */
+    public static Inventory fromJson(JsonObject json){
+        Gson gson = new Gson();
+        try{
+            return gson.fromJson(json, Inventory.getClass());
+        } catch(JsonParseException e){
+            e.printStackTrace();
+        }
+        return new Inventory();
     }
     
-	/** Json read
-     *  
-     *  @param json (JsonObject)
+    /**
+     * Exports the character sheet as a json file
      */
-    public void readJson(JsonObject json){
-
+    public void save(File file) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try {
+            file.createNewFile();
+            FileWriter writer = new FileWriter(file);
+            //writer.write("Heyo");
+            gson.toJson(this, writer);
+            writer.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Turns this feat into a JsonObject
+     */
+    public JsonObject toJson(){
+        return null;
     }
 
     /** 
@@ -196,7 +239,7 @@ public class Inventory {
 	 */
 	public String getMoney(){
 		money = Integer.toString(pp) + "pp " + Integer.toString(gp) + "gp " + Integer.toString(sp) + "sp " + Integer.toString(cp) + "cp";
-		return this.money;
+		return money;
 	}
 	
 	/**

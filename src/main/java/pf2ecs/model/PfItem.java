@@ -4,8 +4,10 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.ArrayList;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonArray;
+import com.google.gson.JsonParseException;
 
 //import pf2ecs.model.Item;
 //import pf2ecs.model.Action;
@@ -28,7 +30,7 @@ public class PfItem {
 	private int level;
 	
 	/** The traits of the item */
-	private HashSet<String> traits = new HashSet<String>();
+	private HashSet<String> traits;
 	
 	/** The price of the item */
 	private double price;
@@ -37,10 +39,10 @@ public class PfItem {
 	private String description;
 	
 	/** The actions to use the item */
-	private HashSet<Action> actions = new HashSet<Action>();
+	private HashSet<Action> actions;
 	
 	/** The runes on the item */
-	private HashSet<Rune> runes = new HashSet<Rune>();
+	private HashSet<Rune> runes;
 	
 	/** Whether item needs to be invested */
 	private boolean requireInvest;
@@ -49,22 +51,67 @@ public class PfItem {
      *  
      */
     public PfItem(){
-        this.name = name;
+        this.name = "";
+        this.level= 0;
+        this.traits= new HashSet<>();
+        this.price= 0.0;
+        this.descrption = "";
+        this.actions = new HashSet<>();
+        this.runes = new HashSet<>();
+        this.requireInvest = false;
+    }
+
+    /** 
+     * Reads a json file containing a class and creates that PfItem 
+     * @param file (File)
+     */
+    public static PfItem fromFile(File file){
+        Gson gson = new Gson();
+        try(Reader reader = new FileReader(file)){
+            return gson.fromJson(reader, PfItem.getClass());
+        } catch (IOException e) { 
+            e.printStackTrace();
+        } catch (JsonParseException e) { 
+            e.printStackTrace();
+        }
+        return new PfItem();
+    }
+
+    /**
+     * Reads a JsonObject and creates that PfItem 
+     * @param json (JsonObject)
+     */
+    public static PfItem fromJson(JsonObject json){
+        Gson gson = new Gson();
+        try{
+            return gson.fromJson(json, PfItem.getClass());
+        } catch(JsonParseException e){
+            e.printStackTrace();
+        }
+        return new PfItem();
     }
     
-    /** Json Constructor Method
-     *  @param json (JsonObject)
+    /**
+     * Exports the class as a json file
      */
-    public PfItem(JsonObject json){
-
+    public void save(File file) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try {
+            file.createNewFile();
+            FileWriter writer = new FileWriter(file);
+            //writer.write("Heyo");
+            gson.toJson(this, writer);
+            writer.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
-
-	/** Json read
-     *  
-     *  @param json (JsonObject)
+    
+    /**
+     * Turns this PfItem into a JsonObject
      */
-    public void readJson(JsonObject json){
-
+    public JsonObject toJson(){
+        return null;
     }
 
     /** 

@@ -1,5 +1,10 @@
 package pf2ecs.model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.ArrayList;
@@ -40,12 +45,70 @@ public class Rune {
 	
     /** Constructor Method
      *  
-     *  @param name (String) The name of the item
      */
-    public Rune(String name){
-        this.name = name;
+    public Rune(){
+        this.name = "";
+        this.level = 0;
+        this.traits = new HashSet<String>();
+        this.price = 0.0;
+        this.description = "";
+        this.fundamental = false;
+        this.actions = new HashSet<Action>();
+    }
+
+    /** 
+     * Reads a json file containing a class and creates that Rune 
+     * @param file (File)
+     */
+    public static Rune fromFile(File file){
+        Gson gson = new Gson();
+        try(Reader reader = new FileReader(file)){
+            return gson.fromJson(reader, Rune.getClass());
+        } catch (IOException e) { 
+            e.printStackTrace();
+        } catch (JsonParseException e) { 
+            e.printStackTrace();
+        }
+        return new Rune();
+    }
+
+    /**
+     * Reads a JsonObject and creates that Rune 
+     * @param json (JsonObject)
+     */
+    public static Rune fromJson(JsonObject json){
+        Gson gson = new Gson();
+        try{
+            return gson.fromJson(json, Rune.getClass());
+        } catch(JsonParseException e){
+            e.printStackTrace();
+        }
+        return new Rune();
     }
     
+    /**
+     * Exports the class as a json file
+     */
+    public void save(File file) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try {
+            file.createNewFile();
+            FileWriter writer = new FileWriter(file);
+            //writer.write("Heyo");
+            gson.toJson(this, writer);
+            writer.close();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * Turns this Rune into a JsonObject
+     */
+    public JsonObject toJson(){
+        return null;
+    }
+   
     /** 
      * Returns this.name
      *  @return this.name (String)

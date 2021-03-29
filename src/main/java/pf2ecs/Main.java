@@ -4,11 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;                                                                                                                                                                                                                                                                                                                                                                                                   
-
-import pf2ecs.model.Feat;
-import pf2ecs.model.Action;
  
 public class Main extends Application{
     @Override
