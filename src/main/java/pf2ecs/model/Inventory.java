@@ -4,6 +4,12 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.ArrayList;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.Reader;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -68,7 +74,7 @@ public class Inventory {
     public static Inventory fromFile(File file){
         Gson gson = new Gson();
         try(Reader reader = new FileReader(file)){
-            return gson.fromJson(reader, Inventory.getClass());
+            return gson.fromJson(reader, Inventory.class);
         } catch (IOException e) { 
             e.printStackTrace();
         } catch (JsonParseException e) { 
@@ -84,7 +90,7 @@ public class Inventory {
     public static Inventory fromJson(JsonObject json){
         Gson gson = new Gson();
         try{
-            return gson.fromJson(json, Inventory.getClass());
+            return gson.fromJson(json, Inventory.class);
         } catch(JsonParseException e){
             e.printStackTrace();
         }
@@ -238,7 +244,7 @@ public class Inventory {
 	 * @return Returns this.money
 	 */
 	public String getMoney(){
-		money = Integer.toString(pp) + "pp " + Integer.toString(gp) + "gp " + Integer.toString(sp) + "sp " + Integer.toString(cp) + "cp";
+		String money = Integer.toString(pp) + "pp " + Integer.toString(gp) + "gp " + Integer.toString(sp) + "sp " + Integer.toString(cp) + "cp";
 		return money;
 	}
 	

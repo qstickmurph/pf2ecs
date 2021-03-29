@@ -1,15 +1,21 @@
 package pf2ecs.model;
 
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.ArrayList;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.Reader;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.ArrayList;
-//import pf2ecs.model.Item;
-//import pf2ecs.model.Action;
+import pf2ecs.model.Action;
 //import pf2ecs.model.Spell;
 
 /** The Rune class holds all the information about each rune including its description, traits, and more
@@ -63,7 +69,7 @@ public class Rune {
     public static Rune fromFile(File file){
         Gson gson = new Gson();
         try(Reader reader = new FileReader(file)){
-            return gson.fromJson(reader, Rune.getClass());
+            return gson.fromJson(reader, Rune.class);
         } catch (IOException e) { 
             e.printStackTrace();
         } catch (JsonParseException e) { 
@@ -79,7 +85,7 @@ public class Rune {
     public static Rune fromJson(JsonObject json){
         Gson gson = new Gson();
         try{
-            return gson.fromJson(json, Rune.getClass());
+            return gson.fromJson(json, Rune.class);
         } catch(JsonParseException e){
             e.printStackTrace();
         }

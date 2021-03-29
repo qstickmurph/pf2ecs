@@ -3,6 +3,12 @@ package pf2ecs.model;
 import java.util.HashSet;
 import java.util.Hashtable;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.Reader;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -58,7 +64,7 @@ public class PfClass {
     public static PfClass fromFile(File file){
         Gson gson = new Gson();
         try(Reader reader = new FileReader(file)){
-            return gson.fromJson(reader, PfClass.getClass());
+            return gson.fromJson(reader, PfClass.class);
         } catch (IOException e) { 
             e.printStackTrace();
         } catch (JsonParseException e) { 
@@ -74,7 +80,7 @@ public class PfClass {
     public static PfClass fromJson(JsonObject json){
         Gson gson = new Gson();
         try{
-            return gson.fromJson(json, PfClass.getClass());
+            return gson.fromJson(json, PfClass.class);
         } catch(JsonParseException e){
             e.printStackTrace();
         }

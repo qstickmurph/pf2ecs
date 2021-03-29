@@ -147,7 +147,7 @@ public class CharacterSheet {
     public static CharacterSheet fromFile(File file){
         Gson gson = new Gson();
         try(Reader reader = new FileReader(file)){
-            return gson.fromJson(reader, CharacterSheet.getClass());
+            return gson.fromJson(reader, CharacterSheet.class);
         } catch (IOException e) { 
             e.printStackTrace();
         } catch (JsonParseException e) { 
@@ -159,7 +159,7 @@ public class CharacterSheet {
     public static CharacterSheet fromJson(JsonObject json){
         Gson gson = new Gson();
         try{
-            return gson.fromJson(json, CharacterSheet.getClass());
+            return gson.fromJson(json, CharacterSheet.class);
         } catch(JsonParseException e){
             e.printStackTrace();
         }

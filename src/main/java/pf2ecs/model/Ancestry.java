@@ -3,6 +3,7 @@ package pf2ecs.model;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.ArrayList;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileReader;
@@ -69,7 +70,7 @@ public class Ancestry {
     public static Ancestry fromFile(File file){
         Gson gson = new Gson();
         try(Reader reader = new FileReader(file)){
-            return gson.fromJson(reader, Ancestry.getClass());
+            return gson.fromJson(reader, Ancestry.class);
         } catch (IOException e) { 
             e.printStackTrace();
         } catch (JsonParseException e){
@@ -85,7 +86,7 @@ public class Ancestry {
     public static Ancestry fromJson(JsonObject json){
         try{
             Gson gson = new Gson();
-            return gson.fromJson(json, Ancestry.getClass());
+            return gson.fromJson(json, Ancestry.class);
         }catch (JsonParseException e){
             e.printStackTrace();
         }

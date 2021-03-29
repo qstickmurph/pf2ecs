@@ -1,14 +1,19 @@
 package pf2ecs.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.Reader;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-
-import java.util.ArrayList;
 
 /** The Skill class holds all the information about skills including its description, key attribute, and more
 *
@@ -53,7 +58,7 @@ public class Skill {
     public static Skill fromFile(File file){
         Gson gson = new Gson();
         try(Reader reader = new FileReader(file)){
-            return gson.fromJson(reader, Skill.getClass());
+            return gson.fromJson(reader, Skill.class);
         } catch (IOException e) { 
             e.printStackTrace();
         } catch (JsonParseException e) { 
@@ -69,7 +74,7 @@ public class Skill {
     public static Skill fromJson(JsonObject json){
         Gson gson = new Gson();
         try{
-            return gson.fromJson(json, Skill.getClass());
+            return gson.fromJson(json, Skill.class);
         } catch(JsonParseException e){
             e.printStackTrace();
         }

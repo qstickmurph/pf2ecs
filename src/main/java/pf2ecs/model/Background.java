@@ -4,6 +4,12 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.ArrayList;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.Reader;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -51,7 +57,7 @@ public class Background {
     public static Background fromFile(File file){
         Gson gson = new Gson();
         try(Reader reader = new FileReader(file)){
-            return gson.fromJson(reader, Background.getClass());
+            return gson.fromJson(reader, Background.class);
         } catch (IOException e) { 
             e.printStackTrace();
         } catch (JsonParseException e){
@@ -67,7 +73,7 @@ public class Background {
     public static Background fromJson(JsonObject json){
         try{
             Gson gson = new Gson();
-            return gson.fromJson(json, Background.getClass());
+            return gson.fromJson(json, Background.class);
         }catch (JsonParseException e){
             e.printStackTrace();
         }
@@ -96,92 +102,6 @@ public class Background {
      */
     public JsonObject toJson(){
         return null;
-    }
-
-	/** Json read
-     *  
-     *  @param json (JsonObject)
-     */
-    public void readJson(JsonObject json){
-    	if(json.has("name")){
-            // Put name from json into this.name
-            this.name = json.get("name").getAsString();
-        }
-
-        if(json.has("description")){
-            // Put description from json into this.description 
-            this.description = json.get("description").getAsString();
-        }
-        
-        if(json.has("ability_boosts")){
-            // Read the array of Strings
-            JsonArray attributeBonusesArray = (JsonArray) json.get("ability_boosts");
-            for(int i = 0; i< attributeBonusesArray.size(); i++){
-                // Get next String
-                String str = attributeBonusesArray.get(i).getAsString();
-
-                // Set attribute based on str
-                Attribute attribute = Attribute.STR;
-                switch(str){
-                    case "strength":
-                        attribute = Attribute.STR;
-                        break;
-                    case "dexterity":
-                        attribute = Attribute.DEX;
-                        break;
-                    case "constitution":
-                        attribute = Attribute.CON;
-                        break;
-                    case "intelligence":
-                        attribute = Attribute.INT;
-                        break;
-                    case "wisdom":
-                        attribute = Attribute.WIS;
-                        break;
-                    case "charisma":
-                        attribute = Attribute.CHA;
-                        break;
-                }
-
-                if(attributeBonuses.contains(attribute)){ // if already has a bonus on this attribute increment it by 1
-                    this.attributeBonuses.put(attribute, this.attributeBonuses.get(attribute) + 1);
-                }else{ // else set to 1
-                    this.attributeBonuses.put(attribute, 1);
-                }
-            }
-        }
-
-        if(json.has("profiencies")){
-            // Read the array of Strings
-            JsonArray proficiencyBonusesArray = (JsonArray) json.get("proficiencies");
-            for(int i = 0; i < proficiencyBonusesArray.size(); i++){
-                // Get next String and split it at '='
-                String[] stringArray = (proficiencyBonusesArray.get(i).getAsString()).split("=");
-
-                SkillTraining bonus = SkillTraining.UNTRAINED;
-                switch(stringArray[1].charAt(0)){ // set the skill bonus accordingly
-                    case 't':
-                    case 'T':
-                        bonus = SkillTraining.TRAINED;
-                        break;
-                    case 'e':
-                    case 'E':
-                        bonus = SkillTraining.EXPERT;
-                        break;
-                    case 'm':
-                    case 'M':
-                        bonus = SkillTraining.MASTER;
-                        break;
-                    case 'l':
-                    case 'L':
-                        bonus = SkillTraining.LEGENDARY;
-                        break;
-                }
-
-                // put it into proficiencyBonuses
-                this.proficiencyBonuses.put(stringArray[0], bonus);
-            }
-        }
     }
 
     /** 

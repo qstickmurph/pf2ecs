@@ -4,6 +4,12 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.ArrayList;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.Reader;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -55,7 +61,7 @@ public class PfItem {
         this.level= 0;
         this.traits= new HashSet<>();
         this.price= 0.0;
-        this.descrption = "";
+        this.description = "";
         this.actions = new HashSet<>();
         this.runes = new HashSet<>();
         this.requireInvest = false;
@@ -68,7 +74,7 @@ public class PfItem {
     public static PfItem fromFile(File file){
         Gson gson = new Gson();
         try(Reader reader = new FileReader(file)){
-            return gson.fromJson(reader, PfItem.getClass());
+            return gson.fromJson(reader, PfItem.class);
         } catch (IOException e) { 
             e.printStackTrace();
         } catch (JsonParseException e) { 
@@ -84,7 +90,7 @@ public class PfItem {
     public static PfItem fromJson(JsonObject json){
         Gson gson = new Gson();
         try{
-            return gson.fromJson(json, PfItem.getClass());
+            return gson.fromJson(json, PfItem.class);
         } catch(JsonParseException e){
             e.printStackTrace();
         }

@@ -2,6 +2,12 @@ package pf2ecs.model;
 
 import java.util.HashSet;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.Reader;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -36,33 +42,33 @@ public class Subclass {
     }
 
     /** 
-     * Reads a json file containing a class and creates that SubClass 
+     * Reads a json file containing a class and creates that Subclass 
      * @param file (File)
      */
-    public static SubClass fromFile(File file){
+    public static Subclass fromFile(File file){
         Gson gson = new Gson();
         try(Reader reader = new FileReader(file)){
-            return gson.fromJson(reader, SubClass.getClass());
+            return gson.fromJson(reader, Subclass.class);
         } catch (IOException e) { 
             e.printStackTrace();
         } catch (JsonParseException e) { 
             e.printStackTrace();
         }
-        return new SubClass();
+        return new Subclass();
     }
 
     /**
-     * Reads a JsonObject and creates that SubClass 
+     * Reads a JsonObject and creates that Subclass 
      * @param json (JsonObject)
      */
-    public static SubClass fromJson(JsonObject json){
+    public static Subclass fromJson(JsonObject json){
         Gson gson = new Gson();
         try{
-            return gson.fromJson(json, SubClass.getClass());
+            return gson.fromJson(json, Subclass.class);
         } catch(JsonParseException e){
             e.printStackTrace();
         }
-        return new SubClass();
+        return new Subclass();
     }
     
     /**
@@ -82,7 +88,7 @@ public class Subclass {
     }
     
     /**
-     * Turns this SubClass into a JsonObject
+     * Turns this Subclass into a JsonObject
      */
     public JsonObject toJson(){
         return null;

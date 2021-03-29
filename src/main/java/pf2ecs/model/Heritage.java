@@ -1,5 +1,11 @@
 package pf2ecs.model;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileReader;
+import java.io.Reader;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
@@ -43,10 +49,10 @@ public class Heritage {
     public static Heritage fromFile(File file){
         Gson gson = new Gson();
         try(Reader reader = new FileReader(file)){
-            return gson.fromJson(reader, Heritage.getClass());
+            return gson.fromJson(reader, Heritage.class);
         } catch (IOException e) { 
             e.printStackTrace();
-            return new Ancestry();
+            return new Heritage();
         }
     }
 
@@ -57,10 +63,10 @@ public class Heritage {
     public static Heritage fromJson(JsonObject json){
         try{
             Gson gson = new Gson();
-            return gson.fromJson(json, Heritage.getClass());
+            return gson.fromJson(json, Heritage.class);
         }catch (JsonParseException e){
             e.printStackTrace();
-            return new Ancestry();
+            return new Heritage();
         }
     }
 
@@ -88,15 +94,6 @@ public class Heritage {
         return null;
     }
     
-	/** Constructor Method
-     *  
-     *  @param json (String) The name of the background
-     */
-    public static Heritage fromJson(JsonObject json){
-        Gson gson = new Gson(); 
-        return gson.fromJson(json, Heritage.class);
-    }
-
     /** 
      * Returns this.name
      *  @return this.name (String)

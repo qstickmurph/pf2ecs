@@ -268,7 +268,7 @@ public class CharacterSheetController {
         fileChooser.setTitle("Save");
         File file = fileChooser.showSaveDialog(menuBar.getScene().getWindow());
         if(file != null)
-            this.characterSheet.saveJson(file);
+            this.characterSheet.save(file);
     }
 
     public void updateFields(){
