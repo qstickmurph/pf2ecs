@@ -83,6 +83,12 @@ public class CharacterSheet {
     /** The character's proficiencies */
     private Hashtable<String, Proficiency> proficiencies;
 
+    /** The character's proficiency item bonuses */
+    private Hashtable<String, Integer> itemBonuses;
+
+    /** The character's proficiency circumstance bonuses */
+    private Hashtable<String, Integer> circumstanceBonuses;
+
     /** The ac of the character */
     private int ac;
 
@@ -497,8 +503,8 @@ public class CharacterSheet {
     }
 
     /**
-     *
-     *
+     * Returns the value of this.proficiencies.get(proficiency)
+     * @param proficiency (String)
      */
     public Proficiency getProficiency(String proficiency){
         if (this.proficiencies.contains(proficiency)){
@@ -509,12 +515,15 @@ public class CharacterSheet {
     }
 
     /**
-     *
-     *
+     * Returns the calculated proficiency modifier of a prof
+     * @param proficiency (String)
      */
     public int getProficiencyMod(String proficiency){
-        // TODO FIX
-        return 0;
+        if (this.proficiencies.contains(proficiency)){
+            return (this.proficiencies.get(proficiency).bonus + level);
+        }else{
+            return 0;
+        }
     }
 
     /**
@@ -528,29 +537,107 @@ public class CharacterSheet {
     /**
      * Sets a proficiency bonus
      * @param proficiency (String)
-     * @param bonus (Integer)
+     * @param bonus (Proficiency)
      */
     public void setProficiency(String proficiency, Proficiency bonus){
         this.proficiencies.put(proficiency, bonus);
     }
     
     /**
-     * Returns the classDc of this character
-     * @return classDc (int)
+     * Getter for this.itemBonuses
+     * @return this.itemBonuses (Hashtable<String, Proficiency>)
      */
-    public int getClassDc(){
-        if(this.proficiencies.contains("class_dc")){
-            return 10 + this.proficiencies.get("class_dc").label + this.level;
-        }
-        return 10;
+    public Hashtable<String, Integer> getItemBonuses(){
+        return this.itemBonuses;
     }
 
     /**
-     * Getter for this.ac
-     * @return this.ac (int)
+     * Returns the total item bonus for a proficiency
+     * @param proficiency (String)
      */
-    public int getAc(){
-        return this.ac;
+    public Integer getItemBonus(String proficiency){
+        if (this.itemBonuses.contains(proficiency)){
+            return this.itemBonuses.get(proficiency);
+        }else{
+            return 0;
+        }
+    }
+
+    /**
+     * Setter for this.itemBonuses
+     * @param itemBonuses (Hashtable<Proficiency, Integer>)
+     */
+    public void setItemBonuses(Hashtable<String, Integer> itemBonuses){
+        this.itemBonuses = itemBonuses;
+    }
+
+    /**
+     * Sets an item bonus
+     * @param proficiency (String)
+     * @param bonus (Integer)
+     */
+    public void setItemBonus(String proficiency, Integer bonus){
+        this.itemBonuses.put(proficiency, bonus);
+    }
+
+    /**
+     * Getter for this.circumstanceBonuses
+     * @return this.circumstanceBonuses (Hashtable<String, Integer>)
+     */
+    public Hashtable<String, Integer> getCircumstanceBonuses(){
+        return this.circumstanceBonuses;
+    }
+
+    /**
+     * Returns the total circumstance bonus for a proficiency
+     * @param proficiency (String)
+     */
+    public int getCircumstanceBonus(String proficiency){
+        if (this.circumstanceBonuses.contains(proficiency)){
+            return this.circumstanceBonuses.get(proficiency);
+        }else{
+            return 0;
+        }
+    }
+
+    /**
+     * Setter for this.circumstanceBonuses
+     * @param circumstanceBonuses (Hashtable<String, Integer>)
+     */
+    public void setCircumstanceBonuses (Hashtable<String, Integer> circumstanceBonuses){
+        this.circumstanceBonuses = circumstanceBonuses;
+    }
+
+    /**
+     * Sets a proficiency bonus
+     * @param proficiency (String)
+     * @param bonus (Integer)
+     */
+    public void setCircumstanceBonus(String proficiency, Integer bonus){
+        this.circumstanceBonuses.put(proficiency, bonus);
+    }
+
+    /**
+     * Returns the total modifier for a proficiency
+     * @param proficiency (String)
+     */
+    public int getTotalBonus(String proficiency){
+        int profBonus = 0;
+        int itemBonus = 0;
+        int circumBonus = 0;
+
+        if(this.proficiencies.contains(proficiency) && this.proficiencies.get(proficiency) != Proficiency.UNTRAINED){
+            profBonus = this.level + this.proficiencies.get(proficiency).bonus;
+        }
+        if(this.itemBonuses.contains(proficiency)){
+            profBonus = this.itemBonuses.get(proficiency);
+        }
+        if(this.circumstanceBonuses.contains(proficiency)){
+            profBonus = this.circumstanceBonuses.get(proficiency);
+        }
+
+        return 10 + profBonus + itemBonus + circumBonus;
+
     }
 
     /**
@@ -664,4 +751,14 @@ public class CharacterSheet {
 	public void setWounded(int wounded){
 		this.wounded = wounded;
 	}
+
+    public int getAcDexCap(){
+        int min = Integer.MAX_VALUE;
+        for(PfItem item : this.inventory.getEquipped()){
+            if(item.getAcDexCap() < min){
+                min = item.getAcDexCap();
+            }
+        }
+        return min;
+    }
 }

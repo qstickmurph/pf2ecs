@@ -381,7 +381,7 @@ public class CharacterSheetController {
 
         //this.classDcLabel;
         
-        this.classDcLabel.setText(String.valueOf(characterSheet.getClassDc()));
+        this.classDcLabel.setText(String.valueOf(characterSheet.getTotalBonus("class_dc")));
 
         this.classKeyAbility.setText(String.valueOf(characterSheet.getPfClass().getKeyAbility()));
 

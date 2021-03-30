@@ -43,6 +43,12 @@ public class PfItem {
 	
 	/** The description of the item */
 	private String description;
+
+    /** The proficiency bonuses this item gives */
+    private Hashtable<String, Integer> proficiencyBonuses;
+
+    /** The proficiency bonuses this item gives */
+    private int acDexCap;
 	
 	/** The actions to use the item */
 	private HashSet<Action> actions;
@@ -300,5 +306,57 @@ public class PfItem {
      */
     public void setRequiredInvest(boolean requireInvest){
         this.requireInvest = requireInvest;
+    }
+
+    /**
+     * Getter for this.proficiencyBonuses
+     * @return this.proficiencyBonuses (Hashtable<String, Integer>)
+     */
+    public Hashtable<String, Integer> getProficiencyBonuses(){
+        return this.proficiencyBonuses;
+    }
+
+    /**
+     * Returns the value of this.proficiencyBonuses.get(proficiency)
+     * @param proficiency (String)
+     */
+    public Integer getProficiencyBonus(String proficiency){
+        if (this.proficiencyBonuses.contains(proficiency)){
+            return this.proficiencyBonuses.get(proficiency);
+        }else{
+            return 0;
+        }
+    }
+
+    /**
+     * Setter for this.proficiencyBonuses
+     * @param proficiencyBonuses (Hashtable<String, Integer>)
+     */
+    public void setProficiencyBonuses(Hashtable<String, Integer> proficiencyBonuses){
+        this.proficiencyBonuses = proficiencyBonuses;
+    }
+
+    /**
+     * Sets a proficiency bonus
+     * @param proficiency (String)
+     * @param bonus (Proficiency)
+     */
+    public void setProficiencyBonus(String proficiency, Integer bonus){
+        this.proficiencyBonuses.put(proficiency, bonus);
+    }
+
+    /**
+     * Gets the ac dexterity mod cap on this item
+     */
+    public int getAcDexCap(){
+        return this.acDexCap;
+    }
+    
+    /**
+     * Sets the ac dexterity mod cap on this item
+     * @param acDexCap (int)
+     */
+    public void setAcDexCap(int acDexCap){
+        this.acDexCap = acDexCap;
     }
 }

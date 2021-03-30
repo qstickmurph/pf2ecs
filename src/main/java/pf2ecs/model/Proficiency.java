@@ -7,9 +7,9 @@ public enum Proficiency{
     MASTER(6),
     LEGENDARY(8);
 
-    public final int label;
+    public final int bonus;
 
-    private Proficiency(int label){
-        this.label = label;
+    private Proficiency(int bonus){
+        this.bonus= bonus;
     }
 }
