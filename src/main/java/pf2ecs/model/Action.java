@@ -43,6 +43,9 @@ public class Action {
 
     /** Holds the trigger of the Action */
     private String trigger;
+
+    /** The proficiency bonus to be used in calculation */
+    private String proficiency;
     
     /** Constructor Method
      *  

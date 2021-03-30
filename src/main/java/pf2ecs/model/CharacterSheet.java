@@ -751,4 +751,14 @@ public class CharacterSheet {
 	public void setWounded(int wounded){
 		this.wounded = wounded;
 	}
+
+    public int getAcDexCap(){
+        int min = Integer.MAX_VALUE;
+        for(PfItem item : this.inventory.getEquipped()){
+            if(item.getAcDexCap() < min){
+                min = item.getAcDexCap();
+            }
+        }
+        return min;
+    }
 }
