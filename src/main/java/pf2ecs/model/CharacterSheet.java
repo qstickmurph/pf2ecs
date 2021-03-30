@@ -108,9 +108,8 @@ public class CharacterSheet {
     private String languages;
 
     /**
-     * Constructor Method default
-     *
-     * @param name (String)
+     * Constructor Method 
+     * Creates an empty CharacterSheet with all values initialized.
      */
     public CharacterSheet(){
         this.name = "";

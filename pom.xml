@@ -1,12 +1,42 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<modelVersion>4.0.0</modelVersion>
 
     <groupId>com.pf2ecs</groupId>
     <artifactId>pf2ecs</artifactId>
-    <version>0.1</version>
+    <version>0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
+
+    <name>pf2ecs (Pathfinder 2e Character Sheet)</name>
+    <description>A customizable, interactive digital character sheet for pathfinder 2e</description>
+    <url>https://www.nragis.com</url>
+
+     <developers>
+         <developer>
+            <name>Quinn Murphey</name>
+            <email>quinn_murphey@me.com</email>
+            <url>https://www.nragis.com</url>
+        </developer>
+         <developer>
+            <name>David Gellhausen</name>
+            <email>dgellhause@gmail.com</email>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+          <name>MIT License</name>
+          <url>https://opensource.org/licenses/MIT</url>
+          <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>scm:git:git://github.com/Nraigis/pf2ecs.git</connection>
+        <developerConnection>scm:git:ssh://github.com:Nragis/pf2ecs.git</developerConnection>
+        <url>http://github.com/Nragis/pf2ecs/tree/master</url>
+    </scm>
 
     <dependencies>
         <dependency>
@@ -78,9 +108,6 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.2.4</version>
-                <configuration>
-                  <!-- put your configurations here -->
-                </configuration>
                 <executions>
                   <execution>
                     <phase>package</phase>
@@ -89,6 +116,11 @@
                     </goals>
                   </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.2.0</version>
             </plugin>
         </plugins>
     </build>
