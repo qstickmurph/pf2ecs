@@ -1,0 +1,22 @@
+{
+  "type": "skill",
+  "name": "Acrobatics",
+  "description": "Acrobatics measures your ability to perform tasks requiring coordination and grace. When you use the Escape basic action, you can use your Acrobatics modifier instead of your unarmed attack modifier.",
+  "keyAbility": "dexterity",
+  "untrainedActions": [
+    {
+      "type": "action",
+      "name": "Balance",
+      "traits": [
+        "move"
+      ],
+      "time": "1 action",
+      "requirements": [
+        "You are in a square that contains a narrow surface, uneven ground, or another similar feature."
+      ],
+      "description": "You move across a narrow surface or uneven ground, attempting an Acrobatics check against its Balance DC. You are flat-footed while on a narrow surface or uneven ground. Critical Success You move up to your Speed. Success You move up to your Speed, treating it as difficult terrain (every 5 feet costs 10 feet of movement). Failure You must remain stationary to keep your balance (wasting the action) or you fall. If you fall, your turn ends. Critical Failure You fall and your turn ends."
+    }
+  ],
+  "trainedActions":[
+  ]
+}
