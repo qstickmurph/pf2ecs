@@ -170,6 +170,8 @@ public class CharacterSheet {
         this.attributes.put(Ability.CHA, 10);
 
         this.proficiencies = new Hashtable<>();
+        this.itemBonuses = new Hashtable<>();
+        this.circumstanceBonuses = new Hashtable<>();
         this.ac = 0;
         this.maxHp = 0;
         this.hp = 0;
@@ -178,6 +180,10 @@ public class CharacterSheet {
         this.languages = "";
     }   
 
+    /**
+     * Creates a CharacterSheet object from a json file
+     * @param file (File)
+     */
     public static CharacterSheet fromFile(File file){
         Gson gson = new Gson();
         try(Reader reader = new FileReader(file)){
@@ -190,6 +196,10 @@ public class CharacterSheet {
         return new CharacterSheet();
     }
 
+    /**
+     * Creates a CharacterSheet object from a json object
+     * @param json (JsonObject)
+     */
     public static CharacterSheet fromJson(JsonObject json){
         Gson gson = new Gson();
         try{
@@ -199,6 +209,7 @@ public class CharacterSheet {
         }
         return new CharacterSheet();
     }
+
     /**
      * Exports the character sheet as a json file
      */
@@ -809,16 +820,33 @@ public class CharacterSheet {
             profBonus = this.circumstanceBonuses.get(proficiency);
         }
 
-        return 10 + profBonus + itemBonus + circumBonus;
-
+        return profBonus + itemBonus + circumBonus;
     }
 
     /**
-     * Setter for this.ac
-     * @param ac (int)
+     * Returns the total modifier for a proficiency
+     * @param proficiency (String)
      */
-    public void setAc(int ac){
-        this.ac = ac;
+    public int getTotalBonus(String proficiency, Ability ability){
+        int profBonus = 0;
+        int itemBonus = 0;
+        int circumBonus = 0;
+        int abilityBonus = 0;
+
+        if(this.proficiencies.contains(proficiency) && this.proficiencies.get(proficiency) != Proficiency.UNTRAINED){
+            profBonus = this.level + this.proficiencies.get(proficiency).bonus;
+        }
+        if(this.itemBonuses.contains(proficiency)){
+            profBonus = this.itemBonuses.get(proficiency);
+        }
+        if(this.circumstanceBonuses.contains(proficiency)){
+            profBonus = this.circumstanceBonuses.get(proficiency);
+        }
+        if(ability != null){
+            abilityBonus = this.getAbilityMod(ability);
+        }
+
+        return profBonus + abilityBonus + itemBonus + circumBonus;
     }
 
     /**

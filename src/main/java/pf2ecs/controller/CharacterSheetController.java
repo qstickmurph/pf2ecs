@@ -4,6 +4,7 @@ import java.io.File;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.Button;
@@ -24,232 +25,156 @@ public class CharacterSheetController {
 
     @FXML
     private MenuBar menuBar;
-
     @FXML
     private MenuItem openMenuItem;
-
     @FXML
     private MenuItem saveMenuItem;
-    
     @FXML
     private Label characterName;
-
     @FXML
     private Label ancestryAndHeritage;
-
     @FXML
     private Label background;
-
     @FXML
     private Label classLabel;
-
     @FXML
     private Label diety;
-
     @FXML
     private Label size;
-
     @FXML
     private Label level;
-
     @FXML
     private Label alignment;
-
     @FXML
     private Label strengthLabel;
-
     @FXML
     private Label strengthScore;
-
     @FXML
     private Label strengthMod;
-
     @FXML
     private Label dexterityLabel;
-
     @FXML
     private Label constitutionLabel;
-
     @FXML
     private Label intelligenceLabel;
-
     @FXML
     private Label wisdomLabel;
-
     @FXML
     private Label charismaLabel;
-
     @FXML
     private Label dexterityScore;
-
     @FXML
     private Label constitutionScore;
-
     @FXML
     private Label intelligenceScore;
-
     @FXML
     private Label wisdomScore;
-
     @FXML
     private Label charismaScore;
-
     @FXML
     private Label dexterityMod;
-
     @FXML
     private Label constitutionMod;
-
     @FXML
     private Label wisdomMod;
-
     @FXML
     private Label intelligenceMod;
-
     @FXML
     private Label charismaMod;
-
     @FXML
     private Label classDcLabel;
-
     @FXML
     private Label classDc;
-
     @FXML
     private Label classKeyAbility;
-
     @FXML
     private Label fortitudeLabel;
-
     @FXML
     private Label fortitudeMod;
-
     @FXML
     private Label reflexLabel;
-
     @FXML
     private Label willLabel;
-
     @FXML
     private Label reflexMod;
-
     @FXML
     private Label willMod;
-
     @FXML
     private Label perceptionMod;
-
     @FXML
     private Label perceptionLabel;
-
     @FXML
     private Label savingThrowsLabel;
-
     @FXML
     private AnchorPane skillsAnchorPane;
-
     @FXML
     private GridPane skillsGtidPane;
-
     @FXML
     private Label languagesLabel;
-
     @FXML
     private Label languages;
-
     @FXML
     private Label maxHp;
-
     @FXML
     private Label maxHpLabel;
-
     @FXML
     private TextField hp;
-
     @FXML
     private TextField tempHp;
-
     @FXML
     private TextField xp;
-
     @FXML
     private Label speed;
-
     @FXML
     private Label feetLabel;
-
     @FXML
-    private TextField movementTypes;
-
+    private TextArea movementTypes;
     @FXML
     private Label dyingLabel;
-
     @FXML
     private Label woundedLabel;
-
     @FXML
     private TextField dying;
-
     @FXML
     private TextField wounded;
-
     @FXML
-    private TextField resistances;
-
+    private TextArea resistances;
     @FXML
     private Label resistancesLabel;
-
     @FXML
     private Label immunitiesLabel;
-
     @FXML
-    private TextField immunities;
-
+    private TextArea immunities;
     @FXML
     private Label conditionsLabel;
-
     @FXML
-    private TextField conditions;
-
+    private TextArea conditions;
     @FXML
     private AnchorPane actionsAnchorPane;
-
     @FXML
     private GridPane actionsGridPane;
-
     @FXML
     private ToolBar actionsToolBar;
-
     @FXML
     private AnchorPane featsAnchorPage;
-
     @FXML
     private ToolBar featsToolBar;
-
     @FXML
     private GridPane featsGridPane;
-
     @FXML
     private AnchorPane inventoryAnchorPane;
-
     @FXML
     private ToolBar inventoryToolBar;
-
     @FXML
     private GridPane inventoryGridPane;
-
     @FXML
     private AnchorPane descriptionAnchorPane;
-
     @FXML
     private ToolBar descriptionToolBar;
-
     @FXML
     private GridPane descriptionGridPane;
-
     @FXML
     private TextField heroPoints;
-
 
     private CharacterSheet characterSheet;
     final FileChooser fileChooser = new FileChooser();
@@ -369,22 +294,25 @@ public class CharacterSheetController {
         this.intelligenceMod.setText(String.valueOf(characterSheet.getAbilityMod(Ability.INT)));
 
         //wisdomLabel;
+
         this.wisdomScore.setText(String.valueOf(characterSheet.getAbilityScore(Ability.WIS)));
 
         this.wisdomMod.setText(String.valueOf(characterSheet.getAbilityMod(Ability.WIS)));
 
-
         //this.charismaLabel;
+        
         this.charismaScore.setText(String.valueOf(characterSheet.getAbilityScore(Ability.CHA)));
 
         this.charismaMod.setText(String.valueOf(characterSheet.getAbilityMod(Ability.CHA)));
 
         //this.classDcLabel;
         
-        this.classDcLabel.setText(String.valueOf(characterSheet.getTotalBonus("class_dc")));
+        this.classDc.setText(String.valueOf(10 + characterSheet.getTotalBonus("class_dc")));
 
         this.classKeyAbility.setText(String.valueOf(characterSheet.getPfClass().getKeyAbility()));
 
+        //this.savingThrowsLabel;
+        
         //this.fortitudeLabel;
         
         this.fortitudeMod.setText(String.valueOf(characterSheet.getProficiencyMod("saving_throws:fortitude")));
@@ -400,11 +328,6 @@ public class CharacterSheetController {
         //this.perceptionLabel;
 
         this.perceptionMod.setText(String.valueOf(characterSheet.getProficiencyMod("saving_throws:perception")));
-
-        //this.savingThrowsLabel;
-        
-        /*skillsAnchorPane;**************************************** 
-        skillsGridPane; */ 
 
         //this.languagesLabel;
 
@@ -432,6 +355,8 @@ public class CharacterSheetController {
         this.dying.setText(String.valueOf(characterSheet.getDying()));
 
         this.wounded.setText(String.valueOf(characterSheet.getWounded()));
+
+        this.heroPoints.setText(String.valueOf(characterSheet.getHeroPoints()));
         
         //this.resistancesLabel;
         
@@ -461,7 +386,8 @@ public class CharacterSheetController {
         descriptionToolBar;****************************************
         descriptionGridPane;*/
 
-        this.heroPoints.setText(String.valueOf(characterSheet.getHeroPoints()));
+        /*skillsAnchorPane;**************************************** 
+        skillsGridPane; */ 
             
     }
 

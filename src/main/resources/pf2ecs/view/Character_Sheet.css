@@ -1,1 +1,25 @@
+.anchor-pane {
+    -fx-background-color: #98513d;
+}
 
+.label {
+    -fx-font-family: fantasy;
+    -fx-font-size: 18px;
+}
+
+.sub-title {
+    -fx-font-size: 22px;
+    -fx-alignment: center;
+}
+
+.small {
+    -fx-font-size: 12px;
+}
+
+.clickable {
+    -fx-underline: true;
+}
+
+.label-white{
+    -fx-background-color: white;
+}
