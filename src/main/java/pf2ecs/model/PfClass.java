@@ -14,6 +14,11 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
+import pf2ecs.model.Ability;
+import pf2ecs.model.Proficiency;
+import pf2ecs.model.Subclass;
+import pf2ecs.model.Feat;
+
 /** The Class class holds all the information about class including its hitpoints, key attribute, and more.
 *
 * @author Quinn Murphey
@@ -29,11 +34,11 @@ public class PfClass {
 	/** The hitpoints of the class */
 	private int hitpoints;
 	
-	/** The keyAttribute of the class */
-	private Attribute keyAttribute;
+	/** The keyAbility of the class */
+	private Ability keyAbility;
 	
 	/** The proficiency bonuses of the class */
-	private Hashtable<String, SkillTraining> proficiencyBonuses;
+	private Hashtable<String, Proficiency> proficiencyBonuses;
 	
 	/** The number of free skills of the class */
 	private int freeSkills;
@@ -50,7 +55,7 @@ public class PfClass {
     public PfClass(){
         this.name = "";
         this.hitpoints = 0;
-    	this.keyAttribute = null;
+    	this.keyAbility = null;
     	this.proficiencyBonuses = new Hashtable<>();
     	this.freeSkills = 0;
     	this.subclasses = new HashSet<>();
@@ -143,42 +148,42 @@ public class PfClass {
     }
     
     /** 
-     * Returns this.keyAttribute
-     * @return this.keyAttribute (Attribute)
+     * Returns this.keyAbility
+     * @return this.keyAbility (Ability)
      */
-    public Attribute getKeyAttribute(){
-        return this.keyAttribute;
+    public Ability getKeyAbility(){
+        return this.keyAbility;
     }
 
     /** 
-     * Sets this.keyAttribute
-     * @param keyAttribute (Attribute)
+     * Sets this.keyAbility
+     * @param keyAbility (Ability)
      */
-    public void setKeyAttribute(Attribute keyAttribute){
-        this.keyAttribute = keyAttribute;
+    public void setKeyAbility(Ability keyAbility){
+        this.keyAbility = keyAbility;
     }
     
     /**
 	 * Getter for this.proficiencyBonuses.
 	 * @return Returns this.proficiencyBonuses.
 	 */
-	public Hashtable<String, SkillTraining> getProficiencyBonuses(){
+	public Hashtable<String, Proficiency> getProficiencyBonuses(){
 		return this.proficiencyBonuses;
 	}
 	
 	/**
 	 * Setter for this.proficiencyBonuses.
-	 * @param proficiencyBonuses (Hashtable<String, SkillTraining>)
+	 * @param proficiencyBonuses (Hashtable<String, Proficiency>)
 	 */
-	public void setProficiencyBonuses(Hashtable<String, SkillTraining> proficiencyBonuses){
+	public void setProficiencyBonuses(Hashtable<String, Proficiency> proficiencyBonuses){
 		this.proficiencyBonuses = proficiencyBonuses;
 	}
 	
 	/**
 	 * Adds proficiency and bonus to this.proficiencyBonuses.
-	 * @param skill (String) bonus (SkillTraining)
+	 * @param skill (String) bonus (Proficiency)
 	 */
-    public void addProficiencyBonus(String skill, SkillTraining bonus){
+    public void addProficiencyBonus(String skill, Proficiency bonus){
     	this.proficiencyBonuses.put(skill, bonus);
     }
 

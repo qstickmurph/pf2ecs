@@ -15,8 +15,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-//import pf2ecs.model.Item;
-//import pf2ecs.model.Action;
+import pf2ecs.model.Action;
+import pf2ecs.model.Rune;
 //import pf2ecs.model.Spell;
 
 /** The Action class holds all the information about each action including its description, any relevant scenario type, and more

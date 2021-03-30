@@ -16,7 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import pf2ecs.model.CharacterSheet;
-import pf2ecs.model.Attribute;
+import pf2ecs.model.Ability;
 import pf2ecs.model.Alignment;
 import pf2ecs.model.Size;
 
@@ -346,44 +346,44 @@ public class CharacterSheetController {
 
         //this.strengthLabel;
 
-        this.strengthScore.setText(String.valueOf(characterSheet.getAttributeScore(Attribute.STR)));
+        this.strengthScore.setText(String.valueOf(characterSheet.getAbilityScore(Ability.STR)));
 
-        this.strengthMod.setText(String.valueOf(characterSheet.getAttributeMod(Attribute.STR)));
+        this.strengthMod.setText(String.valueOf(characterSheet.getAbilityMod(Ability.STR)));
 
         //this.dexterityLabel;
         
-        this.dexterityScore.setText(String.valueOf(characterSheet.getAttributeScore(Attribute.DEX)));
+        this.dexterityScore.setText(String.valueOf(characterSheet.getAbilityScore(Ability.DEX)));
 
-        this.dexterityMod.setText(String.valueOf(characterSheet.getAttributeMod(Attribute.DEX)));
+        this.dexterityMod.setText(String.valueOf(characterSheet.getAbilityMod(Ability.DEX)));
 
         //this.constitutionLabel;
         
-        this.constitutionScore.setText(String.valueOf(characterSheet.getAttributeScore(Attribute.CON)));
+        this.constitutionScore.setText(String.valueOf(characterSheet.getAbilityScore(Ability.CON)));
 
-        this.constitutionMod.setText(String.valueOf(characterSheet.getAttributeMod(Attribute.CON)));
+        this.constitutionMod.setText(String.valueOf(characterSheet.getAbilityMod(Ability.CON)));
 
         //this.intelligenceLabel;
 
-        this.intelligenceScore.setText(String.valueOf(characterSheet.getAttributeScore(Attribute.INT)));
+        this.intelligenceScore.setText(String.valueOf(characterSheet.getAbilityScore(Ability.INT)));
 
-        this.intelligenceMod.setText(String.valueOf(characterSheet.getAttributeMod(Attribute.INT)));
+        this.intelligenceMod.setText(String.valueOf(characterSheet.getAbilityMod(Ability.INT)));
 
         //wisdomLabel;
-        this.wisdomScore.setText(String.valueOf(characterSheet.getAttributeScore(Attribute.WIS)));
+        this.wisdomScore.setText(String.valueOf(characterSheet.getAbilityScore(Ability.WIS)));
 
-        this.wisdomMod.setText(String.valueOf(characterSheet.getAttributeMod(Attribute.WIS)));
+        this.wisdomMod.setText(String.valueOf(characterSheet.getAbilityMod(Ability.WIS)));
 
 
         //this.charismaLabel;
-        this.charismaScore.setText(String.valueOf(characterSheet.getAttributeScore(Attribute.CHA)));
+        this.charismaScore.setText(String.valueOf(characterSheet.getAbilityScore(Ability.CHA)));
 
-        this.charismaMod.setText(String.valueOf(characterSheet.getAttributeMod(Attribute.CHA)));
+        this.charismaMod.setText(String.valueOf(characterSheet.getAbilityMod(Ability.CHA)));
 
         //this.classDcLabel;
         
         this.classDcLabel.setText(String.valueOf(characterSheet.getClassDc()));
 
-        this.classKeyAbility.setText(String.valueOf(characterSheet.getPfClass().getKeyAttribute()));
+        this.classKeyAbility.setText(String.valueOf(characterSheet.getPfClass().getKeyAbility()));
 
         //this.fortitudeLabel;
         

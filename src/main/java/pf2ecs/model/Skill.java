@@ -15,6 +15,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
+import pf2ecs.model.Ability;
+import pf2ecs.model.Action;
+
 /** The Skill class holds all the information about skills including its description, key attribute, and more
 *
 * @author Quinn Murphey
@@ -32,7 +35,7 @@ public class Skill {
 	private String description;
 	
 	/** The key attribute of the skill */
-	private Attribute keyAttribute;
+	private Ability keyAbility;
 	
 	/** The untrained actions of a skill */
 	private HashSet<Action> untrainedActions;
@@ -46,7 +49,7 @@ public class Skill {
     public Skill(){
     	this.name = "";
         this.description = "";
-        this.keyAttribute = null;
+        this.keyAbility = null;
         this.untrainedActions = new HashSet<>();
         this.trainedActions = new HashSet<>();
     }
@@ -137,19 +140,19 @@ public class Skill {
 	}
 	
 	/**
-	 * Getter for this.keyAttribute.
-	 * @return Returns this.keyAttribute
+	 * Getter for this.keyAbility.
+	 * @return Returns this.keyAbility
 	 */
-	public Attribute getKeyAttribute(){
-		return this.keyAttribute;
+	public Ability getKeyAbility(){
+		return this.keyAbility;
 	}
 
 	/**
 	 * Setter for this.description.
-	 * @param keyAttribute (Attribute) Sets this.keyAttribute to keyAttribute 
+	 * @param keyAbility (Ability) Sets this.keyAbility to keyAbility 
 	 */
-	public void setKeyAttribute(Attribute keyAttribute){
-		this.keyAttribute = keyAttribute;
+	public void setKeyAbility(Ability keyAbility){
+		this.keyAbility = keyAbility;
 	}
 	
 	/**

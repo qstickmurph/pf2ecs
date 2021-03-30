@@ -15,8 +15,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-import pf2ecs.model.Attribute;
-import pf2ecs.model.SkillTraining;
+import pf2ecs.model.Ability;
+import pf2ecs.model.Proficiency;
 
 /** The Background class holds all the information about character background including its description, attribute bonuses, and proficiency bonuses
 *
@@ -35,10 +35,10 @@ public class Background {
 	private String description;
 	
 	/** The attribute bonuses of the background */
-	private Hashtable<Attribute, Integer> attributeBonuses;
+	private Hashtable<Ability, Integer> attributeBonuses;
 	
 	/** The proficiency bonuses of the background */
-	private Hashtable<String, SkillTraining> proficiencyBonuses;
+	private Hashtable<String, Proficiency> proficiencyBonuses;
 	
 	/** 
      *  Empty Constructor Method
@@ -140,31 +140,31 @@ public class Background {
 	 * Getter for this.attributeBonuses.
 	 * @return Returns this.attributeBonuses.
 	 */
-	public Hashtable<Attribute, Integer> getAttributeBonuses(){
+	public Hashtable<Ability, Integer> getAbilityBonuses(){
 		return this.attributeBonuses;
 	}
 	
 	/**
 	 * Setter for this.attributeBonuses.
-	 * @param attributeBonuses (Hashtable<Attribute, Integer>)
+	 * @param attributeBonuses (Hashtable<Ability, Integer>)
 	 */
-	public void setAttributeBonuses(Hashtable<Attribute, Integer> attributeBonuses){
+	public void setAbilityBonuses(Hashtable<Ability, Integer> attributeBonuses){
 		this.attributeBonuses = attributeBonuses;
 	}
 	
 	/**
 	 * Adds attribute and bonus to this.attributeBonuses.
-	 * @param attribute (Attribute) bonus (Integer)
+	 * @param attribute (Ability) bonus (Integer)
 	 */
-    public void addAtributeBonus(Attribute attribute, Integer bonus){
+    public void addAtributeBonus(Ability attribute, Integer bonus){
     	this.attributeBonuses.put(attribute, bonus);
     }
 
 	/**
 	 * Removes bonus of an attribute from this.attributeBonuses.
-	 * @param attribute (Attribute)
+	 * @param attribute (Ability)
 	 */
-    public void removeAttributeBonus(Attribute attribute){
+    public void removeAbilityBonus(Ability attribute){
     	this.attributeBonuses.remove(attribute);
     }
     
@@ -172,23 +172,23 @@ public class Background {
 	 * Getter for this.proficiencyBonuses.
 	 * @return Returns this.proficiencyBonuses.
 	 */
-	public Hashtable<String, SkillTraining> getProficiencyBonuses(){
+	public Hashtable<String, Proficiency> getProficiencyBonuses(){
 		return this.proficiencyBonuses;
 	}
 	
 	/**
 	 * Setter for this.proficiencyBonuses.
-	 * @param proficiencyBonuses (Hashtable<String, SkillTraining>)
+	 * @param proficiencyBonuses (Hashtable<String, Proficiency>)
 	 */
-	public void setProficiencyBonuses(Hashtable<String, SkillTraining> proficiencyBonuses){
+	public void setProficiencyBonuses(Hashtable<String, Proficiency> proficiencyBonuses){
 		this.proficiencyBonuses = proficiencyBonuses;
 	}
 	
 	/**
 	 * Adds proficiency and bonus to this.proficiencyBonuses.
-	 * @param skill (String) bonus (SkillTraining)
+	 * @param skill (String) bonus (Proficiency)
 	 */
-    public void addProficiencyBonus(String skill, SkillTraining bonus){
+    public void addProficiencyBonus(String skill, Proficiency bonus){
     	this.proficiencyBonuses.put(skill, bonus);
     }
 

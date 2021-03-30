@@ -1,6 +1,6 @@
 package pf2ecs.model;
 
-public enum SkillTraining{
+public enum Proficiency{
     UNTRAINED(0),
     TRAINED(2),
     EXPERT(4),
@@ -9,7 +9,7 @@ public enum SkillTraining{
 
     public final int label;
 
-    private SkillTraining(int label){
+    private Proficiency(int label){
         this.label = label;
     }
 }

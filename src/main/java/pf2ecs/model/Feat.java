@@ -15,7 +15,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
 import pf2ecs.model.Action;
-import pf2ecs.model.Attribute;
+import pf2ecs.model.Ability;
 //import pf2ecs.model.Spell;
 
 
@@ -48,10 +48,10 @@ public class Feat {
     private boolean multiple;
 
     /** The attribute bonuses of the feat*/
-    private Hashtable<Attribute, Integer> attributeBonuses;
+    private Hashtable<Ability, Integer> attributeBonuses;
 
     /** The proficiency bonuses of the feat*/
-    private Hashtable<String, SkillTraining> proficiencyBonuses;
+    private Hashtable<String, Proficiency> proficiencyBonuses;
 
     /** The actions the feat gives */
     private HashSet<Action> actions;
@@ -270,7 +270,7 @@ public class Feat {
 	 * Getter for this.attributeBonuses.
 	 * @return Returns this.attributeBonuses
 	 */
-	public Hashtable<Attribute, Integer> getAttributeBonuses(){
+	public Hashtable<Ability, Integer> getAbilityBonuses(){
 		return this.attributeBonuses;
 	}
 
@@ -278,24 +278,24 @@ public class Feat {
 	 * Setter for this.attributeBonuses.
 	 * @param name Sets this.attributeBonuses to attributeBonuses
 	 */
-	public void setAttributeBonuses(Hashtable<Attribute, Integer> attributeBonuses){
+	public void setAbilityBonuses(Hashtable<Ability, Integer> attributeBonuses){
 		this.attributeBonuses = attributeBonuses;
 	}
 
     /**
 	 * Adds attribute, bonus to this.attributeBonuses.
-	 * @param attribute (Attribute) 
+	 * @param attribute (Ability) 
 	 * @param bonus (Integer) 
 	 */
-    public void addAttributeBonus(Attribute attribute, Integer bonus){
+    public void addAbilityBonus(Ability attribute, Integer bonus){
         this.attributeBonuses.put(attribute, bonus);
     }
 
 	/**
 	 * Removes attribute from this.attributeBonuses if present.
-	 * @param attribute (Attribute)
+	 * @param attribute (Ability)
 	 */
-    public void removeAttributeBonus(Attribute attribute){
+    public void removeAbilityBonus(Ability attribute){
         if(this.attributeBonuses.contains(attribute)){
             this.attributeBonuses.remove(attribute);
         }
@@ -305,14 +305,14 @@ public class Feat {
 	 * Getter for this.proficiencyBonuses.
 	 * @return Returns this.proficiencyBonuses
 	 */
-	public Hashtable<String, SkillTraining> getProficiencyBonuses(){
+	public Hashtable<String, Proficiency> getProficiencyBonuses(){
 		return this.proficiencyBonuses;
 	}
 
 	/**
 	 * Setter for this.proficiencyBonuses.
 	 * @param name Sets this.proficiencyBonuses to proficiencyBonuses */
-	public void setProficiencyBonuses(Hashtable<String, SkillTraining> proficiencyBonuses){
+	public void setProficiencyBonuses(Hashtable<String, Proficiency> proficiencyBonuses){
 		this.proficiencyBonuses = proficiencyBonuses;
 	}
 
@@ -321,7 +321,7 @@ public class Feat {
 	 * @param proficiency (String) 
 	 * @param bonus (Integer) 
 	 */
-    public void addProficiencyBonus(String proficiency, SkillTraining bonus){
+    public void addProficiencyBonus(String proficiency, Proficiency bonus){
         this.proficiencyBonuses.put(proficiency, bonus);
     }
 

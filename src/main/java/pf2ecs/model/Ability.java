@@ -1,6 +1,6 @@
 package pf2ecs.model;
 
-public enum Attribute{
+public enum Ability{
     STR,
     DEX,
     CON,

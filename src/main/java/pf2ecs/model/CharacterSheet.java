@@ -15,10 +15,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-import pf2ecs.model.Attribute;
+import pf2ecs.model.Ability;
 import pf2ecs.model.Alignment;
 import pf2ecs.model.Scenario;
-import pf2ecs.model.SkillTraining;
+import pf2ecs.model.Proficiency;
 import pf2ecs.model.Size;
 import pf2ecs.model.PfClass;
 import pf2ecs.model.Ancestry;
@@ -78,10 +78,10 @@ public class CharacterSheet {
     private int heroPoints;
 
     /** The character's attributes */
-    private Hashtable<Attribute, Integer> attributes;
+    private Hashtable<Ability, Integer> attributes;
 
     /** The character's proficiencies */
-    private Hashtable<String, SkillTraining> proficiencies;
+    private Hashtable<String, Proficiency> proficiencies;
 
     /** The ac of the character */
     private int ac;
@@ -127,12 +127,12 @@ public class CharacterSheet {
         this.heroPoints = 0;
         
         this.attributes = new Hashtable<>();
-        this.attributes.put(Attribute.STR, 10);
-        this.attributes.put(Attribute.DEX, 10);
-        this.attributes.put(Attribute.CON, 10);
-        this.attributes.put(Attribute.INT, 10);
-        this.attributes.put(Attribute.WIS, 10);
-        this.attributes.put(Attribute.CHA, 10);
+        this.attributes.put(Ability.STR, 10);
+        this.attributes.put(Ability.DEX, 10);
+        this.attributes.put(Ability.CON, 10);
+        this.attributes.put(Ability.INT, 10);
+        this.attributes.put(Ability.WIS, 10);
+        this.attributes.put(Ability.CHA, 10);
 
         this.proficiencies = new Hashtable<>();
         this.ac = 0;
@@ -448,51 +448,51 @@ public class CharacterSheet {
 
     /**
      * Getter for this.attributes
-     * @return this.attributes (Hashtable<Attribute, Integer>
+     * @return this.attributes (Hashtable<Ability, Integer>
      */
-    public Hashtable<Attribute, Integer> getAttributes(){
+    public Hashtable<Ability, Integer> getAbilitys(){
         return this.attributes;
     }
     
     /**
-     * @param attribute (Attribute)
+     * @param attribute (Ability)
      * @return score (int) 
      */
-    public int getAttributeScore(Attribute attribute){
+    public int getAbilityScore(Ability attribute){
         return (int) this.attributes.get(attribute);
     }
     
     /**
-     * @param attribute (Attribute)
+     * @param attribute (Ability)
      * @return mod (int)
      */
-    public int getAttributeMod(Attribute attribute){
+    public int getAbilityMod(Ability attribute){
         return (int) (this.attributes.get(attribute) - 10)/2;
     }
 
     /**
      * Setter for this.attributes
-     * @param attribute (Attribute)
+     * @param attribute (Ability)
      * @param bonus (int)
      */
-    public void setAttributes(Hashtable<Attribute, Integer> attributes){
+    public void setAbilitys(Hashtable<Ability, Integer> attributes){
         this.attributes = attributes;
     }
 
     /**
      * Sets a attribute
-     * @param attribute (Attribute)
+     * @param attribute (Ability)
      * @param bonus (Integer)
      */
-    public void setAttribute(Attribute attribute, Integer bonus){
+    public void setAbility(Ability attribute, Integer bonus){
         this.attributes.put(attribute, bonus);
     }
 
     /**
      * Getter for this.proficiencies
-     * @return this.proficiencies (Hashtable<String, SkillTraining>)
+     * @return this.proficiencies (Hashtable<String, Proficiency>)
      */
-    public Hashtable<String, SkillTraining> getProficiencies(){
+    public Hashtable<String, Proficiency> getProficiencies(){
         return this.proficiencies;
     }
 
@@ -500,11 +500,11 @@ public class CharacterSheet {
      *
      *
      */
-    public SkillTraining getProficiency(String proficiency){
+    public Proficiency getProficiency(String proficiency){
         if (this.proficiencies.contains(proficiency)){
             return this.proficiencies.get(proficiency);
         }else{
-            return SkillTraining.UNTRAINED;
+            return Proficiency.UNTRAINED;
         }
     }
 
@@ -519,9 +519,9 @@ public class CharacterSheet {
 
     /**
      * Setter for this.proficiencies
-     * @param proficiencies (Hashtable<String, SkillTraining>)
+     * @param proficiencies (Hashtable<String, Proficiency>)
      */
-    public void setProficiencies(Hashtable<String, SkillTraining> proficiencies){
+    public void setProficiencies(Hashtable<String, Proficiency> proficiencies){
         this.proficiencies = proficiencies;
     }
 
@@ -530,7 +530,7 @@ public class CharacterSheet {
      * @param proficiency (String)
      * @param bonus (Integer)
      */
-    public void setProficiency(String proficiency, SkillTraining bonus){
+    public void setProficiency(String proficiency, Proficiency bonus){
         this.proficiencies.put(proficiency, bonus);
     }
     

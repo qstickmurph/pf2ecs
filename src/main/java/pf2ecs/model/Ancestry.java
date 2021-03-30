@@ -32,7 +32,7 @@ public class Ancestry {
 	private int hitpoints;
 	
 	/** The attribute bonuses of the ancestry */
-	private Hashtable<Attribute, Integer> attributeBonuses;
+	private Hashtable<Ability, Integer> attributeBonuses;
 	
 	/** The traits of the ancestry */
 	private HashSet<String> traits;
@@ -187,31 +187,31 @@ public class Ancestry {
 	 * Getter for this.attributeBonuses.
 	 * @return Returns this.attributeBonuses.
 	 */
-	public Hashtable<Attribute, Integer> getAttributeBonuses(){
+	public Hashtable<Ability, Integer> getAbilityBonuses(){
 		return this.attributeBonuses;
 	}
 	
 	/**
 	 * Setter for this.attributeBonuses.
-	 * @param attributeBonuses (Hashtable<Attribute, Integer>)
+	 * @param attributeBonuses (Hashtable<Ability, Integer>)
 	 */
-	public void setAttributeBonuses(Hashtable<Attribute, Integer> attributeBonuses){
+	public void setAbilityBonuses(Hashtable<Ability, Integer> attributeBonuses){
 		this.attributeBonuses = attributeBonuses;
 	}
 	
 	/**
 	 * Adds attribute and bonus to this.attributeBonuses.
-	 * @param attribute (Attribute) bonus (Integer)
+	 * @param attribute (Ability) bonus (Integer)
 	 */
-    public void addAtributeBonus(Attribute attribute, Integer bonus){
+    public void addAtributeBonus(Ability attribute, Integer bonus){
     	this.attributeBonuses.put(attribute, bonus);
     }
 
 	/**
 	 * Removes bonus of an attribute from this.attributeBonuses.
-	 * @param attribute (Attribute)
+	 * @param attribute (Ability)
 	 */
-    public void removeAttributeBonus(Attribute attribute){
+    public void removeAbilityBonus(Ability attribute){
     	this.attributeBonuses.remove(attribute);
     }
     
