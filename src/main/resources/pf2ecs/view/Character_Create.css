@@ -1,0 +1,16 @@
+.label {
+    -fx-font-size: 18px;
+}
+
+.description {
+    -fx-alignment: TOP_LEFT;
+}
+
+.feats-grid > * {
+    -fx-pref-height: USE_COMPUTED_SIZE;
+}
+
+.skills-grid > * {
+    -fx-min-height: 30px;
+    -fx-pref-height: 30px;
+}
