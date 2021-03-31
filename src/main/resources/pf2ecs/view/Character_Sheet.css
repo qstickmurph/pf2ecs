@@ -4,6 +4,7 @@
 
 .label {
     -fx-font-family: fantasy;
+    -fx-text-fill: black;
     -fx-font-size: 18px;
 }
 
