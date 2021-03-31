@@ -33,7 +33,7 @@ public class Action {
     private HashSet<String> traits;
 
     /** Holds the requirements of the Action */
-    private HashSet<String> requirements;
+    private String requirements;
 
     /** Holds the description of the Action */
     private String description;
@@ -53,7 +53,7 @@ public class Action {
     public Action(){
         this.name = "";
         this.traits = new HashSet<>();
-        this.requirements = new HashSet<>();
+        this.requirements = "";
         this.description = "";
         this.time = "";
         this.trigger = "";
@@ -200,7 +200,7 @@ public class Action {
 	 * Getter for this.requirements.
 	 * @return Returns this.requirements.
 	 */
-	public HashSet<String> getRequirements(){
+	public String getRequirements(){
 		return this.requirements;
 	}
 
@@ -208,7 +208,7 @@ public class Action {
 	 * Setter for this.requirements.
 	 * @param requrements (HashSet<String>)
 	 */
-	public void setRequirements(HashSet<String> requirements){
+	public void setRequirements(String requirements){
 		this.requirements = requirements;
 	}
     

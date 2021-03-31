@@ -2,6 +2,7 @@ package pf2ecs.controller;
 
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -78,13 +79,39 @@ public class CharacterCreateController {
     @FXML
     private Tab classTab;
     @FXML
-    private ChoiceBox<String> classChoiceBox;
+    private ChoiceBox<PfClass> classChoiceBox;
     @FXML
     private Label classDescription;
     @FXML
     private Label classKeyAbility;
     @FXML
     private Label classHitPoints;
+    @FXML
+    private Label classPerception;
+    @FXML
+    private Label classClassDC;
+    @FXML
+    private Label classUnarmoredDefense;
+    @FXML
+    private Label classLightArmor;
+    @FXML
+    private Label classMediumArmor;
+    @FXML
+    private Label classHeavyArmor;
+    @FXML
+    private Label classMartialWeapons;
+    @FXML
+    private Label classSimpleWeapons;
+    @FXML
+    private Label classUnarmedAttacks;
+    @FXML
+    private Label classFortitude;
+    @FXML
+    private Label classReflex;
+    @FXML
+    private Label classWill;
+    @FXML
+    private Label classSkills;
     @FXML
     private Tab classFeaturesTab;
     @FXML
@@ -195,9 +222,9 @@ public class CharacterCreateController {
     // Non FXML variables
     private ArrayList<Ancestry> ancestries;
     private ArrayList<Background> backgrounds;
-    private ArrayList<PfClass> classes;
+    private ArrayList<PfClass> pfClasses;
     private ArrayList<Skill> skills;
-    private ArrayList<PfItem> items;
+    private ArrayList<PfItem> pfItems;
 
     void abilityScoresTabSelected() {
 
@@ -246,6 +273,8 @@ public class CharacterCreateController {
 
     private void ancestryChosen(){
         Ancestry ancestry = ancestryChoiceBox.getSelectionModel().getSelectedItem();
+        if(ancestry== null)
+            return;
         
         this.ancestryDescription.setText(ancestry.getDescription());
 
@@ -296,6 +325,7 @@ public class CharacterCreateController {
             }
         }
         ObservableList<Feat> obsFeatsList = FXCollections.observableArrayList(ancestryFeats);
+        this.ancestryFeatChoiceBox.getSelectionModel().clearSelection();
         this.ancestryFeatChoiceBox.setItems(obsFeatsList);
         
         ArrayList<Heritage> ancestryHeritages = new ArrayList<>();
@@ -305,19 +335,58 @@ public class CharacterCreateController {
         ObservableList<Heritage> obsHeritageList = FXCollections.observableArrayList(ancestryHeritages);
         this.heritageChoiceBox.setItems(obsHeritageList);
 
+    }
 
+    private void backgroundChosen(){
+
+    }
+
+
+    private void classChosen(){
+        PfClass pfClass = classChoiceBox.getSelectionModel().getSelectedItem();
+        if(pfClass == null)
+            return;
+
+        this.classKeyAbility.setText(pfClass.getKeyAbility().label);
+
+        this.classHitPoints.setText(String.valueOf(pfClass.getHitPoints()));
+
+        this.classPerception.setText(pfClass.getProficiencyBonus("saving_throws:perception").label);
+        this.classFortitude.setText(pfClass.getProficiencyBonus("saving_throws:fortitude").label);
+        this.classReflex.setText(pfClass.getProficiencyBonus("saving_throws:reflex").label);
+        this.classWill.setText(pfClass.getProficiencyBonus("saving_throws:will").label);
+
+        String skills = "";
+        Enumeration enu = pfClass.getProficiencyBonuses().keys();
+        while( enu.hasMoreElements() ){
+            String proficiency = (String) enu.nextElement();
+            String[] split = proficiency.split(":");
+            if(  split[0].equals("skills") ){
+                skills += pfClass.getProficiencyBonus(proficiency).label + " in " + split[1] + ", ";
+            }
+        }
+        this.classSkills.setText(skills.substring(0, skills.length() - 2));
+
+        this.classUnarmedAttacks.setText(pfClass.getProficiencyBonus("attacks:unarmed_attacks").label);
+        this.classSimpleWeapons.setText(pfClass.getProficiencyBonus("attacks:simple_weapons").label);
+        this.classMartialWeapons.setText(pfClass.getProficiencyBonus("attacks:matrial_weapons").label);
+        this.classUnarmoredDefense.setText(pfClass.getProficiencyBonus("armor:unarmored_defense").label);
+        this.classLightArmor.setText(pfClass.getProficiencyBonus("armor:light_armor").label);
+        this.classMediumArmor.setText(pfClass.getProficiencyBonus("armor:medium_armor").label);
+        this.classHeavyArmor.setText(pfClass.getProficiencyBonus("armor:heavy_armor").label);
+        this.classClassDC.setText(pfClass.getProficiencyBonus("class_dc").label);
     }
 
     public void initialize(){
         this.ancestries = new ArrayList<>();
         this.backgrounds = new ArrayList<>();
-        this.classes = new ArrayList<>();
+        this.pfClasses = new ArrayList<>();
         this.skills = new ArrayList<>();
-        this.items = new ArrayList<>();
+        this.pfItems = new ArrayList<>();
         File dir;
         File[] files;
 
-        // Read ancestry files
+        // Ancestry
 
         dir = new File("data/ancestries");
         files = dir.listFiles();
@@ -329,21 +398,66 @@ public class CharacterCreateController {
             }
         }
         
-        ObservableList<Ancestry> obsList = FXCollections.observableArrayList(ancestries);
-        this.ancestryChoiceBox.setItems(obsList);
+        ObservableList<Ancestry> obsAncestryList = FXCollections.observableArrayList(ancestries);
+        this.ancestryChoiceBox.setItems(obsAncestryList);
 
         this.ancestryChoiceBox.setOnAction((event) -> {
             ancestryChosen();
           }); 
-   
-        /*this.ancestryChoiceBox.getSelectionModel().selectedIndexProperty().addListener(
-            (ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
-                Ancestry ancestry = ancestryChoiceBox.getSelectionModel().getSelectedItem();
-                this.ancestryHitPoints.setText(String.valueOf(ancestry.getHitPoints()));
-          }); */
-      
+
+        this.ancestryFeatChoiceBox.setOnAction((event) -> {
+            if(this.ancestryFeatChoiceBox.getSelectionModel().getSelectedItem() != null){
+                this.ancestryFeatDescription.setText(this.ancestryFeatChoiceBox.getSelectionModel().getSelectedItem().getDescription());
+            }else{
+                this.ancestryFeatDescription.setText("Ancestry Feat Description");
+            }
+        });
+
+        this.heritageChoiceBox.setOnAction((event) -> {
+            if(this.heritageChoiceBox.getSelectionModel().getSelectedItem() != null){
+                this.heritageDescription.setText(this.heritageChoiceBox.getSelectionModel().getSelectedItem().getDescription());
+            }else{
+                this.heritageDescription.setText("Heritage Description");
+            }
+        });
+
         // Read background files
+
+        dir = new File("data/backgrounds");
+        files = dir.listFiles();
+        Arrays.sort(files);
+        if( files != null){
+            for(File file : files){
+                Background background = Background.fromFile(file);
+                backgrounds.add(background);
+            }
+        }
+
+        ObservableList<Background> obsBackgroundList = FXCollections.observableArrayList(backgrounds);
+        this.backgroundChoiceBox.setItems(obsBackgroundList);
+
+        this.backgroundChoiceBox.setOnAction((event) -> {
+            backgroundChosen();
+        });
+
         // Read class files
+
+        dir = new File("data/classes");
+        files = dir.listFiles();
+        Arrays.sort(files);
+        if( files != null){
+            for(File file : files){
+                PfClass pfClass = PfClass.fromFile(file);
+                pfClasses.add(pfClass);
+            }
+        }
+
+        ObservableList<PfClass> obsPfClassesList = FXCollections.observableArrayList(pfClasses);
+        this.classChoiceBox.setItems(obsPfClassesList);
+
+        this.classChoiceBox.setOnAction((event) -> {
+            classChosen();
+        });
         // Read skill files
         // Read item files
     }

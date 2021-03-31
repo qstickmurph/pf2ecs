@@ -1,19 +1,23 @@
 {
-  "type": "background",
-  "name": "laborer",
+  "name": "Laborer",
   "description": "You’ve spent years performing arduous physical labor. It was a difficult life, but you somehow survived. You may have embraced adventuring as an easier method to make your way in the world, or you might adventure under someone else’s command.",
-  "ability_boosts": [
+  "abilityBoosts": [
     "free",
-    [
-      "strength",
-      "constitution"
-    ]
+    "strength/constitution"
   ],
   "proficiencies":[
     "skills:athletics=t",
     "skills:lore_(labor)=t"
   ],
   "feats": [
-  "hefty_hauler"
+    {
+    	"name":"Hefty Hauler",
+    	"level": 1,
+    	"description": "You can carry more than your frame implies. Increase your maximum and encumbered Bulk limits by 2.",
+    	"traits":[
+          "General",
+          "Skill"    	
+    	]
+    }
   ]
 }

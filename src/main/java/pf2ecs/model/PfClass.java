@@ -2,6 +2,7 @@ package pf2ecs.model;
 
 import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.ArrayList;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -47,7 +48,10 @@ public class PfClass {
 	private HashSet<Subclass> subclasses;
 	
 	/** The features of the class */
-	private HashSet<Feat> features;
+	private ArrayList<Feat> features;
+
+	/** Wheter the class gets a feat at level 1 */
+    private boolean level1Feat;
 
 	/**  
      *  Empty Constructor Method
@@ -59,7 +63,7 @@ public class PfClass {
     	this.proficiencyBonuses = new Hashtable<>();
     	this.freeSkills = 0;
     	this.subclasses = new HashSet<>();
-    	this.features = new HashSet<>();
+    	this.features = new ArrayList<>();
     }
 
     /** 
@@ -135,7 +139,7 @@ public class PfClass {
      * Returns this.hitpoints
      *  @return this.hitpoints (int)
      */
-    public int getHitpoints(){
+    public int getHitPoints(){
         return this.hitpoints;
     }
 
@@ -143,7 +147,7 @@ public class PfClass {
      * Sets this.hitpoints
      * @param hitpoints (int)
      */
-    public void setHitpoints(int hitpoints){
+    public void setHitPoints(int hitpoints){
         this.hitpoints = hitpoints;
     }
     
@@ -171,6 +175,18 @@ public class PfClass {
 		return this.proficiencyBonuses;
 	}
 	
+    /**
+	 * Getter for this.proficiencyBonuses.
+	 * @return Returns this.proficiencyBonuses.
+	 */
+	public Proficiency getProficiencyBonus(String prof){
+        if(this.proficiencyBonuses.containsKey(prof)){
+            return this.proficiencyBonuses.get(prof);
+        }else {
+            return Proficiency.UNTRAINED;
+        }
+	}
+
 	/**
 	 * Setter for this.proficiencyBonuses.
 	 * @param proficiencyBonuses (Hashtable<String, Proficiency>)
@@ -249,15 +265,15 @@ public class PfClass {
 	 * Getter for this.features.
 	 * @return Returns this.features.
 	 */
-	public HashSet<Feat> getFeatures(){
+	public ArrayList<Feat> getFeatures(){
 		return this.features;
 	}
 
 	/**
 	 * Setter for this.features.
-	 * @param features (HashSet<Feat>)
+	 * @param features (ArrayList<Feat>)
 	 */
-	public void setFeatures(HashSet<Feat> features){
+	public void setFeatures(ArrayList<Feat> features){
 		this.features = features;
 	}
     
