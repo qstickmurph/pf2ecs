@@ -2,6 +2,7 @@ package pf2ecs.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -208,12 +209,21 @@ public class CharacterSheetController {
         // Add new
         File dir = new File("data/skills");
         File[] files = dir.listFiles();
+        Arrays.sort(files);
         if( files != null){
             for(File file : files){
+                int row = this.skillsGridPane.getRowCount() + 1;
                 Skill skill = Skill.fromFile(file);
                 Label label = new Label();
+                label.getStyleClass().add("label-white");
+                label.setText(skill.getKeyAbility().label);
+                this.skillsGridPane.add(label, 0, row);
+
+                label = new Label();
+                label.getStyleClass().add("clickable");
+                label.getStyleClass().add("label-white");
                 label.setText(skill.getName());
-                this.skillsGridPane.add(label, 1, this.skillsGridPane.getRowCount() + 1);
+                this.skillsGridPane.add(label, 1, row);
             }
         }
 

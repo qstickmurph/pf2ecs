@@ -2,7 +2,7 @@
   "type": "skill",
   "name": "Acrobatics",
   "description": "Acrobatics measures your ability to perform tasks requiring coordination and grace. When you use the Escape basic action, you can use your Acrobatics modifier instead of your unarmed attack modifier.",
-  "keyAbility": "dexterity",
+  "keyAbility": "DEX",
   "untrainedActions": [
     {
       "type": "action",

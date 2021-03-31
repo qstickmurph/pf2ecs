@@ -2,7 +2,7 @@
   "type": "skill",
   "name": "Thievery",
   "description": "You are trained in a particular set of skills favored by thieves and miscreants. ",
-  "key_ability": "dexterity",
+  "keyAbility": "DEX",
   "actions": [
     [
       "actions:skills:palm_an_object",

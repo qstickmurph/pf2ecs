@@ -2,7 +2,7 @@
   "type": "skill",
   "name": "Intimidation",
   "description": "You bend others to your will using threats.",
-  "key_ability": "charisma",
+  "keyAbility": "CHA",
   "actions": [
     [
       "actions:skills:coerce",

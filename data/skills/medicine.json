@@ -2,7 +2,7 @@
   "type": "skill",
   "name": "Medicine",
   "description": "You can patch up wounds and help people recover from diseases and poisons. Even if you’re untrained in Medicine, you can use it to Recall Knowledge.",
-  "key_ability": "wisdom",
+  "keyAbility": "WIS",
   "actions": [
     [
       "actions:skills:recall_knowledge",

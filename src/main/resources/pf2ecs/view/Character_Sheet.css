@@ -21,6 +21,10 @@
 }
 
 .label-white{
+    -fx-text-fill: white;
+}
+
+.label-white-bg{
     -fx-background-color: white;
 }
 

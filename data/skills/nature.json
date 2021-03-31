@@ -2,7 +2,7 @@
   "type": "skill",
   "name": "Nature",
   "description": "You know about the natural world, and you command and train animals and magical beasts. Even if you’re untrained in Nature, you can use it to Recall Knowledge (page 238).",
-  "key_ability": "wisdom",
+  "keyAbility": "WIS",
   "actions": [
     [
       "actions:skills:recall_knowledge",
