@@ -8,6 +8,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.event.ActionEvent;
 
 public class CharacterCreateController {
     @FXML
@@ -171,53 +172,48 @@ public class CharacterCreateController {
     @FXML
     private Label overviewHeritage;
 
-    @FXML
-    void abilityScoresTabSelected(ActionEvent event) {
+    void abilityScoresTabSelected() {
+
+    }
+
+    void ancestryTabSelection() {
+
+    }
+
+    void classFeaturesTabSelected() {
+
+    }
+
+    void classTabSelected() {
+
+    }
+
+    void descriptionTabSelected() {
+
+    }
+
+    void heritageBackgroundTabSelected() {
+
+    }
+
+    void notesTabSelected() {
+
+    }
+
+    void overviewTabSelected() {
+
+    }
+
+    void skillsTabSelected() {
+
+    }
+
+    void spellsTabSelected() {
 
     }
 
     @FXML
-    void ancestryTabSelection(ActionEvent event) {
-
-    }
-
-    @FXML
-    void classFeaturesTabSelected(ActionEvent event) {
-
-    }
-
-    @FXML
-    void classTabSelected(ActionEvent event) {
-
-    }
-
-    @FXML
-    void descriptionTabSelected(ActionEvent event) {
-
-    }
-
-    @FXML
-    void heritageBackgroundTabSelected(ActionEvent event) {
-
-    }
-
-    @FXML
-    void notesTabSelected(ActionEvent event) {
-
-    }
-
-    @FXML
-    void overviewTabSelected(ActionEvent event) {
-
-    }
-
-    @FXML
-    void skillsTabSelected(ActionEvent event) {
-
-    }
-
-    @FXML
-    void spellsTabSelected(ActionEvent event) {
+    void createCharacterButtonPressed(ActionEvent event) {
 
     }
 

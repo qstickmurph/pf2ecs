@@ -7,7 +7,6 @@
 }
 
 .feats-grid > * {
-    -fx-pref-height: USE_COMPUTED_SIZE;
 }
 
 .skills-grid > * {

@@ -68,6 +68,20 @@ public class BlankController{
 
     @FXML
     void newCharacterSheetMenuButtonPressed(ActionEvent event) {
+        try{
+            Stage stage = (Stage) image.getScene().getWindow();
+            
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/pf2ecs/view/Character_Create.fxml"));
+
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            stage.setTitle("Character Creator");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+        } catch( IOException e ){
+            e.printStackTrace();
+        }
 
     }
 

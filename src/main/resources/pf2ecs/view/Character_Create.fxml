@@ -15,9 +15,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@Character_Create.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@Character_Create.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pf2ecs.controller.CharacterCreateController">
   <tabs>
-    <Tab text="Ancestry">
+    <Tab fx:id="ancestryTab" text="Ancestry">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -63,7 +63,7 @@
                </children></AnchorPane>
       </content>
     </Tab>
-      <Tab text="Heritage/Background">
+      <Tab fx:id="heritageBackgroundTab" text="Heritage/Background">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -98,7 +98,7 @@
             </AnchorPane>
         </content>
       </Tab>
-      <Tab text="Class">
+      <Tab fx:id="classTab" text="Class">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -135,7 +135,7 @@
                </children></AnchorPane>
         </content>
       </Tab>
-      <Tab text="Class Features">
+      <Tab fx:id="classFeaturesTab" text="Class Features">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -164,7 +164,7 @@
                </children></AnchorPane>
         </content>
       </Tab>
-      <Tab text="Ability Scores">
+      <Tab fx:id="abilityScoresTab" text="Ability Scores">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -209,7 +209,7 @@
                </children></AnchorPane>
         </content>
       </Tab>
-      <Tab text="Skills">
+      <Tab fx:id="skillsTab" text="Skills">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -234,17 +234,17 @@
                </children></AnchorPane>
         </content>
       </Tab>
-      <Tab disable="true" text="Spells">
+      <Tab fx:id="spellsTab" disable="true" text="Spells">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
         </content>
       </Tab>
-      <Tab text="Equipment">
+      <Tab fx:id="equipmentTab" disable="true" text="Equipment">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
         </content>
       </Tab>
-      <Tab text="Description">
+      <Tab fx:id="descriptionTab" text="Description">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
@@ -259,17 +259,17 @@
                   <Label layoutX="14.0" layoutY="254.0" text="Skin:" />
                   <Label layoutX="14.0" layoutY="284.0" text="Eyes:" />
                   <Label layoutX="14.0" layoutY="314.0" text="Age:" />
-                  <TextField layoutX="171.0" layoutY="12.0" prefHeight="26.0" prefWidth="1100.0" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="10.0" />
-                  <TextField layoutX="138.0" layoutY="42.0" prefHeight="26.0" prefWidth="1100.0" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="10.0" />
-                  <TextField layoutX="70.0" layoutY="102.0" prefHeight="26.0" prefWidth="1100.0" AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="10.0" />
-                  <TextField layoutX="93.0" layoutY="132.0" prefHeight="26.0" prefWidth="1100.0" AnchorPane.leftAnchor="91.0" AnchorPane.rightAnchor="10.0" />
-                  <TextField layoutX="85.0" layoutY="162.0" prefHeight="26.0" prefWidth="1100.0" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="10.0" />
-                  <TextField layoutX="90.0" layoutY="192.0" prefHeight="26.0" prefWidth="1100.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="10.0" />
-                  <ChoiceBox layoutX="117.0" layoutY="72.0" minHeight="26.0" prefHeight="26.0" prefWidth="150.0" />
-                  <TextField layoutX="90.0" layoutY="222.0" prefHeight="26.0" prefWidth="1100.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="10.0" />
-                  <TextField layoutX="90.0" layoutY="252.0" prefHeight="26.0" prefWidth="1100.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="10.0" />
-                  <TextField layoutX="90.0" layoutY="282.0" prefHeight="26.0" prefWidth="1100.0" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="10.0" />
-                  <TextField layoutX="90.0" layoutY="312.0" prefHeight="26.0" prefWidth="1100.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="10.0" />
+                  <TextField fx:id="charactedName" layoutX="171.0" layoutY="12.0" prefHeight="26.0" prefWidth="1100.0" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="10.0" />
+                  <TextField fx:id="playerName" layoutX="138.0" layoutY="42.0" prefHeight="26.0" prefWidth="1100.0" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="10.0" />
+                  <TextField fx:id="diety" layoutX="70.0" layoutY="102.0" prefHeight="26.0" prefWidth="1100.0" AnchorPane.leftAnchor="73.0" AnchorPane.rightAnchor="10.0" />
+                  <TextField fx:id="gender" layoutX="93.0" layoutY="132.0" prefHeight="26.0" prefWidth="1100.0" AnchorPane.leftAnchor="91.0" AnchorPane.rightAnchor="10.0" />
+                  <TextField fx:id="height" layoutX="85.0" layoutY="162.0" prefHeight="26.0" prefWidth="1100.0" AnchorPane.leftAnchor="86.0" AnchorPane.rightAnchor="10.0" />
+                  <TextField fx:id="weight" layoutX="90.0" layoutY="192.0" prefHeight="26.0" prefWidth="1100.0" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="10.0" />
+                  <ChoiceBox fx:id="alignmentChoiceBox" layoutX="117.0" layoutY="72.0" minHeight="26.0" prefHeight="26.0" prefWidth="150.0" />
+                  <TextField fx:id="hair" layoutX="90.0" layoutY="222.0" prefHeight="26.0" prefWidth="1100.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="10.0" />
+                  <TextField fx:id="skin" layoutX="90.0" layoutY="252.0" prefHeight="26.0" prefWidth="1100.0" AnchorPane.leftAnchor="65.0" AnchorPane.rightAnchor="10.0" />
+                  <TextField fx:id="eyes" layoutX="90.0" layoutY="282.0" prefHeight="26.0" prefWidth="1100.0" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="10.0" />
+                  <TextField fx:id="age" layoutX="90.0" layoutY="312.0" prefHeight="26.0" prefWidth="1100.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="10.0" />
                   <GridPane layoutX="15.0" layoutY="352.0" prefHeight="334.0" prefWidth="1255.0">
                     <columnConstraints>
                       <ColumnConstraints halignment="RIGHT" hgrow="NEVER" minWidth="10.0" />
@@ -288,26 +288,26 @@
                         <Label text="Bonds:" GridPane.rowIndex="2" />
                         <Label text="Flaws:" GridPane.rowIndex="3" />
                         <Label text="Appearance Continued: " GridPane.rowIndex="4" />
-                        <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
-                        <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <TextArea fx:id="personalityTraits" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
+                        <TextArea fx:id="ideals" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextArea fx:id="bonds" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextArea fx:id="flaws" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextArea fx:id="appearanceContinued" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                      </children>
                   </GridPane>
                </children></AnchorPane>
         </content>
       </Tab>
-      <Tab text="Notes">
+      <Tab fx:id="notesTab" disable="true" text="Notes">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
         </content>
       </Tab>
-      <Tab text="Overview">
+      <Tab fx:id="overviewTab" text="Overview">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Button layoutX="1038.0" layoutY="598.0" mnemonicParsing="false" prefHeight="75.0" prefWidth="228.0" text="Create Character">
+                  <Button fx:id="createCharacterButton" layoutX="1038.0" layoutY="598.0" mnemonicParsing="false" onAction="#createCharacterButtonPressed" prefHeight="75.0" prefWidth="228.0" text="Create Character">
                      <font>
                         <Font size="22.0" />
                      </font>
@@ -333,7 +333,7 @@
                     </rowConstraints>
                      <children>
                         <Label text="Ability Scores: " GridPane.rowSpan="3" />
-                        <Label text="Hit Points: " GridPane.rowIndex="4" />
+                        <Label text="Hit Points: " GridPane.columnIndex="4" GridPane.rowIndex="4" />
                         <GridPane GridPane.columnIndex="1" GridPane.rowSpan="3">
                           <columnConstraints>
                             <ColumnConstraints halignment="RIGHT" hgrow="NEVER" />
@@ -389,21 +389,34 @@
                         <Label text="Skills: " GridPane.columnIndex="4" GridPane.rowSpan="3" />
                         <ScrollPane hbarPolicy="NEVER" prefHeight="200.0" prefWidth="200.0" vbarPolicy="ALWAYS" GridPane.columnIndex="5" GridPane.rowSpan="3">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="297.0" prefWidth="285.0">
+                            <AnchorPane minHeight="317.0" minWidth="273.0" prefWidth="273.0">
                                  <children>
-                                    <GridPane fx:id="overviewSkillsGrid" layoutX="13.0" layoutY="13.0" prefHeight="90.0" prefWidth="264.0">
+                                    <GridPane fx:id="overviewSkillsGrid" layoutX="13.0" layoutY="13.0" prefWidth="250.0" styleClass="skills-grid">
                                       <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                       </columnConstraints>
-                                      <rowConstraints>
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                      </rowConstraints>
                                     </GridPane>
                                  </children>
                               </AnchorPane>
                           </content>
                         </ScrollPane>
+                        <Label text="Class: " GridPane.rowIndex="4" />
+                        <Label text="Ancestry: " GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                        <Label text="Class Feat: " GridPane.rowIndex="5" />
+                        <Label text="Ancestry Feat: " GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                        <Label GridPane.rowIndex="6" />
+                        <Label text="Heritage: " GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                        <Label text="Background: " GridPane.rowIndex="6" />
+                        <Label text="Worth: " GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                        <Label fx:id="overviewHitPoints" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                        <Label fx:id="overviewWorth" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                        <Label fx:id="overviewClass" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Label fx:id="overviewAncestry" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                        <Label fx:id="overviewClassFeat" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <Label fx:id="overviewBackground" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <Label fx:id="overviewAncestryFeat" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                        <Label fx:id="overviewHeritage" GridPane.columnIndex="3" GridPane.rowIndex="6" />
                      </children>
                   </GridPane>
                </children></AnchorPane>
