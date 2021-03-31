@@ -1,6 +1,6 @@
 package pf2ecs.model;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.ArrayList;
 
@@ -27,48 +27,56 @@ public class Ancestry {
 
 	/** The name of the ancestry */
 	private String name;
+
+    /** The description of this ancestry */
+    private String description;
 	
 	/** The hitpoints of the ancestry */
 	private int hitpoints;
 	
 	/** The ability bonuses of the ancestry */
-	private ArrayList<String> abilityBonuses;
+	private ArrayList<String> abilityBoosts;
 	
 	/** The ability flaws of the ancestry */
 	private ArrayList<String> abilityFlaws;
 
 	/** The languages the ancestry knows */
-	private HashSet<String> languages;
+	private ArrayList<String> languages;
 	
 	/** The traits of the ancestry */
-	private HashSet<String> traits;
+	private ArrayList<String> traits;
 	
 	/** The features of the ancestry */
-	private HashSet<Feat> features;
+	private ArrayList<Feat> features;
 	
 	/** The heritages of the ancestry */
-	private HashSet<Heritage> heritages;
+	private ArrayList<Heritage> heritages;
 	
 	/** The feats of the ancestry */
-	private HashSet<Feat> feats;
+	private ArrayList<Feat> feats;
 	
 	/** The size of the ancestry */
 	private Size size;
+
+    /** The default speed of the ancestry */
+    private String speed;
 	
 	/** 
      *  Empty Constructor Method
      */
     public Ancestry(){
     	this.name = "";
+    	this.description = "";
     	this.hitpoints = 0;
-    	this.abilityBonuses = new ArrayList<>();
+    	this.abilityBoosts = new ArrayList<>();
     	this.abilityFlaws = new ArrayList<>();
-	    this.languages = new HashSet<>();
-    	this.traits = new HashSet<>();
-    	this.features = new HashSet<>();
-    	this.heritages = new HashSet<>();
-    	this.feats = new HashSet<>();
+	    this.languages = new ArrayList<>();
+    	this.traits = new ArrayList<>();
+    	this.features = new ArrayList<>();
+    	this.heritages = new ArrayList<>();
+    	this.feats = new ArrayList<>();
     	this.size = null;
+        this.speed = "0 ft";
     }
 
     /** 
@@ -140,6 +148,22 @@ public class Ancestry {
     public void setName(String name){
         this.name = name;
     }
+
+	/**
+	 * Getter for this.description.
+	 * @return Returns this.description
+	 */
+	public String getDescription(){
+		return this.description;
+	}
+
+	/**
+	 * Setter for this.description.
+	 * @param name Sets this.description to description 
+	 */
+	public void setDescription(String description){
+		this.description = description;
+	}
     
     /** 
      * Returns this.hitpoints
@@ -161,15 +185,15 @@ public class Ancestry {
 	 * Getter for this.traits.
 	 * @return Returns this.traits.
 	 */
-	public HashSet<String> getTraits(){
+	public ArrayList<String> getTraits(){
 		return this.traits;
 	}
 
 	/**
 	 * Setter for this.traits.
-	 * @param traits (HashSet<String>)
+	 * @param traits (ArrayList<String>)
 	 */
-	public void setTraits(HashSet<String> traits){
+	public void setTraits(ArrayList<String> traits){
 		this.traits = traits;
 	}
     
@@ -192,35 +216,35 @@ public class Ancestry {
     }
     
     /**
-	 * Getter for this.abilityBonuses.
-	 * @return Returns this.abilityBonuses.
+	 * Getter for this.abilityBoosts.
+	 * @return Returns this.abilityBoosts.
 	 */
-	public ArrayList<String> getAbilityBonuses(){
-		return this.abilityBonuses;
+	public ArrayList<String> getAbilityBoosts(){
+		return this.abilityBoosts;
 	}
 	
 	/**
-	 * Setter for this.abilityBonuses.
-	 * @param abilityBonuses (ArrayList<String>)
+	 * Setter for this.abilityBoosts.
+	 * @param abilityBoosts (ArrayList<String>)
 	 */
-	public void setAbilityBonuses(ArrayList<String> abilityBonuses){
-		this.abilityBonuses = abilityBonuses;
+	public void setAbilityBoosts(ArrayList<String> abilityBoosts){
+		this.abilityBoosts = abilityBoosts;
 	}
 	
 	/**
-	 * Adds ability and bonus to this.abilityBonuses.
+	 * Adds ability and bonus to this.abilityBoosts.
 	 * @param ability (Ability)
 	 */
     public void addAbilityBonus(String ability){
-    	this.abilityBonuses.add(ability);
+    	this.abilityBoosts.add(ability);
     }
 
 	/**
-	 * Removes bonus of an ability from this.abilityBonuses.
+	 * Removes bonus of an ability from this.abilityBoosts.
 	 * @param ability (String)
 	 */
     public void removeAbilityBonus(String ability){
-    	this.abilityBonuses.remove(ability);
+    	this.abilityBoosts.remove(ability);
     }
 
     /**
@@ -248,27 +272,60 @@ public class Ancestry {
     }
 
 	/**
-	 * Removes bonus of an ability from this.abilityBonuses.
+	 * Removes bonus of an ability from this.abilityBoosts.
 	 * @param ability (String)
 	 */
     public void removeAbilityFlaw(String ability){
     	this.abilityFlaws.remove(ability);
     }
+
+    /**
+	 * Getter for this.languages.
+	 * @return Returns this.features.
+	 */
+	public ArrayList<String> getLanguages(){
+		return this.languages;
+	}
+
+	/**
+	 * Setter for this.languages.
+	 * @param languages (ArrayList<String>)
+	 */
+	public void setLanguages(ArrayList<String> languages){
+		this.languages = languages;
+	}
     
+	/**
+	 * Adds feature to this.languages.
+	 * @param languages (String) 
+	 */
+    public void addLanguage(String language){
+        this.languages.add(language);
+    }
+
+	/**
+	 * Removes language from this.languages if present.
+	 * @param language (String)
+	 */
+    public void removeLanguage(String language){
+        if(this.languages.contains(language)){
+            this.languages.remove(language);
+        }
+    }
 
     /**
 	 * Getter for this.features.
 	 * @return Returns this.features.
 	 */
-	public HashSet<Feat> getFeatures(){
+	public ArrayList<Feat> getFeatures(){
 		return this.features;
 	}
 
 	/**
 	 * Setter for this.features.
-	 * @param features (HashSet<Feat>)
+	 * @param features (ArrayList<Feat>)
 	 */
-	public void setFeatures(HashSet<Feat> features){
+	public void setFeatures(ArrayList<Feat> features){
 		this.features = features;
 	}
     
@@ -294,15 +351,15 @@ public class Ancestry {
 	 * Getter for this.feats.
 	 * @return Returns this.feats.
 	 */
-	public HashSet<Feat> getFeats(){
+	public ArrayList<Feat> getFeats(){
 		return this.feats;
 	}
 
 	/**
 	 * Setter for this.feats.
-	 * @param feats (HashSet<Feat>)
+	 * @param feats (ArrayList<Feat>)
 	 */
-	public void setFeats(HashSet<Feat> feats){
+	public void setFeats(ArrayList<Feat> feats){
 		this.feats = feats;
 	}
     
@@ -328,15 +385,15 @@ public class Ancestry {
 	 * Getter for this.heritages.
 	 * @return Returns this.heritages.
 	 */
-	public HashSet<Heritage> getHeritages(){
+	public ArrayList<Heritage> getHeritages(){
 		return this.heritages;
 	}
 
 	/**
 	 * Setter for this.heritages.
-	 * @param heritages (HashSet<Heritage>)
+	 * @param heritages (ArrayList<Heritage>)
 	 */
-	public void setHeritages(HashSet<Heritage> heritages){
+	public void setHeritages(ArrayList<Heritage> heritages){
 		this.heritages = heritages;
 	}
     
@@ -373,6 +430,22 @@ public class Ancestry {
     public void setSize(Size size){
         this.size = size;
     }
+
+	/**
+	 * Getter for this.speed.
+	 * @return Returns this.speed.
+	 */
+	public String getSpeed(){
+		return this.speed;
+	}
+
+	/**
+	 * Setter for this.speed.
+	 * @param speed (String)
+	 */
+	public void setSpeed(String speed){
+		this.speed = speed;
+	}
     
     @Override
     public String toString(){

@@ -1,6 +1,7 @@
 {
   "type": "ancestry",
   "name": "Dwarf",
+  "description": "Dwarves have a well-earned reputation as a stoic and stern people, ensconced within citadels and cities carved from solid rock. While some see them as dour and humorless crafters of stone and metal, dwarves and those who have spent time among them understand their unbridled zeal for their work, caring far more about quality than quantity. To a stranger, they can seem untrusting and clannish, but to their friends and family, they are warm and caring, their halls filled with the sounds of laughter and hammers hitting anvils.",
   "hitpoints": 10,
   "size": "MEDIUM",
   "speed": "20 ft",
@@ -48,7 +49,7 @@
   "heritages": [
   {
     "type": "heritage",
-    "name": "ancient_blooded_dwarf",
+    "name": "Ancient Blooded Dwarf",
     "description":"Dwarven heroes of old could shrug off their enemies’ magic, and some of that resistance manifests in you. You gain the Call on Ancient Blood reaction.",
     "feat": {
     	"name":"Ancient Blooded Dwarf",
@@ -118,7 +119,7 @@
   "feats": [
     {
     "type": "feat",
-    "name": "dwarven_lore",
+    "name": "Dwarven Lore",
     "level": 1,
     "traits": [
       "Dwarf"
@@ -127,7 +128,7 @@
     },
     {
     "type": "feat",
-    "name": "dwarven_weapon_familiarity",
+    "name": "Dwarven Weapon Familiarity",
     "level": 1,
     "traits": [
       "Dwarf"
@@ -136,7 +137,7 @@
     },
     {
     "type": "feat",
-    "name": "rock_runner",
+    "name": "Rock Runner",
     "level": 1,
     "traits": [
       "Dwarf"
@@ -145,7 +146,7 @@
     },
     {
     "type": "feat",
-    "name": "stonecunning",
+    "name": "Stonecunning",
     "level": 1,
     "traits": [
       "Dwarf"
@@ -154,7 +155,7 @@
     },
     {
     "type": "feat",
-    "name": "unburdened_iron",
+    "name": "Unburdened Iron",
     "level": 1,
     "traits": [
       "Dwarf"
@@ -163,7 +164,7 @@
     },
     {
     "type": "feat",
-    "name": "vengeful_hatred",
+    "name": "Vengeful Hatred",
     "level": 1,
     "traits": [
       "Dwarf"
@@ -172,7 +173,7 @@
     },
     {
     "type": "feat",
-    "name": "boulder_roll",
+    "name": "Boulder Roll",
     "level": 5,
     "description": "Your dwarven build allows you to push foes around, just like a mighty boulder tumbles through a subterranean cavern. Take a Step into the square of a foe that is your size or smaller, and the foe must move into the empty space directly behind it. The foe must move even if doing so places it in harm’s way. The foe can attempt a Fortitude saving throw against your Athletics DC to block your Step. If the foe attempts this saving throw, unless it critically succeeds, it takes bludgeoning damage equal to your level plus your Strength modifier. If the foe can’t move into an empty space (if it is surrounded by solid objects or other creatures, for example), your Boulder Roll has no effect.",
     "traits": [
@@ -189,7 +190,7 @@
     },
     {
     "type": "feat",
-    "name": "dwarven_weapon_cunning",
+    "name": "Dwarven Weapon Cunning",
     "level": 5,
     "traits": [
       "Dwarf"
@@ -201,7 +202,7 @@
     },
     {
     "type": "feat",
-    "name": "mountains's_stoutness",
+    "name": "Mountains's Stoutness",
     "level": 9,
     "traits": [
       "Dwarf"
@@ -210,7 +211,7 @@
     },
     {
     "type": "feat",
-    "name": "stonewalker",
+    "name": "Stonewalker",
     "level": 9,
     "traits": [
       "Dwarf"
@@ -219,7 +220,7 @@
     },
     {
     "type": "feat",
-    "name": "dwarven_weapon_expertise",
+    "name": "Dwarven Weapon Expertise",
     "level": 13,
     "traits": [
       "Dwarf"

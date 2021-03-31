@@ -359,4 +359,9 @@ public class PfItem {
     public void setAcDexCap(int acDexCap){
         this.acDexCap = acDexCap;
     }
+
+    @Override
+    public String toString(){
+        return this.name;
+    }
 }

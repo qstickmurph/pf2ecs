@@ -223,4 +223,8 @@ public class Skill {
         }
     }
 
+    @Override
+    public String toString(){
+        return this.name;
+    }
 }

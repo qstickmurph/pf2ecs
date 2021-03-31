@@ -400,4 +400,9 @@ public class Feat {
             this.choices.remove(choice);
         }
     }
+    
+    @Override
+    public String toString(){
+        return this.name;
+    }
 }

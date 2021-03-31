@@ -1,5 +1,6 @@
 package pf2ecs.controller;
 
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -20,11 +21,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.beans.value.ObservableValue;
 
+import pf2ecs.model.Alignment;
 import pf2ecs.model.Ancestry;
 import pf2ecs.model.Background;
+import pf2ecs.model.Feat;
+import pf2ecs.model.Heritage;
 import pf2ecs.model.PfClass;
-import pf2ecs.model.Skill;
 import pf2ecs.model.PfItem;
+import pf2ecs.model.Skill;
 
 public class CharacterCreateController {
     @FXML
@@ -34,7 +38,7 @@ public class CharacterCreateController {
     @FXML
     private Label ancestryDescription;
     @FXML
-    private ChoiceBox<String> ancestryFeatChoiceBox;
+    private ChoiceBox<Feat> ancestryFeatChoiceBox;
     @FXML
     private Label ancestryFeatDescription;
     @FXML
@@ -56,11 +60,11 @@ public class CharacterCreateController {
     @FXML
     private Tab heritageBackgroundTab;
     @FXML
-    private ChoiceBox<String> heritageChoiceBox;
+    private ChoiceBox<Heritage> heritageChoiceBox;
     @FXML
     private Label heritageDescription;
     @FXML
-    private ChoiceBox<String> backgroundChoiceBox;
+    private ChoiceBox<Background> backgroundChoiceBox;
     @FXML
     private Label backgroundDescription;
     @FXML
@@ -86,7 +90,7 @@ public class CharacterCreateController {
     @FXML
     private GridPane classFeaturesGrid;
     @FXML
-    private ChoiceBox<String> classLevel1Feat;
+    private ChoiceBox<Feat> classLevel1Feat;
     @FXML
     private Label classLevel1FeatDescription;
     @FXML
@@ -124,7 +128,7 @@ public class CharacterCreateController {
     @FXML
     private TextField weight;
     @FXML
-    private ChoiceBox<?> alignmentChoiceBox;
+    private ChoiceBox<Alignment> alignmentChoiceBox;
     @FXML
     private TextField hair;
     @FXML
@@ -175,7 +179,7 @@ public class CharacterCreateController {
     private Label overviewHitPoints;
     @FXML
     private Label overviewWorth;
-    @FXML
+    @FXML 
     private Label overviewClass;
     @FXML
     private Label overviewAncestry;
@@ -241,7 +245,67 @@ public class CharacterCreateController {
     }
 
     private void ancestryChosen(){
+        Ancestry ancestry = ancestryChoiceBox.getSelectionModel().getSelectedItem();
         
+        this.ancestryDescription.setText(ancestry.getDescription());
+
+        this.ancestryHitPoints.setText(String.valueOf(ancestry.getHitPoints()));
+
+        this.ancestrySize.setText(ancestry.getSize().label);
+
+        this.ancestrySpeed.setText(ancestry.getSpeed());
+
+        String languages = "";
+        for (String language : ancestry.getLanguages()) {
+            languages += language.substring(0,1).toUpperCase() + language.substring(1) + ", ";
+        }
+        this.ancestryLanguages.setText(languages);
+    
+        String abilityBoosts = "";
+        for (String ability : ancestry.getAbilityBoosts()) {
+            abilityBoosts += ability.substring(0,1).toUpperCase() + ability.substring(1) + ", ";
+        }
+        abilityBoosts = abilityBoosts.substring(0, abilityBoosts.length() - 2);
+        this.ancestryAbilityBoosts.setText(abilityBoosts);
+
+        String abilityFlaws= "";
+        for (String ability : ancestry.getAbilityFlaws()) {
+            abilityFlaws += ability.substring(0,1).toUpperCase() + ability.substring(1) + ", ";
+        }
+        abilityFlaws= abilityFlaws.substring(0, abilityFlaws.length() - 2);
+        this.ancestryAbilityFlaws.setText(abilityFlaws);
+        
+        String traits= "";
+        for (String trait: ancestry.getTraits()) {
+            traits += trait.substring(0,1).toUpperCase() + trait.substring(1) + ", ";
+        }
+        traits = traits.substring(0, traits.length() - 2);
+        this.ancestryTraits.setText(traits);
+
+        String features = "";
+        for (Feat feature : ancestry.getFeatures()) {
+            String featureName = feature.getName();
+            features += featureName.substring(0,1).toUpperCase() + featureName.substring(1) + ", ";
+        }
+        this.ancestryFeatures.setText(features);
+        
+        ArrayList<Feat> ancestryFeats = new ArrayList<>();
+        for(Feat feat : ancestry.getFeats()){
+            if(feat.getLevel() == 1){
+                ancestryFeats.add(feat);
+            }
+        }
+        ObservableList<Feat> obsFeatsList = FXCollections.observableArrayList(ancestryFeats);
+        this.ancestryFeatChoiceBox.setItems(obsFeatsList);
+        
+        ArrayList<Heritage> ancestryHeritages = new ArrayList<>();
+        for(Heritage heritage : ancestry.getHeritages()){
+            ancestryHeritages.add(heritage);
+        }
+        ObservableList<Heritage> obsHeritageList = FXCollections.observableArrayList(ancestryHeritages);
+        this.heritageChoiceBox.setItems(obsHeritageList);
+
+
     }
 
     public void initialize(){
@@ -251,23 +315,25 @@ public class CharacterCreateController {
         this.skills = new ArrayList<>();
         this.items = new ArrayList<>();
         File dir;
-        File file;
+        File[] files;
 
         // Read ancestry files
 
-        file = new File("data/ancestries/dwarf.json");
-        ArrayList<String> ancestryNames = new ArrayList<>();
-        if(file != null){
-            Ancestry ancestry = Ancestry.fromFile(file);
-            ancestries.add(ancestry);
+        dir = new File("data/ancestries");
+        files = dir.listFiles();
+        Arrays.sort(files);
+        if( files != null){
+            for(File file : files){
+                Ancestry ancestry = Ancestry.fromFile(file);
+                ancestries.add(ancestry);
+            }
         }
         
         ObservableList<Ancestry> obsList = FXCollections.observableArrayList(ancestries);
         this.ancestryChoiceBox.setItems(obsList);
 
         this.ancestryChoiceBox.setOnAction((event) -> {
-                Ancestry ancestry = ancestryChoiceBox.getSelectionModel().getSelectedItem();
-                this.ancestryHitPoints.setText(String.valueOf(ancestry.getHitPoints()));
+            ancestryChosen();
           }); 
    
         /*this.ancestryChoiceBox.getSelectionModel().selectedIndexProperty().addListener(

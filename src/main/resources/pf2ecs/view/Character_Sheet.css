@@ -30,5 +30,5 @@
 }
 
 .skills-grid > * {
-    -fx-min-height: 30px;
+    -fx-min-height: 40px;
 }

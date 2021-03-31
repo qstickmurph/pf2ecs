@@ -228,4 +228,8 @@ public class Action {
 		this.description = description;
 	}
 
+    @Override
+    public String toString(){
+        return this.name;
+    }
 }

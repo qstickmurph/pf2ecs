@@ -199,4 +199,9 @@ public class Background {
     public void removeProficiencyBonus(String skill){
     	this.proficiencyBonuses.remove(skill);
     }
+    
+    @Override
+    public String toString(){
+        return this.name;
+    }
 }

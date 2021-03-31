@@ -278,4 +278,9 @@ public class PfClass {
             this.features.remove(feature);
         }
     }
+
+    @Override
+    public String toString(){
+        return this.name;
+    }
 }

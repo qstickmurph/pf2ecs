@@ -262,4 +262,9 @@ public class Rune {
     public void setFundamental(boolean fundamental) {
     	this.fundamental = fundamental;
     }
+
+    @Override
+    public String toString(){
+        return this.name;
+    }
 }
