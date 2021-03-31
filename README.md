@@ -13,3 +13,10 @@ In the "Releases" section, find the desired release and download the .zip file c
 ## RowdyHacks 2021
 
 This project was made in the collaboration of 4 people, Quinn Murphey, David Gellhausen, Jim Richmond, and Alexander Lomeli-Azoubel, for UTSA's annual hack-a-thon RowdyHacks. Everything that is a part of Release 0.1 was written over the span of 40 hours 8pm, March 26 to 12pm, March 28.
+
+## Credits
+Quinn Murphey - Lead Developer \
+David Gellhausen - Lead Developer \
+Jim Richmond - Data Organization \
+Alexander Lomeli-Azoubel - Initial GUI Design \
+Naail Ali - Graphic Design
