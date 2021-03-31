@@ -39,7 +39,7 @@ public class PfClass {
 	private Ability keyAbility;
 	
 	/** The proficiency bonuses of the class */
-	private Hashtable<String, Proficiency> proficiencyBonuses;
+	private Hashtable<String, Proficiency> proficiencies;
 	
 	/** The number of free skills of the class */
 	private int freeSkills;
@@ -60,7 +60,7 @@ public class PfClass {
         this.name = "";
         this.hitpoints = 0;
     	this.keyAbility = null;
-    	this.proficiencyBonuses = new Hashtable<>();
+    	this.proficiencies = new Hashtable<>();
     	this.freeSkills = 0;
     	this.subclasses = new HashSet<>();
     	this.features = new ArrayList<>();
@@ -168,47 +168,47 @@ public class PfClass {
     }
     
     /**
-	 * Getter for this.proficiencyBonuses.
-	 * @return Returns this.proficiencyBonuses.
+	 * Getter for this.proficiencies.
+	 * @return Returns this.proficiencies.
 	 */
-	public Hashtable<String, Proficiency> getProficiencyBonuses(){
-		return this.proficiencyBonuses;
+	public Hashtable<String, Proficiency> getProficiencies(){
+		return this.proficiencies;
 	}
 	
     /**
-	 * Getter for this.proficiencyBonuses.
-	 * @return Returns this.proficiencyBonuses.
+	 * Getter for this.proficiencies.
+	 * @return Returns this.proficiencies.
 	 */
-	public Proficiency getProficiencyBonus(String prof){
-        if(this.proficiencyBonuses.containsKey(prof)){
-            return this.proficiencyBonuses.get(prof);
+	public Proficiency getProficiency(String prof){
+        if(this.proficiencies.containsKey(prof)){
+            return this.proficiencies.get(prof);
         }else {
             return Proficiency.UNTRAINED;
         }
 	}
 
 	/**
-	 * Setter for this.proficiencyBonuses.
-	 * @param proficiencyBonuses (Hashtable<String, Proficiency>)
+	 * Setter for this.proficiencies.
+	 * @param proficiencies (Hashtable<String, Proficiency>)
 	 */
-	public void setProficiencyBonuses(Hashtable<String, Proficiency> proficiencyBonuses){
-		this.proficiencyBonuses = proficiencyBonuses;
+	public void setProficiencies(Hashtable<String, Proficiency> proficiencies){
+		this.proficiencies = proficiencies;
 	}
 	
 	/**
-	 * Adds proficiency and bonus to this.proficiencyBonuses.
+	 * Adds proficiency and bonus to this.proficiencies.
 	 * @param skill (String) bonus (Proficiency)
 	 */
-    public void addProficiencyBonus(String skill, Proficiency bonus){
-    	this.proficiencyBonuses.put(skill, bonus);
+    public void addProficiency(String skill, Proficiency bonus){
+    	this.proficiencies.put(skill, bonus);
     }
 
 	/**
-	 * Removes proficiency bonus of an skill from this.proficiencyBonuses.
+	 * Removes proficiency bonus of an skill from this.proficiencies.
 	 * @param skill (String)
 	 */
-    public void removeProficiencyBonus(String skill){
-    	this.proficiencyBonuses.remove(skill);
+    public void removeProficiency(String skill){
+    	this.proficiencies.remove(skill);
     }
     
     /** 

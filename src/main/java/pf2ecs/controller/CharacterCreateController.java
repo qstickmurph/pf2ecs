@@ -338,7 +338,36 @@ public class CharacterCreateController {
     }
 
     private void backgroundChosen(){
+        Background background = backgroundChoiceBox.getSelectionModel().getSelectedItem();
+        if( background == null )
+            return;
 
+        this.backgroundDescription.setText(background.getDescription());
+
+        String abilityBoosts = "";
+        for (String ability : background.getAbilityBoosts()) {
+            abilityBoosts += ability.substring(0,1).toUpperCase() + ability.substring(1) + ", ";
+        }
+        this.backgroundAbilityBoosts.setText(abilityBoosts.substring(0, abilityBoosts.length() - 2));
+
+        String skills = "";
+        Enumeration enu = background.getProficiencies().keys();
+        while( enu.hasMoreElements() ){
+            String proficiency = (String) enu.nextElement();
+            String[] split = proficiency.split(":");
+            if(  split[0].equals("skills") ){
+                if( split[1].equals("lore") ){
+                    skills += background.getProficiency(proficiency).label + " in " + split[2].substring(0,1).toUpperCase() + split[2].substring(1) + " " + split[1].substring(0,1).toUpperCase() + split[1].substring(1) + ", ";
+                }else{
+                    skills += background.getProficiency(proficiency).label + " in " + split[1].substring(0,1).toUpperCase() + split[1].substring(1) + ", ";
+                }
+            }
+        }
+        this.backgroundProficiencies.setText(skills.substring(0, skills.length() - 2));
+
+        this.backgroundFeat.setText(background.getFeat().getName());
+
+        this.backgroundFeatDescription.setText(background.getFeat().getDescription());
     }
 
 
@@ -351,30 +380,30 @@ public class CharacterCreateController {
 
         this.classHitPoints.setText(String.valueOf(pfClass.getHitPoints()));
 
-        this.classPerception.setText(pfClass.getProficiencyBonus("saving_throws:perception").label);
-        this.classFortitude.setText(pfClass.getProficiencyBonus("saving_throws:fortitude").label);
-        this.classReflex.setText(pfClass.getProficiencyBonus("saving_throws:reflex").label);
-        this.classWill.setText(pfClass.getProficiencyBonus("saving_throws:will").label);
+        this.classPerception.setText(pfClass.getProficiency("saving_throws:perception").label);
+        this.classFortitude.setText(pfClass.getProficiency("saving_throws:fortitude").label);
+        this.classReflex.setText(pfClass.getProficiency("saving_throws:reflex").label);
+        this.classWill.setText(pfClass.getProficiency("saving_throws:will").label);
 
         String skills = "";
-        Enumeration enu = pfClass.getProficiencyBonuses().keys();
+        Enumeration enu = pfClass.getProficiencies().keys();
         while( enu.hasMoreElements() ){
             String proficiency = (String) enu.nextElement();
             String[] split = proficiency.split(":");
             if(  split[0].equals("skills") ){
-                skills += pfClass.getProficiencyBonus(proficiency).label + " in " + split[1] + ", ";
+                skills += pfClass.getProficiency(proficiency).label + " in " + split[1].substring(0,1).toUpperCase() + split[1].substring(1) + ", ";
             }
         }
         this.classSkills.setText(skills.substring(0, skills.length() - 2));
 
-        this.classUnarmedAttacks.setText(pfClass.getProficiencyBonus("attacks:unarmed_attacks").label);
-        this.classSimpleWeapons.setText(pfClass.getProficiencyBonus("attacks:simple_weapons").label);
-        this.classMartialWeapons.setText(pfClass.getProficiencyBonus("attacks:matrial_weapons").label);
-        this.classUnarmoredDefense.setText(pfClass.getProficiencyBonus("armor:unarmored_defense").label);
-        this.classLightArmor.setText(pfClass.getProficiencyBonus("armor:light_armor").label);
-        this.classMediumArmor.setText(pfClass.getProficiencyBonus("armor:medium_armor").label);
-        this.classHeavyArmor.setText(pfClass.getProficiencyBonus("armor:heavy_armor").label);
-        this.classClassDC.setText(pfClass.getProficiencyBonus("class_dc").label);
+        this.classUnarmedAttacks.setText(pfClass.getProficiency("attacks:unarmed_attacks").label);
+        this.classSimpleWeapons.setText(pfClass.getProficiency("attacks:simple_weapons").label);
+        this.classMartialWeapons.setText(pfClass.getProficiency("attacks:matrial_weapons").label);
+        this.classUnarmoredDefense.setText(pfClass.getProficiency("armor:unarmored_defense").label);
+        this.classLightArmor.setText(pfClass.getProficiency("armor:light_armor").label);
+        this.classMediumArmor.setText(pfClass.getProficiency("armor:medium_armor").label);
+        this.classHeavyArmor.setText(pfClass.getProficiency("armor:heavy_armor").label);
+        this.classClassDC.setText(pfClass.getProficiency("class_dc").label);
     }
 
     public void initialize(){

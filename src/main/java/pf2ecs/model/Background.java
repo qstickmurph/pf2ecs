@@ -17,6 +17,7 @@ import com.google.gson.JsonParseException;
 
 import pf2ecs.model.Ability;
 import pf2ecs.model.Proficiency;
+import pf2ecs.model.Feat;
 
 /** The Background class holds all the information about character background including its description, ability bonuses, and proficiency bonuses
 *
@@ -35,10 +36,12 @@ public class Background {
 	private String description;
 	
 	/** The ability bonuses of the background */
-	private ArrayList<String> abilityBonuses;
+	private ArrayList<String> abilityBoosts;
 	
 	/** The proficiency bonuses of the background */
-	private Hashtable<String, Proficiency> proficiencyBonuses;
+	private Hashtable<String, Proficiency> proficiencies;
+
+    private Feat feat;
 	
 	/** 
      *  Empty Constructor Method
@@ -46,12 +49,13 @@ public class Background {
     public Background(){
     	this.name = "";
         this.description = "";
-        this.abilityBonuses = new ArrayList<>();
-        this.proficiencyBonuses = new Hashtable<>();
+        this.abilityBoosts = new ArrayList<>();
+        this.proficiencies = new Hashtable<>();
+        this.feat = new Feat();
     }
 
     /** 
-     * Reads a json file containing a feat and creates that Feat
+     * Reads a json file containing a background and creates that Background 
      *
      */
     public static Background fromFile(File file){
@@ -137,67 +141,93 @@ public class Background {
 	}
 	
 	/**
-	 * Getter for this.abilityBonuses.
-	 * @return Returns this.abilityBonuses.
+	 * Getter for this.abilityBoosts.
+	 * @return Returns this.abilityBoosts.
 	 */
-	public ArrayList<String> getAbilityBonuses(){
-		return this.abilityBonuses;
+	public ArrayList<String> getAbilityBoosts(){
+		return this.abilityBoosts;
 	}
 	
 	/**
-	 * Setter for this.abilityBonuses.
-	 * @param abilityBonuses (ArrayList<String>)
+	 * Setter for this.abilityBoosts.
+	 * @param abilityBoosts (ArrayList<String>)
 	 */
-	public void setAbilityBonuses(ArrayList<String> abilityBonuses){
-		this.abilityBonuses = abilityBonuses;
+	public void setAbilityBoosts(ArrayList<String> abilityBoosts){
+		this.abilityBoosts = abilityBoosts;
 	}
 	
 	/**
-	 * Adds ability and bonus to this.abilityBonuses.
+	 * Adds ability and bonus to this.abilityBoosts.
 	 * @param ability (Ability)
 	 */
     public void addAbilityBonus(String ability){
-    	this.abilityBonuses.add(ability);
+    	this.abilityBoosts.add(ability);
     }
 
 	/**
-	 * Removes bonus of an ability from this.abilityBonuses.
+	 * Removes bonus of an ability from this.abilityBoosts.
 	 * @param ability (String)
 	 */
     public void removeAbilityBonus(String ability){
-    	this.abilityBonuses.remove(ability);
+    	this.abilityBoosts.remove(ability);
     }
     
     /**
-	 * Getter for this.proficiencyBonuses.
-	 * @return Returns this.proficiencyBonuses.
+	 * Getter for this.proficiencies.
+	 * @return Returns this.proficiencies.
 	 */
-	public Hashtable<String, Proficiency> getProficiencyBonuses(){
-		return this.proficiencyBonuses;
+	public Hashtable<String, Proficiency> getProficiencies(){
+		return this.proficiencies;
+	}
+    
+    /**
+	 * Getter for this.proficiencies.
+	 * @return Returns this.proficiencies.
+	 */
+	public Proficiency getProficiency(String prof){
+        if(this.proficiencies.containsKey(prof)){
+            return this.proficiencies.get(prof);
+        }else {
+            return Proficiency.UNTRAINED;
+        }
+	}
+	/**
+	 * Setter for this.proficiencies.
+	 * @param proficiencies (Hashtable<String, Proficiency>)
+	 */
+	public void setProficiencies(Hashtable<String, Proficiency> proficiencies){
+		this.proficiencies = proficiencies;
 	}
 	
 	/**
-	 * Setter for this.proficiencyBonuses.
-	 * @param proficiencyBonuses (Hashtable<String, Proficiency>)
-	 */
-	public void setProficiencyBonuses(Hashtable<String, Proficiency> proficiencyBonuses){
-		this.proficiencyBonuses = proficiencyBonuses;
-	}
-	
-	/**
-	 * Adds proficiency and bonus to this.proficiencyBonuses.
+	 * Adds proficiency and bonus to this.proficiencies.
 	 * @param skill (String) bonus (Proficiency)
 	 */
     public void addProficiencyBonus(String skill, Proficiency bonus){
-    	this.proficiencyBonuses.put(skill, bonus);
+    	this.proficiencies.put(skill, bonus);
     }
 
 	/**
-	 * Removes proficiency bonus of an skill from this.proficiencyBonuses.
+	 * Removes proficiency bonus of an skill from this.proficiencies.
 	 * @param skill (String)
 	 */
     public void removeProficiencyBonus(String skill){
-    	this.proficiencyBonuses.remove(skill);
+    	this.proficiencies.remove(skill);
+    }
+    
+    /**
+     * Getter for this.feat
+     */
+    public Feat getFeat(){
+        return this.feat;
+    }
+    
+    /**
+     * Setter for this.feat
+     * @param feat (Feat)
+     */
+    public void setFeat(Feat feat){
+        this.feat = feat;
     }
     
     @Override

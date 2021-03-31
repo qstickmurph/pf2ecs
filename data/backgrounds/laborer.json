@@ -5,10 +5,10 @@
     "free",
     "strength/constitution"
   ],
-  "proficiencies":[
-    "skills:athletics=t",
-    "skills:lore_(labor)=t"
-  ],
+  "proficiencies":{
+    "skills:athletics": "TRAINED",
+    "skills:lore:labor": "TRAINED"
+  },
   "feats": [
     {
     	"name":"Hefty Hauler",

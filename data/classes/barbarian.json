@@ -4,7 +4,7 @@
     
     "keyAbility": "STR",
     
-    "proficiencyBonuses": {
+    "proficiencies": {
       "saving_throws:fortitude": "EXPERT",
       "saving_throws:reflex": "TRAINED",
       "saving_throws:will": "EXPERT",
