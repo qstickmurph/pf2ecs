@@ -15,7 +15,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-/** The Ancestry class holds all the information about character ancestry including its hitpoints, attribute bonuses, and more.
+/** The Ancestry class holds all the information about character ancestry including its hitpoints, ability bonuses, and more.
 *
 * @author Quinn Murphey
 * @author David Gellhausen
@@ -31,9 +31,12 @@ public class Ancestry {
 	/** The hitpoints of the ancestry */
 	private int hitpoints;
 	
-	/** The attribute bonuses of the ancestry */
-	private Hashtable<Ability, Integer> attributeBonuses;
+	/** The ability bonuses of the ancestry */
+	private ArrayList<Ability> abilityBonuses;
 	
+	/** The ability flaws of the ancestry */
+	private ArrayList<Ability> abilityFlaws;
+
 	/** The traits of the ancestry */
 	private HashSet<String> traits;
 	
@@ -55,7 +58,8 @@ public class Ancestry {
     public Ancestry(){
     	this.name = "";
     	this.hitpoints = 0;
-    	this.attributeBonuses = new Hashtable<>();
+    	this.abilityBonuses = new ArrayList<>();
+    	this.abilityFlaws = new ArrayList<>();
     	this.traits = new HashSet<>();
     	this.features = new HashSet<>();
     	this.heritages = new HashSet<>();
@@ -184,37 +188,70 @@ public class Ancestry {
     }
     
     /**
-	 * Getter for this.attributeBonuses.
-	 * @return Returns this.attributeBonuses.
+	 * Getter for this.abilityBonuses.
+	 * @return Returns this.abilityBonuses.
 	 */
-	public Hashtable<Ability, Integer> getAbilityBonuses(){
-		return this.attributeBonuses;
+	public ArrayList<Ability> getAbilityBonuses(){
+		return this.abilityBonuses;
 	}
 	
 	/**
-	 * Setter for this.attributeBonuses.
-	 * @param attributeBonuses (Hashtable<Ability, Integer>)
+	 * Setter for this.abilityBonuses.
+	 * @param abilityBonuses (ArrayList<Ability>)
 	 */
-	public void setAbilityBonuses(Hashtable<Ability, Integer> attributeBonuses){
-		this.attributeBonuses = attributeBonuses;
+	public void setAbilityBonuses(ArrayList<Ability> abilityBonuses){
+		this.abilityBonuses = abilityBonuses;
 	}
 	
 	/**
-	 * Adds attribute and bonus to this.attributeBonuses.
-	 * @param attribute (Ability) bonus (Integer)
+	 * Adds ability and bonus to this.abilityBonuses.
+	 * @param ability (Ability)
 	 */
-    public void addAtributeBonus(Ability attribute, Integer bonus){
-    	this.attributeBonuses.put(attribute, bonus);
+    public void addAbilityBonus(Ability ability){
+    	this.abilityBonuses.add(ability);
     }
 
 	/**
-	 * Removes bonus of an attribute from this.attributeBonuses.
-	 * @param attribute (Ability)
+	 * Removes bonus of an ability from this.abilityBonuses.
+	 * @param ability (Ability)
 	 */
-    public void removeAbilityBonus(Ability attribute){
-    	this.attributeBonuses.remove(attribute);
+    public void removeAbilityBonus(Ability ability){
+    	this.abilityBonuses.remove(ability);
+    }
+
+    /**
+	 * Getter for this.abilityFlaws.
+	 * @return Returns this.abilityFlaws.
+	 */
+	public ArrayList<Ability> getAbilityFlaws(){
+		return this.abilityFlaws;
+	}
+	
+	/**
+	 * Setter for this.abilityFlaws.
+	 * @param abilityFlaws (ArrayList<Ability>)
+	 */
+	public void setAbilityFlaws(ArrayList<Ability> abilityFlaws){
+		this.abilityFlaws = abilityFlaws;
+	}
+	
+	/**
+	 * Adds ability and bonus to this.abilityFlaws.
+	 * @param ability (Ability)
+	 */
+    public void addAbilityFlaw(Ability ability){
+    	this.abilityFlaws.add(ability);
+    }
+
+	/**
+	 * Removes bonus of an ability from this.abilityBonuses.
+	 * @param ability (Ability)
+	 */
+    public void removeAbilityFlaw(Ability ability){
+    	this.abilityFlaws.remove(ability);
     }
     
+
     /**
 	 * Getter for this.features.
 	 * @return Returns this.features.
