@@ -1,6 +1,6 @@
 {
   "type": "skill",
-  "name": "crafting",
+  "name": "Crafting",
   "description": "You can use this skill to create and repair items. Even if you’re untrained, you can Recall Knowledge.",
   "key_ability": "intelligence",
   "actions": [

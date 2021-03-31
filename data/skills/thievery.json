@@ -1,6 +1,6 @@
 {
   "type": "skill",
-  "name": "thievery",
+  "name": "Thievery",
   "description": "You are trained in a particular set of skills favored by thieves and miscreants. ",
   "key_ability": "dexterity",
   "actions": [

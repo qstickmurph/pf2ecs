@@ -23,3 +23,7 @@
 .label-white{
     -fx-background-color: white;
 }
+
+.skills-grid > * {
+    -fx-min-height: 30px;
+}

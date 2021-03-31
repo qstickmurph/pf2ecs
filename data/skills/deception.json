@@ -1,6 +1,6 @@
 {
   "type": "skill",
-  "name": "deception",
+  "name": "Deception",
   "description": "You can trick and mislead others using disguises, lies, andother forms of subterfuge.",
   "key_ability": "charisma",
   "actions": [

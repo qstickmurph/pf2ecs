@@ -1,6 +1,6 @@
 {
   "type": "skill",
-  "name": "occultism",
+  "name": "Occultism",
   "description": "You know a great deal about ancient philosophies, esoteric lore, obscure mysticism, and supernatural creatures. Even if you’re untrained in Occultism, you can use it to Recall Knowledge.",
   "key_ability": "intelligence",
   "actions": [

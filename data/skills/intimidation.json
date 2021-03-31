@@ -1,6 +1,6 @@
 {
   "type": "skill",
-  "name": "intimidation",
+  "name": "Intimidation",
   "description": "You bend others to your will using threats.",
   "key_ability": "charisma",
   "actions": [

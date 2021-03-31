@@ -10,11 +10,12 @@ public class Main extends Application{
     @Override
     public void start(Stage stage) throws Exception{
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("view/Character_Sheet.fxml"));
-            //Parent root = FXMLLoader.load(getClass().getResource("view/character_create/Ancestry.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/pf2ecs/view/Blank.fxml"));
+            Parent root = loader.load();
+            
             Scene scene = new Scene(root);
             stage.setTitle("Pathfinder 2e Character Sheet");
-            //scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+            stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
         } catch(Exception e) {

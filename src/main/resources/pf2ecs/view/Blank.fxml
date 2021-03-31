@@ -8,29 +8,37 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="595.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="595.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pf2ecs.controller.BlankController">
    <children>
       <MenuBar prefHeight="29.0" prefWidth="1200.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+                  <Menu mnemonicParsing="false" text="New...">
+                    <items>
+                      <MenuItem fx:id="newCharacterSheetMenuButton" mnemonicParsing="false" onAction="#newCharacterSheetMenuButtonPressed" text="Character Sheet" />
+                    </items>
+                  </Menu>
+              <MenuItem fx:id="openMenuButton" mnemonicParsing="false" onAction="#openMenuButtonPressed" text="Open" />
+                  <MenuItem fx:id="saveMenuButton" mnemonicParsing="false" onAction="#saveMenuButtonPressed" text="Save" />
+                  <MenuItem fx:id="quitMenuButton" mnemonicParsing="false" onAction="#quitMenuButtonPressed" text="Quit" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem fx:id="editCharaterMenuButton" mnemonicParsing="false" onAction="#editCharaterMenuButtonPressed" text="Edit Character" />
+                  <MenuItem fx:id="levelUpMenuButton" mnemonicParsing="false" onAction="#levelUpMenuButtonPressed" text="Level Up" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Help">
+          <Menu fx:id="aboutMenuButton" mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem fx:id="aboutMenuButton" mnemonicParsing="false" onAction="#aboutMenuButtonPressed" text="About" />
+                  <MenuItem fx:id="gitHubMenuButton" mnemonicParsing="false" onAction="#gitHubMenuButtonPressed" text="GitHub" />
             </items>
           </Menu>
         </menus>
       </MenuBar>
-      <ImageView fitHeight="964.0" fitWidth="1198.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="image" fitHeight="964.0" fitWidth="1198.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@pf2ecs_Logo.png" />
          </image>

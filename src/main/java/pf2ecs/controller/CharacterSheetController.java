@@ -1,6 +1,7 @@
 package pf2ecs.controller;
 
 import java.io.File;
+import java.io.IOException;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -20,9 +21,9 @@ import pf2ecs.model.CharacterSheet;
 import pf2ecs.model.Ability;
 import pf2ecs.model.Alignment;
 import pf2ecs.model.Size;
+import pf2ecs.model.Skill;
 
 public class CharacterSheetController {
-
     @FXML
     private MenuBar menuBar;
     @FXML
@@ -108,7 +109,7 @@ public class CharacterSheetController {
     @FXML
     private AnchorPane skillsAnchorPane;
     @FXML
-    private GridPane skillsGtidPane;
+    private GridPane skillsGridPane;
     @FXML
     private Label languagesLabel;
     @FXML
@@ -194,6 +195,32 @@ public class CharacterSheetController {
         File file = fileChooser.showSaveDialog(menuBar.getScene().getWindow());
         if(file != null)
             this.characterSheet.save(file);
+    }
+
+    public void fillGrids(){
+        // Skills
+        
+        // Clear old
+        while(skillsGridPane.getRowConstraints().size() > 0){
+            skillsGridPane.getRowConstraints().remove(0);
+        }
+        
+        // Add new
+        File dir = new File("data/skills");
+        File[] files = dir.listFiles();
+        if( files != null){
+            for(File file : files){
+                Skill skill = Skill.fromFile(file);
+                Label label = new Label();
+                label.setText(skill.getName());
+                this.skillsGridPane.add(label, 1, this.skillsGridPane.getRowCount() + 1);
+            }
+        }
+
+        // Actions
+        // Feats
+        // Spells
+        //
     }
 
     public void updateFields(){
@@ -391,11 +418,17 @@ public class CharacterSheetController {
             
     }
 
+    public void setCharacterSheet(CharacterSheet cs){
+        this.characterSheet = cs;
+    }
+
+    public CharacterSheetController(CharacterSheet characterSheet){
+        this.characterSheet = characterSheet;
+    }
+
     // called by FXMLLoader to initialize the controller
     public void initialize(){
-        characterSheet = new CharacterSheet();
-        
-        // Initialize label and textField values
+        this.fillGrids();
         this.updateFields();
     }
 }

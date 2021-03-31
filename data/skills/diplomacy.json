@@ -1,6 +1,6 @@
 {
   "type": "skill",
-  "name": "diplomacy",
+  "name": "Diplomacy",
   "description": "You influence others through negotiation and flattery.",
   "key_ability": "charisma",
   "actions": [
