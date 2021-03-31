@@ -1,5 +1,12 @@
 package pf2ecs.controller;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.io.File;
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -9,16 +16,25 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.event.ActionEvent;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.beans.value.ObservableValue;
+
+import pf2ecs.model.Ancestry;
+import pf2ecs.model.Background;
+import pf2ecs.model.PfClass;
+import pf2ecs.model.Skill;
+import pf2ecs.model.PfItem;
 
 public class CharacterCreateController {
     @FXML
     private Tab ancestryTab;
     @FXML
-    private ChoiceBox<?> ancestryChoiceBox;
+    private ChoiceBox<Ancestry> ancestryChoiceBox;
     @FXML
     private Label ancestryDescription;
     @FXML
-    private ChoiceBox<?> ancestryFeatChoiceBox;
+    private ChoiceBox<String> ancestryFeatChoiceBox;
     @FXML
     private Label ancestryFeatDescription;
     @FXML
@@ -40,11 +56,11 @@ public class CharacterCreateController {
     @FXML
     private Tab heritageBackgroundTab;
     @FXML
-    private ChoiceBox<?> heritageChoiceBox;
+    private ChoiceBox<String> heritageChoiceBox;
     @FXML
     private Label heritageDescription;
     @FXML
-    private ChoiceBox<?> backgroundChoiceBox;
+    private ChoiceBox<String> backgroundChoiceBox;
     @FXML
     private Label backgroundDescription;
     @FXML
@@ -58,7 +74,7 @@ public class CharacterCreateController {
     @FXML
     private Tab classTab;
     @FXML
-    private ChoiceBox<?> classChoiceBox;
+    private ChoiceBox<String> classChoiceBox;
     @FXML
     private Label classDescription;
     @FXML
@@ -70,7 +86,7 @@ public class CharacterCreateController {
     @FXML
     private GridPane classFeaturesGrid;
     @FXML
-    private ChoiceBox<?> classLevel1Feat;
+    private ChoiceBox<String> classLevel1Feat;
     @FXML
     private Label classLevel1FeatDescription;
     @FXML
@@ -172,6 +188,13 @@ public class CharacterCreateController {
     @FXML
     private Label overviewHeritage;
 
+    // Non FXML variables
+    private ArrayList<Ancestry> ancestries;
+    private ArrayList<Background> backgrounds;
+    private ArrayList<PfClass> classes;
+    private ArrayList<Skill> skills;
+    private ArrayList<PfItem> items;
+
     void abilityScoresTabSelected() {
 
     }
@@ -217,5 +240,46 @@ public class CharacterCreateController {
 
     }
 
+    private void ancestryChosen(){
+        
+    }
+
+    public void initialize(){
+        this.ancestries = new ArrayList<>();
+        this.backgrounds = new ArrayList<>();
+        this.classes = new ArrayList<>();
+        this.skills = new ArrayList<>();
+        this.items = new ArrayList<>();
+        File dir;
+        File file;
+
+        // Read ancestry files
+
+        file = new File("data/ancestries/dwarf.json");
+        ArrayList<String> ancestryNames = new ArrayList<>();
+        if(file != null){
+            Ancestry ancestry = Ancestry.fromFile(file);
+            ancestries.add(ancestry);
+        }
+        
+        ObservableList<Ancestry> obsList = FXCollections.observableArrayList(ancestries);
+        this.ancestryChoiceBox.setItems(obsList);
+
+        this.ancestryChoiceBox.setOnAction((event) -> {
+                Ancestry ancestry = ancestryChoiceBox.getSelectionModel().getSelectedItem();
+                this.ancestryHitPoints.setText(String.valueOf(ancestry.getHitPoints()));
+          }); 
+   
+        /*this.ancestryChoiceBox.getSelectionModel().selectedIndexProperty().addListener(
+            (ObservableValue<? extends Number> ov, Number old_val, Number new_val) -> {
+                Ancestry ancestry = ancestryChoiceBox.getSelectionModel().getSelectedItem();
+                this.ancestryHitPoints.setText(String.valueOf(ancestry.getHitPoints()));
+          }); */
+      
+        // Read background files
+        // Read class files
+        // Read skill files
+        // Read item files
+    }
 }
 

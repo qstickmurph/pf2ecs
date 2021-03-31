@@ -18,7 +18,7 @@ import com.google.gson.JsonParseException;
 import pf2ecs.model.Ability;
 import pf2ecs.model.Proficiency;
 
-/** The Background class holds all the information about character background including its description, attribute bonuses, and proficiency bonuses
+/** The Background class holds all the information about character background including its description, ability bonuses, and proficiency bonuses
 *
 * @author Quinn Murphey
 * @author David Gellhausen
@@ -34,8 +34,8 @@ public class Background {
 	/** The description of the background */
 	private String description;
 	
-	/** The attribute bonuses of the background */
-	private Hashtable<Ability, Integer> attributeBonuses;
+	/** The ability bonuses of the background */
+	private ArrayList<String> abilityBonuses;
 	
 	/** The proficiency bonuses of the background */
 	private Hashtable<String, Proficiency> proficiencyBonuses;
@@ -46,7 +46,7 @@ public class Background {
     public Background(){
     	this.name = "";
         this.description = "";
-        this.attributeBonuses = new Hashtable<>();
+        this.abilityBonuses = new ArrayList<>();
         this.proficiencyBonuses = new Hashtable<>();
     }
 
@@ -137,35 +137,35 @@ public class Background {
 	}
 	
 	/**
-	 * Getter for this.attributeBonuses.
-	 * @return Returns this.attributeBonuses.
+	 * Getter for this.abilityBonuses.
+	 * @return Returns this.abilityBonuses.
 	 */
-	public Hashtable<Ability, Integer> getAbilityBonuses(){
-		return this.attributeBonuses;
+	public ArrayList<String> getAbilityBonuses(){
+		return this.abilityBonuses;
 	}
 	
 	/**
-	 * Setter for this.attributeBonuses.
-	 * @param attributeBonuses (Hashtable<Ability, Integer>)
+	 * Setter for this.abilityBonuses.
+	 * @param abilityBonuses (ArrayList<String>)
 	 */
-	public void setAbilityBonuses(Hashtable<Ability, Integer> attributeBonuses){
-		this.attributeBonuses = attributeBonuses;
+	public void setAbilityBonuses(ArrayList<String> abilityBonuses){
+		this.abilityBonuses = abilityBonuses;
 	}
 	
 	/**
-	 * Adds attribute and bonus to this.attributeBonuses.
-	 * @param attribute (Ability) bonus (Integer)
+	 * Adds ability and bonus to this.abilityBonuses.
+	 * @param ability (Ability)
 	 */
-    public void addAtributeBonus(Ability attribute, Integer bonus){
-    	this.attributeBonuses.put(attribute, bonus);
+    public void addAbilityBonus(String ability){
+    	this.abilityBonuses.add(ability);
     }
 
 	/**
-	 * Removes bonus of an attribute from this.attributeBonuses.
-	 * @param attribute (Ability)
+	 * Removes bonus of an ability from this.abilityBonuses.
+	 * @param ability (String)
 	 */
-    public void removeAbilityBonus(Ability attribute){
-    	this.attributeBonuses.remove(attribute);
+    public void removeAbilityBonus(String ability){
+    	this.abilityBonuses.remove(ability);
     }
     
     /**

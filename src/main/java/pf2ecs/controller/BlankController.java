@@ -123,7 +123,6 @@ public class BlankController{
     }
 
     public void initialize(){
-
     }
 
 }

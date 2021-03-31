@@ -1,17 +1,19 @@
 {
   "type": "ancestry",
-  "name": "elf",
-  "hitpoints": "6",
-  "size": "medium",
+  "name": "Elf",
+  "hitpoints": 6,
+  "size": "MEDIUM",
   "speed": "30 ft",
     
-  "ability_boosts": [
+  "abilityBoosts": [
    "dexterity",
    "intelligence",
    "free"
  ],
  
- "ability_flaw": "constitution",
+ "abilityFlaws": [
+   "constitution"
+   ],
  "languages": [
     "common",
     "elven"
@@ -53,7 +55,7 @@
    "description": "You’re adapted to life in the forest or the deep jungle, and you know how to climb trees and use foliage to your advantage. When Climbing trees, vines, and other foliage, you move at half your Speed on a success and at full Speed on a critical success (and you move at full Speed on a success if you have Quick Climb). This doesn’t affect you if you’re using a climb Speed. You can always use the Take Cover action when you are within forest terrain to gain cover, even if you’re not next to an obstacle you can Take Cover behind."
   }
   ],
-  "ancestry_feats": [
+  "feats": [
     {
     "type": "feat",
     "name": "ancestral_longevity",
