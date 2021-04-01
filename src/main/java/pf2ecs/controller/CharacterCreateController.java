@@ -24,6 +24,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.beans.value.ObservableValue;
 
+import pf2ecs.model.Ability;
 import pf2ecs.model.Alignment;
 import pf2ecs.model.Ancestry;
 import pf2ecs.model.Background;
@@ -285,9 +286,9 @@ public class CharacterCreateController {
         // Place all other first level class features 
         for( Feat feat : pfClass.getFeatures() ){
             if(feat.getLevel() <= 1){
-                if( feat.getChoices().isEmpty() ){
                     this.classFeaturesGrid.getRowConstraints().add(expandingRowConstraints);
                     int row = this.classFeaturesGrid.getRowCount();
+                if( feat.getChoices().isEmpty() ){
                     Label label = new Label();
                     label.setText(feat.getName() + ": ");
                     this.classFeaturesGrid.add(label, 0, row);
@@ -297,6 +298,20 @@ public class CharacterCreateController {
                     label.setText(feat.getDescription());
                     this.classFeaturesGrid.add(label, 1, row);
                 } else{
+                    ChoiceBox<Feat> featChoiceBox = new ChoiceBox<>();
+                    Label label = new Label();
+
+                    this.classFeaturesGrid.add(featChoiceBox, 0, row);
+                    this.classFeaturesGrid.add(label, 1, row);
+
+                    ObservableList<Feat> obsChoiceList = FXCollections.observableArrayList(feat.getChoices());
+                    featChoiceBox.setItems(obsChoiceList);
+
+                    featChoiceBox.setOnAction((event) -> {
+                        Feat choice = featChoiceBox.getSelectionModel().getSelectedItem();
+                        if( choice != null )
+                            label.setText(choice.getDescription());
+                    });
                 }
             }
         }
@@ -306,9 +321,9 @@ public class CharacterCreateController {
         if( subclass != null ){
             for( Feat feat : subclass.getFeatures() ){
                 if(feat.getLevel() <= 1){
+                    this.classFeaturesGrid.getRowConstraints().add(expandingRowConstraints);
+                    int row = this.classFeaturesGrid.getRowCount();
                     if( feat.getChoices().isEmpty() ){
-                        this.classFeaturesGrid.getRowConstraints().add(expandingRowConstraints);
-                        int row = this.classFeaturesGrid.getRowCount();
                         Label label = new Label();
                         label.setText(feat.getName() + ": ");
                         this.classFeaturesGrid.add(label, 0, row);
@@ -318,7 +333,20 @@ public class CharacterCreateController {
                         label.getStyleClass().add("description");
                         this.classFeaturesGrid.add(label, 1, row);
                     } else{
-                        ChoiceBox<Feat> featChoiceBox = new ChoiceBox<>(); /***************************************************************/
+                        ChoiceBox<Feat> featChoiceBox = new ChoiceBox<>();
+                        Label label = new Label();
+
+                        this.classFeaturesGrid.add(featChoiceBox, 0, row);
+                        this.classFeaturesGrid.add(label, 1, row);
+
+                        ObservableList<Feat> obsChoiceList = FXCollections.observableArrayList(feat.getChoices());
+                        featChoiceBox.setItems(obsChoiceList);
+
+                        featChoiceBox.setOnAction((event) -> {
+                            Feat choice = featChoiceBox.getSelectionModel().getSelectedItem();
+                            if( choice != null )
+                                label.setText(choice.getDescription());
+                        });
                     }
                 }
             }
@@ -371,7 +399,7 @@ public class CharacterCreateController {
             features += featureName.substring(0,1).toUpperCase() + featureName.substring(1) + ", ";
         }
         this.ancestryFeatures.setText(features);
-        
+       
         ArrayList<Feat> ancestryFeats = new ArrayList<>();
         for(Feat feat : ancestry.getFeats()){
             if(feat.getLevel() == 1){
@@ -388,6 +416,43 @@ public class CharacterCreateController {
         }
         ObservableList<Heritage> obsHeritageList = FXCollections.observableArrayList(ancestryHeritages);
         this.heritageChoiceBox.setItems(obsHeritageList);
+
+        // Update ability scores tab
+        ArrayList<String> abilities = ancestry.getAbilityBoosts();
+        int col = 1;
+        for( String ability : abilities ){
+            if( col > 5 )
+                break;
+            ChoiceBox<Ability> abilityChoiceBox = new ChoiceBox<Ability>();
+            this.abilityBoostsGrid.add(abilityChoiceBox, col, 0);
+            ArrayList<Ability> abilityList = new ArrayList<>();
+            for( String substring : ability.split("/") ){
+                abilityList.add(Ability.toAbility(substring));
+            }
+            ObservableList<Ability> obsAbilityList = FXCollections.observableArrayList(abilityList);
+            abilityChoiceBox.setItems(obsAbilityList);
+            if( abilityList.size() == 1 )
+                abilityChoiceBox.getSelectionModel().selectFirst();
+            col += 1;
+        }
+        abilities = ancestry.getAbilityFlaws();
+        col = 1;
+        for( String ability : abilities ){
+            if( col > 5 )
+                break;
+            ChoiceBox<Ability> abilityChoiceBox = new ChoiceBox<Ability>();
+            this.abilityBoostsGrid.add(abilityChoiceBox, col, 1);
+            ArrayList<Ability> abilityList = new ArrayList<>();
+            for( String substring : ability.split("/") ){
+                abilityList.add(Ability.toAbility(substring));
+            }
+            ObservableList<Ability> obsAbilityList = FXCollections.observableArrayList(abilityList);
+            abilityChoiceBox.setItems(obsAbilityList);
+            if( abilityList.size() == 1 )
+                abilityChoiceBox.getSelectionModel().selectFirst();
+
+            col += 1;
+        }
 
         this.heritageBackgroundTab.setDisable(false);
     }
@@ -424,6 +489,8 @@ public class CharacterCreateController {
 
         this.backgroundFeatDescription.setText(background.getFeat().getDescription());
 
+        this.classTab.setDisable(false);
+
     }
 
     private void classChosen(){
@@ -455,8 +522,7 @@ public class CharacterCreateController {
             String[] split = proficiency.split(":");
             if(  split[0].equals("skills") ){
                 skills += pfClass.getProficiency(proficiency).label + " in " + split[1].substring(0,1).toUpperCase() + split[1].substring(1) + ", ";
-            }
-        }
+            } }
         this.classSkills.setText(skills.substring(0, skills.length() - 2));
 
         this.classUnarmedAttacks.setText(pfClass.getProficiency("attacks:unarmed_attacks").label);
@@ -476,6 +542,8 @@ public class CharacterCreateController {
         this.classClassDC.setText(pfClass.getProficiency("class_dc").label);
 
         this.updateClassFeatures();       
+
+
 
         // Enable subclass tab if applicable, else enable class_features tab
         if( pfClass.hasSubclass() ){
@@ -497,6 +565,7 @@ public class CharacterCreateController {
         }else {
             this.subclassTab.setDisable(true);
             this.classFeaturesTab.setDisable(false);
+            this.abilityScoresTab.setDisable(false);
         }
     }
 
@@ -504,15 +573,16 @@ public class CharacterCreateController {
         Subclass subclass = subclassChoiceBox.getSelectionModel().getSelectedItem();
         if( subclass == null )
             return;
-
+        
+        // Update description of subclass
         this.subclassDescription.setText(subclass.getDescription());
 
+        // Update class features to include subclass features
         this.updateClassFeatures();       
-
-         
 
         // Undisable class features tab
         this.classFeaturesTab.setDisable(false);
+        this.abilityScoresTab.setDisable(false);
     }
 
 
