@@ -4,6 +4,7 @@
 
 .description {
     -fx-alignment: TOP_LEFT;
+    -fx-wrap-text: true;
 }
 
 .feats-grid > * {

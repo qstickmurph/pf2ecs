@@ -32,6 +32,9 @@ public class PfClass {
 	/** The name of the class */
 	private String name;
 	
+	/** The name of the class */
+	private String description;
+	
 	/** The hitpoints of the class */
 	private int hitpoints;
 	
@@ -67,6 +70,7 @@ public class PfClass {
      */
     public PfClass(){
         this.name = "";
+        this.description = "";
         this.hitpoints = 0;
     	this.keyAbility = null;
     	this.proficiencies = new Hashtable<>();
@@ -145,6 +149,22 @@ public class PfClass {
      */
     public void setName(String name){
         this.name = name;
+    }
+    
+    /** 
+     * Returns this.description
+     *  @return this.description (String)
+     */
+    public String getDescription(){
+        return this.description;
+    }
+
+    /** 
+     * Sets this.description
+     * @param description (String)
+     */
+    public void setDescription(String description){
+        this.description = description;
     }
     
     /** 

@@ -222,7 +222,7 @@
                            <children>
                               <GridPane fx:id="classFeaturesGrid" layoutX="15.0" layoutY="50.0" minWidth="1232.0" prefWidth="1232.0" styleClass="feats-grid" AnchorPane.topAnchor="50.0">
                                 <columnConstraints>
-                                  <ColumnConstraints halignment="RIGHT" hgrow="NEVER" maxWidth="610.0" minWidth="10.0" />
+                                  <ColumnConstraints halignment="RIGHT" hgrow="NEVER" maxWidth="610.0" minWidth="-Infinity" />
                                   <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
                                 </columnConstraints>
                               </GridPane>

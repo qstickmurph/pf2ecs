@@ -160,7 +160,11 @@
                      <top>
                         <Pane prefHeight="37.0" prefWidth="353.0" style="-fx-background-color: #002664;" BorderPane.alignment="CENTER">
                            <children>
-                              <Label layoutX="4.0" layoutY="6.0" prefHeight="16.0" prefWidth="346.0" styleClass="label-white" text="Ability Scores" textAlignment="CENTER" textFill="WHITE" />
+                              <Label layoutX="4.0" layoutY="6.0" prefHeight="16.0" prefWidth="346.0" text="Ability Scores" textAlignment="CENTER" textFill="WHITE">
+                                 <styleClass>
+                                    <String fx:value="label-white" />
+                                    <String fx:value="sub-title" />
+                                 </styleClass></Label>
                            </children>
                         </Pane>
                      </top>
@@ -169,7 +173,11 @@
                      <top>
                         <Pane prefHeight="37.0" prefWidth="353.0" style="-fx-background-color: #002664;" BorderPane.alignment="CENTER">
                            <children>
-                              <Label fx:id="classDcLabel" layoutX="4.0" layoutY="6.0" prefHeight="16.0" prefWidth="346.0" styleClass="label-white" text="Class DC" textAlignment="CENTER" textFill="WHITE" underline="true" />
+                              <Label fx:id="classDcLabel" layoutX="4.0" layoutY="6.0" prefHeight="16.0" prefWidth="346.0" text="Class DC" textAlignment="CENTER" textFill="WHITE" underline="true">
+                                 <styleClass>
+                                    <String fx:value="label-white" />
+                                    <String fx:value="sub-title" />
+                                 </styleClass></Label>
                            </children>
                         </Pane>
                      </top>
@@ -232,7 +240,11 @@
                      <top>
                         <Pane prefHeight="37.0" prefWidth="353.0" style="-fx-background-color: #002664;" BorderPane.alignment="CENTER">
                            <children>
-                              <Label fx:id="savingThrowsLabel" layoutX="4.0" layoutY="6.0" prefHeight="16.0" prefWidth="346.0" styleClass="sub-title" text="Saving Throws" textAlignment="CENTER" textFill="WHITE" />
+                              <Label fx:id="savingThrowsLabel" layoutX="4.0" layoutY="6.0" prefHeight="16.0" prefWidth="346.0" text="Saving Throws" textAlignment="CENTER" textFill="WHITE">
+                                 <styleClass>
+                                    <String fx:value="sub-title" />
+                                    <String fx:value="label-white" />
+                                 </styleClass></Label>
                            </children>
                         </Pane>
                      </top>
@@ -271,7 +283,11 @@
                      <top>
                         <Pane prefHeight="37.0" prefWidth="353.0" style="-fx-background-color: #002664;" BorderPane.alignment="CENTER">
                            <children>
-                              <Label fx:id="languagesLabel" layoutX="4.0" layoutY="6.0" prefHeight="26.0" prefWidth="537.0" styleClass="label-white" text="Languages" textFill="WHITE" underline="true" />
+                              <Label fx:id="languagesLabel" layoutX="4.0" layoutY="6.0" prefHeight="26.0" prefWidth="537.0" text="Languages" textFill="WHITE" underline="true">
+                                 <styleClass>
+                                    <String fx:value="label-white" />
+                                    <String fx:value="sub-title" />
+                                 </styleClass></Label>
                            </children>
                         </Pane>
                      </top>
@@ -287,7 +303,11 @@
                      <top>
                         <Pane prefHeight="37.0" prefWidth="353.0" style="-fx-background-color: #002664;" BorderPane.alignment="CENTER">
                            <children>
-                              <Label layoutX="4.0" layoutY="6.0" prefHeight="26.0" prefWidth="266.0" styleClass="label-white" text="Hit Points" textAlignment="CENTER" textFill="WHITE" />
+                              <Label layoutX="4.0" layoutY="6.0" prefHeight="26.0" prefWidth="266.0" text="Hit Points" textAlignment="CENTER" textFill="WHITE">
+                                 <styleClass>
+                                    <String fx:value="label-white" />
+                                    <String fx:value="sub-title" />
+                                 </styleClass></Label>
                            </children>
                         </Pane>
                      </top>
@@ -331,19 +351,18 @@
                      <top>
                         <Pane prefHeight="37.0" prefWidth="353.0" style="-fx-background-color: #002664;" BorderPane.alignment="CENTER">
                            <children>
-                              <Label layoutX="4.0" layoutY="6.0" prefHeight="26.0" prefWidth="266.0" styleClass="label-white" text="Speed" textAlignment="CENTER" textFill="WHITE" />
+                              <Label layoutX="4.0" layoutY="6.0" prefHeight="26.0" prefWidth="266.0" text="Speed" textAlignment="CENTER" textFill="WHITE">
+                                 <styleClass>
+                                    <String fx:value="label-white" />
+                                    <String fx:value="sub-title" />
+                                 </styleClass></Label>
                            </children>
                         </Pane>
                      </top>
                      <center>
                         <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #98513d;" BorderPane.alignment="CENTER">
                            <children>
-                              <Label fx:id="speed" layoutX="71.0" layoutY="4.0" prefHeight="21.0" prefWidth="78.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="30" wrapText="true" />
-                              <Label fx:id="feetLabel" layoutX="153.0" layoutY="6.0" prefHeight="21.0" prefWidth="48.0" styleClass="label-white" text="Feet" textAlignment="RIGHT" textFill="WHITE">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font>
-                              </Label>
+                              <Label fx:id="speed" layoutX="62.0" layoutY="4.0" prefHeight="26.0" prefWidth="148.0" style="-fx-font-size: 22; -fx-background-color: white; -fx-alignment: center;" text="30" wrapText="true" />
                               <Label layoutX="5.0" layoutY="32.0" prefHeight="21.0" prefWidth="251.0" styleClass="label-white" text="Movement Types &amp; Notes" textAlignment="RIGHT" textFill="WHITE">
                                  <font>
                                     <Font size="12.0" />
@@ -358,7 +377,11 @@
                      <top>
                         <Pane prefHeight="37.0" prefWidth="353.0" style="-fx-background-color: #002664;" BorderPane.alignment="CENTER">
                            <children>
-                              <Label layoutX="4.0" layoutY="6.0" prefHeight="26.0" prefWidth="266.0" styleClass="label-white" text="Death" textAlignment="CENTER" textFill="WHITE" />
+                              <Label layoutX="4.0" layoutY="6.0" prefHeight="26.0" prefWidth="266.0" text="Death" textAlignment="CENTER" textFill="WHITE">
+                                 <styleClass>
+                                    <String fx:value="label-white" />
+                                    <String fx:value="sub-title" />
+                                 </styleClass></Label>
                            </children>
                         </Pane>
                      </top>
@@ -413,7 +436,7 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <TextArea fx:id="resistances" layoutX="5.0" layoutY="22.0" prefHeight="100.0" prefWidth="262.0" wrapText="true" />
+                              <TextArea fx:id="resistances" layoutX="5.0" layoutY="21.0" prefHeight="100.0" prefWidth="262.0" wrapText="true" />
                               <TextArea fx:id="immunities" layoutX="4.0" layoutY="139.0" prefHeight="97.0" prefWidth="263.0" />
                            </children>
                         </Pane>
@@ -423,7 +446,11 @@
                      <top>
                         <Pane prefHeight="37.0" prefWidth="353.0" style="-fx-background-color: #002664;" BorderPane.alignment="CENTER">
                            <children>
-                              <Label fx:id="conditionsLabel" layoutX="3.0" layoutY="6.0" prefHeight="26.0" prefWidth="266.0" styleClass="label-white" text="Conditions" textAlignment="CENTER" textFill="WHITE" underline="true" />
+                              <Label fx:id="conditionsLabel" layoutX="3.0" layoutY="6.0" prefHeight="26.0" prefWidth="266.0" text="Conditions" textAlignment="CENTER" textFill="WHITE" underline="true">
+                                 <styleClass>
+                                    <String fx:value="label-white" />
+                                    <String fx:value="sub-title" />
+                                 </styleClass></Label>
                            </children>
                         </Pane>
                      </top>

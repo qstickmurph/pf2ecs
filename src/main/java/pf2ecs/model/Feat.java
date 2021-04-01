@@ -1,5 +1,6 @@
 package pf2ecs.model;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Hashtable;
 
@@ -57,7 +58,7 @@ public class Feat {
     private HashSet<Action> actions;
 
     /** The possible feat choices of this feat */
-    private HashSet<Feat> choices;
+    private ArrayList<Feat> choices;
 
     /** The Spells the feat give */
 //    private HashSet<Spell> spells = new HashSet<Spells>;
@@ -78,7 +79,7 @@ public class Feat {
         this.attributeBonuses = new Hashtable<>();
         this.proficiencyBonuses = new Hashtable<>();
         this.actions = new HashSet<>();
-        this.choices = new HashSet<>();
+        this.choices = new ArrayList<>();
     }
  
     /** 
@@ -372,14 +373,14 @@ public class Feat {
 	 * Getter for this.choices.
 	 * @return Returns this.choices
 	 */
-	public HashSet<Feat> getChoices(){
+	public ArrayList<Feat> getChoices(){
 		return this.choices;
 	}
 
 	/**
 	 * Setter for this.choices.
 	 * @param choices Sets this.choices to choices*/
-	public void setChoices(HashSet<Feat> choices){
+	public void setChoices(ArrayList<Feat> choices){
 		this.choices = choices;
 	}
 

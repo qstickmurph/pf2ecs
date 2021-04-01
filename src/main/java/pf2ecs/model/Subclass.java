@@ -1,6 +1,6 @@
 package pf2ecs.model;
 
-import java.util.HashSet;
+import java.util.ArrayList;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -13,7 +13,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-/** The Subclass class holds all the information about subclass including its description and feats.
+/** The Subclass class holds all the information about subclass including its description and features.
 *
 * @author Quinn Murphey
 * @author David Gellhausen
@@ -22,15 +22,14 @@ import com.google.gson.JsonParseException;
 * @since 03/26/2021
 */
 public class Subclass {
-
 	/** The name of the subclass */
 	private String name;
 	
 	/** The description of the subclass */
 	private String description;
 	
-	/** The feats of the subclass */
-	private HashSet<Feat> feats;
+	/** The features of the subclass */
+	private ArrayList<Feat> features;
 	
 	/** 
      * Constructor Method
@@ -38,7 +37,7 @@ public class Subclass {
     public Subclass(){
         this.name = "";
         this.description = "";
-	    this.feats = new HashSet<>();
+	    this.features = new ArrayList<>();
     }
 
     /** 
@@ -127,36 +126,36 @@ public class Subclass {
 	}
 	
 	/**
-	 * Getter for this.feats.
-	 * @return Returns this.feats.
+	 * Getter for this.features.
+	 * @return Returns this.features.
 	 */
-	public HashSet<Feat> getFeats(){
-		return this.feats;
+	public ArrayList<Feat> getFeatures(){
+		return this.features;
 	}
 
 	/**
-	 * Setter for this.feats.
-	 * @param feats (HashSet<Feat>)
+	 * Setter for this.features.
+	 * @param features (ArrayList<Feat>)
 	 */
-	public void setFeats(HashSet<Feat> feats){
-		this.feats = feats;
+	public void setFeatures(ArrayList<Feat> features){
+		this.features = features;
 	}
     
 	/**
 	 * Adds feat to this.features.
 	 * @param feat (Feat) 
 	 */
-    public void addFeats(Feat feat){
-        this.feats.add(feat);
+    public void addFeatures(Feat feat){
+        this.features.add(feat);
     }
 
 	/**
-	 * Removes feat from this.feats if present.
+	 * Removes feat from this.features if present.
 	 * @param feat (Feat)
 	 */
     public void removeFeat(Feat feat){
-        if(this.feats.contains(feat)){
-            this.feats.remove(feat);
+        if(this.features.contains(feat)){
+            this.features.remove(feat);
         }
     }
     

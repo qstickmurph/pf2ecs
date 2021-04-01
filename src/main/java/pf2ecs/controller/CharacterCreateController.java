@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Control;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
@@ -17,6 +18,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.event.ActionEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -229,6 +231,7 @@ public class CharacterCreateController {
     // Non FXML javafx nodes
     private ChoiceBox<Feat> classLevel1Feat = new ChoiceBox<>();;
     private Label classLevel1FeatDescription = new Label();
+    private RowConstraints expandingRowConstraints = new RowConstraints();
 
     // Non FXML variables
     private ArrayList<Ancestry> ancestries;
@@ -245,6 +248,81 @@ public class CharacterCreateController {
     @FXML
     void createCharacterButtonPressed(ActionEvent event) {
 
+    }
+
+    private void updateClassFeatures(){
+        PfClass pfClass = classChoiceBox.getSelectionModel().getSelectedItem();
+        if(pfClass == null)
+            return;
+
+        this.classFeaturesGrid.setVgap(15);
+        // Clear grid
+        while(classFeaturesGrid.getRowConstraints().size() > 0){
+            this.classFeaturesGrid.getRowConstraints().remove(0);
+        }
+        this.classFeaturesGrid.getChildren().clear();
+
+        // Place level 1 feat if applicable
+        if( pfClass.level1Feat ){
+            this.classFeaturesGrid.getRowConstraints().add(expandingRowConstraints);
+            this.classFeaturesGrid.add(this.classLevel1Feat, 0, 0);
+            this.classLevel1FeatDescription.getStyleClass().add("description");
+            this.classFeaturesGrid.add(this.classLevel1FeatDescription, 1, 0);
+            ArrayList<Feat> featsList = new ArrayList<>();
+            for( Feat feat : pfClass.getFeats() ){
+                if( feat.getLevel() <= 1 ){
+                    featsList.add(feat);
+                }
+            }
+            ObservableList<Feat> obsFeatsList = FXCollections.observableArrayList(featsList);
+            this.classLevel1Feat.setItems(obsFeatsList);
+
+            this.classLevel1Feat.setOnAction((event) -> {
+                classLevel1FeatChosen();
+            }); 
+        }
+    
+        // Place all other first level class features 
+        for( Feat feat : pfClass.getFeatures() ){
+            if(feat.getLevel() <= 1){
+                if( feat.getChoices().isEmpty() ){
+                    this.classFeaturesGrid.getRowConstraints().add(expandingRowConstraints);
+                    int row = this.classFeaturesGrid.getRowCount();
+                    Label label = new Label();
+                    label.setText(feat.getName() + ": ");
+                    this.classFeaturesGrid.add(label, 0, row);
+
+                    label = new Label();
+                    label.getStyleClass().add("description");
+                    label.setText(feat.getDescription());
+                    this.classFeaturesGrid.add(label, 1, row);
+                } else{
+                }
+            }
+        }
+
+        // Place first level subclass feats
+        Subclass subclass = subclassChoiceBox.getSelectionModel().getSelectedItem();
+        if( subclass != null ){
+            for( Feat feat : subclass.getFeatures() ){
+                if(feat.getLevel() <= 1){
+                    if( feat.getChoices().isEmpty() ){
+                        this.classFeaturesGrid.getRowConstraints().add(expandingRowConstraints);
+                        int row = this.classFeaturesGrid.getRowCount();
+                        Label label = new Label();
+                        label.setText(feat.getName() + ": ");
+                        this.classFeaturesGrid.add(label, 0, row);
+
+                        label = new Label();
+                        label.setText(feat.getDescription());
+                        label.getStyleClass().add("description");
+                        this.classFeaturesGrid.add(label, 1, row);
+                    } else{
+                        ChoiceBox<Feat> featChoiceBox = new ChoiceBox<>(); /***************************************************************/
+                    }
+                }
+            }
+        }
     }
 
     private void ancestryChosen(){
@@ -354,6 +432,7 @@ public class CharacterCreateController {
             return;
 
         // Fill labels with class information
+        this.classDescription.setText(pfClass.getDescription());
 
         this.classKeyAbility.setText(pfClass.getKeyAbility().label);
 
@@ -396,43 +475,7 @@ public class CharacterCreateController {
 
         this.classClassDC.setText(pfClass.getProficiency("class_dc").label);
 
-        // Place feats in grid
-        // Clear grid
-        while(classFeaturesGrid.getRowConstraints().size() > 0){
-            classFeaturesGrid.getRowConstraints().remove(0);
-        }
-
-        // Place level 1 feat if applicable
-        if(pfClass.level1Feat){
-            this.classFeaturesGrid.add(this.classLevel1Feat, 0, 0);
-            this.classFeaturesGrid.add(this.classLevel1FeatDescription, 1, 0);
-            ArrayList<Feat> featsList = new ArrayList<>();
-            for( Feat feat : pfClass.getFeats() ){
-                if( feat.getLevel() <= 1 ){
-                    featsList.add(feat);
-                }
-            }
-            ObservableList<Feat> obsFeatsList = FXCollections.observableArrayList(featsList);
-            this.classLevel1Feat.setItems(obsFeatsList);
-
-            this.classLevel1Feat.setOnAction((event) -> {
-                classLevel1FeatChosen();
-            }); 
-        }
-
-        // Place all other first level class features 
-        for( Feat feat : pfClass.getFeatures() ){
-            if(feat.getLevel() <= 1){
-                int row = this.classFeaturesGrid.getRowCount() + 1;
-                Label label = new Label();
-                label.setText(feat.getName() + ": ");
-                this.classFeaturesGrid.add(label, 0, row);
-
-                label = new Label();
-                label.setText(feat.getDescription());
-                this.classFeaturesGrid.add(label, 1, row);
-            }
-        }
+        this.updateClassFeatures();       
 
         // Enable subclass tab if applicable, else enable class_features tab
         if( pfClass.hasSubclass() ){
@@ -458,24 +501,20 @@ public class CharacterCreateController {
     }
 
     private void subclassChosen(){
-        /*
         Subclass subclass = subclassChoiceBox.getSelectionModel().getSelectedItem();
+        if( subclass == null )
+            return;
 
-        // Place all other first level subclass features 
-        for( Feat feat : pfClass.getSubclass().getFeatures() ){
-            if(feat.getLevel() <= 1){
-                int row = this.classFeaturesGrid.getRowCount() + 1;
-                Label label = new Label();
-                label.setText(feat.getName() + ": ");
-                this.classFeaturesGrid.add(label, 0, row);
+        this.subclassDescription.setText(subclass.getDescription());
 
-                label = new Label();
-                label.setText(feat.getDescription());
-                this.classFeaturesGrid.add(label, 1, row);
-            }
-        } 
-        */
+        this.updateClassFeatures();       
+
+         
+
+        // Undisable class features tab
+        this.classFeaturesTab.setDisable(false);
     }
+
 
     private void classLevel1FeatChosen(){
         Feat feat = classLevel1Feat.getSelectionModel().getSelectedItem();
@@ -491,6 +530,10 @@ public class CharacterCreateController {
         this.pfClasses = new ArrayList<>();
         this.skills = new ArrayList<>();
         this.pfItems = new ArrayList<>();
+
+        //this.expandingRowConstraints.setMinHeight(100);
+        this.expandingRowConstraints.setPrefHeight(Control.USE_COMPUTED_SIZE);
+
         File dir;
         File[] files;
 

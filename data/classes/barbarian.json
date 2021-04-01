@@ -1,5 +1,6 @@
 {
     "name": "Barbarian",
+    "description": "Rage consumes you in battle. You delight in wreaking havoc and using powerful weapons to carve through your enemies, relying on astonishing durability without needing complicated techniques or rigid training. Your rages draw upon a vicious instinct, which you might associate with an animal, a spirit, or some part of yourself. To many barbarians, brute force is a hammer and every problem looks like a nail, whereas others try to hold back the storm of emotions inside them and release their rage only when it matters most.",
     "hitpoints": 12,
     
     "keyAbility": "STR",
@@ -35,7 +36,8 @@
             "choices": [
               {
                 "name": "Ape",
-                "actions": {
+                "description": "You gain a fist unarmed attack that deals 1d10 B damage with the grapple trait",
+                "action": {
                     "name": "Ape Fist",
                     "description": "You attack with your fist dealing 1d10 B damage.",
                     "traits": [
@@ -47,19 +49,16 @@
             ]          
           }, 
           {
-            "type": "feat",
             "name": "Anathema",
             "level": 1,
             "description": "Flagrantly disrespecting an animal of your chosen kind is anathema to your instinct, as is using weapons while raging"
           },
           {
-            "type": "feat",
             "name": "Bestial Rage",
             "level": 1,
-            "description": "When you Rage, you gain your chosen animal’s unarmed attack (or attacks). The specific attack gained, the damage it deals, and its traits are listed. These attacks are in the brawling group. Your Rage action gains the morph, primal, and transmutation traits."
+            "description": "When you Rage, you gain your chosen animal’s unarmed attack (or attacks). The specific attack gained, the damage it deals, and its traits are determined by your Animal Instincts choice. These attacks are in the brawling group. Your Rage action gains the morph, primal, and transmutation traits."
           },
           {
-            "type": "feat",
             "name": "Specialization Ability",
             "level": 7,
             "description": "Increase the damage die size for the unarmed attacks granted by your chosen animal by one step, and increase the additional damage from Rage from 2 to 5 for your chosen animal’s unarmed attacks. The frog’s tongue attack and deer’s antler attack gain reach 10 feet. If you have greater weapon specialization, increase the damage from Rage from 5 to 12 for your chosen animal’s unarmed attacks."
