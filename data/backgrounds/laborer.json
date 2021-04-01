@@ -9,8 +9,7 @@
     "skills:athletics": "TRAINED",
     "skills:lore:labor": "TRAINED"
   },
-  "feats": [
-    {
+  "feat": {
     	"name":"Hefty Hauler",
     	"level": 1,
     	"description": "You can carry more than your frame implies. Increase your maximum and encumbered Bulk limits by 2.",
@@ -18,6 +17,5 @@
           "General",
           "Skill"    	
     	]
-    }
-  ]
+  }
 }

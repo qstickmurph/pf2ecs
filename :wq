@@ -30,7 +30,6 @@ import pf2ecs.model.Heritage;
 import pf2ecs.model.PfClass;
 import pf2ecs.model.PfItem;
 import pf2ecs.model.Skill;
-import pf2ecs.model.Subclass;
 
 public class CharacterCreateController {
     @FXML
@@ -117,12 +116,6 @@ public class CharacterCreateController {
     private Label classSkills;
     @FXML
     private Tab subclassTab;
-    @FXML
-    private Label subclassTypeDescription;
-    @FXML
-    private Label subclassDescription;
-    @FXML
-    private ChoiceBox<Subclass> subclassChoiceBox;
     @FXML
     private Tab classFeaturesTab;
     @FXML
@@ -310,8 +303,6 @@ public class CharacterCreateController {
         }
         ObservableList<Heritage> obsHeritageList = FXCollections.observableArrayList(ancestryHeritages);
         this.heritageChoiceBox.setItems(obsHeritageList);
-
-        this.heritageBackgroundTab.setDisable(false);
     }
 
     private void backgroundChosen(){
@@ -345,7 +336,6 @@ public class CharacterCreateController {
         this.backgroundFeat.setText(background.getFeat().getName());
 
         this.backgroundFeatDescription.setText(background.getFeat().getDescription());
-
     }
 
     private void classChosen(){
@@ -411,13 +401,13 @@ public class CharacterCreateController {
                 if( feat.getLevel() <= 1 ){
                     featsList.add(feat);
                 }
-            }
-            ObservableList<Feat> obsFeatsList = FXCollections.observableArrayList(featsList);
-            this.classLevel1Feat.setItems(obsFeatsList);
+                ObservableList<Feat> obsFeatsList = FXCollections.observableArrayList(featsList);
+                this.classLevel1Feat.setItems(obsFeatsList);
 
-            this.classLevel1Feat.setOnAction((event) -> {
-                classLevel1FeatChosen();
-            }); 
+                this.classLevel1Feat.setOnAction((event) -> {
+                    classLevel1FeatChosen();
+                }); 
+            }
         }
 
         // Place all other first level class features 
@@ -438,19 +428,6 @@ public class CharacterCreateController {
         if( pfClass.hasSubclass() ){
             this.subclassTab.setDisable(false);
             this.classFeaturesTab.setDisable(true);
-
-            this.subclassTypeDescription.setText(pfClass.getSubclassTypeDescription());
-            ArrayList<Subclass> subclassList = new ArrayList<>();
-            for( Subclass subclass : pfClass.getSubclasses() ){
-                subclassList.add(subclass);
-            }
-
-            ObservableList<Subclass> obsSubclassList = FXCollections.observableArrayList(subclassList);
-            this.subclassChoiceBox.setItems(obsSubclassList);
-
-            this.subclassChoiceBox.setOnAction((event) -> {
-                subclassChosen();
-            }); 
         }else {
             this.subclassTab.setDisable(true);
             this.classFeaturesTab.setDisable(false);

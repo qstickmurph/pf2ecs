@@ -159,4 +159,9 @@ public class Subclass {
             this.feats.remove(feat);
         }
     }
+    
+    @Override
+    public String toString(){
+        return this.name;
+    }
 }

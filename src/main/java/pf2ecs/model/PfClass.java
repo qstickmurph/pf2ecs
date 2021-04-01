@@ -43,6 +43,12 @@ public class PfClass {
 	
 	/** The number of free skills of the class */
 	private int freeSkills;
+    
+    /** Whether the class has a subclass or not */
+    private boolean subclass;
+
+    /** The description of the subclass mechanic */
+    private String subclassTypeDescription;
 	
 	/** The subclasses of the class */
 	private HashSet<Subclass> subclasses;
@@ -50,8 +56,11 @@ public class PfClass {
 	/** The features of the class */
 	private ArrayList<Feat> features;
 
+	/** The features of the class */
+	private ArrayList<Feat> feats;
+
 	/** Wheter the class gets a feat at level 1 */
-    private boolean level1Feat;
+    public boolean level1Feat;
 
 	/**  
      *  Empty Constructor Method
@@ -64,6 +73,9 @@ public class PfClass {
     	this.freeSkills = 0;
     	this.subclasses = new HashSet<>();
     	this.features = new ArrayList<>();
+        this.subclass = false;
+        this.subclassTypeDescription = "";
+        this.level1Feat = false;
     }
 
     /** 
@@ -260,6 +272,14 @@ public class PfClass {
             this.subclasses.remove(subclass);
         }
     }
+
+    public String getSubclassTypeDescription(){
+        return this.subclassTypeDescription;
+    }
+
+    public void setSubclassTypeDescription(String subclassTypeDescription){
+        this.subclassTypeDescription = subclassTypeDescription;
+    }
     
     /**
 	 * Getter for this.features.
@@ -293,6 +313,47 @@ public class PfClass {
         if(this.features.contains(feature)){
             this.features.remove(feature);
         }
+    }
+    
+    /**
+	 * Getter for this.feats.
+	 * @return Returns this.feats.
+	 */
+	public ArrayList<Feat> getFeats(){
+		return this.feats;
+	}
+
+	/**
+	 * Setter for this.feats.
+	 * @param feats (ArrayList<Feat>)
+	 */
+	public void setFeats(ArrayList<Feat> feats){
+		this.feats = feats;
+	}
+    
+	/**
+	 * Adds feat to this.feats.
+	 * @param feat (Feat) 
+	 */
+    public void addFeat(Feat feat){
+        this.feats.add(feat);
+    }
+
+	/**
+	 * Removes feat from this.feats if present.
+	 * @param feat (Feat)
+	 */
+    public void removeFeat(Feat feat){
+        if(this.feats.contains(feat)){
+            this.feats.remove(feat);
+        }
+    }
+    
+    /** 
+     * Returns true if this class has a subclass
+     */
+    public boolean hasSubclass(){
+        return this.subclass;
     }
 
     @Override
