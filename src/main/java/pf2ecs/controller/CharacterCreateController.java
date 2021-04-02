@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Control;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -19,6 +20,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.event.Event;
 import javafx.event.ActionEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -240,15 +242,230 @@ public class CharacterCreateController {
     private ArrayList<PfClass> pfClasses;
     private ArrayList<Skill> skills;
     private ArrayList<PfItem> pfItems;
+    private Hashtable<Ability, Integer> abilityScores;
 
     @FXML
     void overviewTabSelected(ActionEvent event) {
 
     }
 
-    @FXML
-    void createCharacterButtonPressed(ActionEvent event) {
+    void abilityScoresTabSelected(){
 
+    }
+
+    @FXML
+    void createCharacterButtonPressed(Event event) {
+
+    }
+
+    private void updateAbilityScoreChoices(){
+        // Remove old choice boxes
+        ArrayList<Node> remove = new ArrayList<>();
+        for( Node child :  this.abilityBoostsGrid.getChildren() ){
+            if( child instanceof ChoiceBox )
+                remove.add(child);
+        }
+        ObservableList<Node> obsRemove = FXCollections.observableArrayList(remove);
+        this.abilityBoostsGrid.getChildren().removeAll(obsRemove);
+
+        // Add new choice boxes
+        ArrayList<String> abilities;
+        int col;
+
+        // Add ancestry Ability Boosts
+        Ancestry ancestry = this.ancestryChoiceBox.getSelectionModel().getSelectedItem();
+        if( ancestry != null ){
+            col = 1;
+            abilities = ancestry.getAbilityBoosts();
+            for( String ability : abilities ){
+                if( col > 5 )
+                    break;
+                ChoiceBox<Ability> abilityChoiceBox = new ChoiceBox<Ability>();
+                this.abilityBoostsGrid.add(abilityChoiceBox, col, 0);
+                ArrayList<Ability> abilityList = new ArrayList<>();
+
+                if( ability.toUpperCase().equals("FREE") ){
+                    abilityList.add(Ability.STR);
+                    abilityList.add(Ability.DEX);
+                    abilityList.add(Ability.CON);
+                    abilityList.add(Ability.INT);
+                    abilityList.add(Ability.WIS);
+                    abilityList.add(Ability.CHA);
+                }else{
+                    for( String substring : ability.split("/") ){
+                        abilityList.add(Ability.toAbility(substring));
+                    }
+                }
+
+                ObservableList<Ability> obsAbilityList = FXCollections.observableArrayList(abilityList);
+                abilityChoiceBox.setItems(obsAbilityList);
+
+                abilityChoiceBox.setOnAction((event) ->{
+                    updateAbilityScores();
+                });
+
+                if( abilityList.size() == 1 )
+                    abilityChoiceBox.getSelectionModel().selectFirst();
+                col += 1;
+            }
+            
+            // Add ancestry ability flaws
+            abilities = ancestry.getAbilityFlaws();
+            col = 1;
+            for( String ability : abilities ){
+                if( col > 5 )
+                    break;
+                ChoiceBox<Ability> abilityChoiceBox = new ChoiceBox<Ability>();
+                this.abilityBoostsGrid.add(abilityChoiceBox, col, 1);
+                ArrayList<Ability> abilityList = new ArrayList<>();
+
+                if( ability.toUpperCase().equals("FREE") ){
+                    abilityList.add(Ability.STR);
+                    abilityList.add(Ability.DEX);
+                    abilityList.add(Ability.CON);
+                    abilityList.add(Ability.INT);
+                    abilityList.add(Ability.WIS);
+                    abilityList.add(Ability.CHA);
+                }else{
+                    for( String substring : ability.split("/") ){
+                        abilityList.add(Ability.toAbility(substring));
+                    }
+                }
+
+                ObservableList<Ability> obsAbilityList = FXCollections.observableArrayList(abilityList);
+                abilityChoiceBox.setItems(obsAbilityList);
+                
+                abilityChoiceBox.setOnAction((event) ->{
+                    updateAbilityScores();
+                });
+
+                if( abilityList.size() == 1 )
+                    abilityChoiceBox.getSelectionModel().selectFirst();
+
+                col += 1;
+            }
+        }
+
+        // Update background ability boosts
+        Background background = this.backgroundChoiceBox.getSelectionModel().getSelectedItem();
+        if( background != null ){
+            abilities = background.getAbilityBoosts();
+            col = 1;
+            for( String ability : abilities ){
+                if( col > 5 )
+                    break;
+                ChoiceBox<Ability> abilityChoiceBox = new ChoiceBox<Ability>();
+                this.abilityBoostsGrid.add(abilityChoiceBox, col, 2);
+                ArrayList<Ability> abilityList = new ArrayList<>();
+
+                if( ability.toUpperCase().equals("FREE") ){
+                    abilityList.add(Ability.STR);
+                    abilityList.add(Ability.DEX);
+                    abilityList.add(Ability.CON);
+                    abilityList.add(Ability.INT);
+                    abilityList.add(Ability.WIS);
+                    abilityList.add(Ability.CHA);
+                }else{
+                    for( String substring : ability.split("/") ){
+                        abilityList.add(Ability.toAbility(substring));
+                    }
+                }
+
+                ObservableList<Ability> obsAbilityList = FXCollections.observableArrayList(abilityList);
+                abilityChoiceBox.setItems(obsAbilityList);
+                
+                abilityChoiceBox.setOnAction((event) ->{
+                    updateAbilityScores();
+                });
+
+                if( abilityList.size() == 1 )
+                    abilityChoiceBox.getSelectionModel().selectFirst();
+                col += 1;
+            }
+        }
+
+        // Add class key ability
+        PfClass pfClass = this.classChoiceBox.getSelectionModel().getSelectedItem();
+        if( pfClass != null ){
+            Ability ability = pfClass.getKeyAbility();
+
+            ChoiceBox<Ability> abilityChoiceBox = new ChoiceBox<Ability>();
+            this.abilityBoostsGrid.add(abilityChoiceBox, 1, 3);
+            ArrayList<Ability> abilityList = new ArrayList<>();
+            abilityList.add(ability);
+            
+            ObservableList<Ability> obsAbilityList = FXCollections.observableArrayList(abilityList);
+            abilityChoiceBox.setItems(obsAbilityList);
+                
+            abilityChoiceBox.setOnAction((event) ->{
+                updateAbilityScores();
+            });
+
+
+            if( abilityList.size() == 1 )
+                abilityChoiceBox.getSelectionModel().selectFirst();
+        }
+
+        // Add free ability boosts
+        col = 1;
+        for( int i = 1; i < 5; i++){
+            ChoiceBox<Ability> abilityChoiceBox = new ChoiceBox<Ability>();
+            this.abilityBoostsGrid.add(abilityChoiceBox, col, 4);
+            ArrayList<Ability> abilityList = new ArrayList<>();
+
+            abilityList.add(Ability.STR);
+            abilityList.add(Ability.DEX);
+            abilityList.add(Ability.CON);
+            abilityList.add(Ability.INT);
+            abilityList.add(Ability.WIS);
+            abilityList.add(Ability.CHA);
+
+            ObservableList<Ability> obsAbilityList = FXCollections.observableArrayList(abilityList);
+            abilityChoiceBox.setItems(obsAbilityList);
+            
+            abilityChoiceBox.setOnAction((event) ->{
+                updateAbilityScores();
+            });
+
+            if( abilityList.size() == 1 )
+                abilityChoiceBox.getSelectionModel().selectFirst();
+            col += 1;
+        }
+
+        updateAbilityScores();
+    }
+
+    private void updateAbilityScores(){
+        // Set all ability scores to default 10
+        this.abilityScores.put(Ability.STR, 10);
+        this.abilityScores.put(Ability.DEX, 10);
+        this.abilityScores.put(Ability.CON, 10);
+        this.abilityScores.put(Ability.INT, 10);
+        this.abilityScores.put(Ability.WIS, 10);
+        this.abilityScores.put(Ability.CHA, 10);
+        
+        // Add 2 for each boost, subtract 2 for flaw
+        for( Node child : this.abilityBoostsGrid.getChildren() ){
+            if( child instanceof ChoiceBox ){
+                Ability ability = (Ability) ((ChoiceBox) child).getSelectionModel().getSelectedItem();
+                if( this.abilityBoostsGrid.getRowIndex(child) == 1 ){
+                    if( ability != null ){
+                        this.abilityScores.put(ability, this.abilityScores.get(ability) - 2);
+                    }
+                }else{
+                    if( ability != null ){
+                        this.abilityScores.put(ability, this.abilityScores.get(ability) + 2);
+                    }
+                }
+            }
+        }
+
+        this.strength.setText(String.valueOf(this.abilityScores.get(Ability.STR)));
+        this.dexterity.setText(String.valueOf(this.abilityScores.get(Ability.DEX)));
+        this.constitution.setText(String.valueOf(this.abilityScores.get(Ability.CON)));
+        this.intelligence.setText(String.valueOf(this.abilityScores.get(Ability.INT)));
+        this.wisdom.setText(String.valueOf(this.abilityScores.get(Ability.WIS)));
+        this.charisma.setText(String.valueOf(this.abilityScores.get(Ability.CHA)));
     }
 
     private void updateClassFeatures(){
@@ -418,41 +635,7 @@ public class CharacterCreateController {
         this.heritageChoiceBox.setItems(obsHeritageList);
 
         // Update ability scores tab
-        ArrayList<String> abilities = ancestry.getAbilityBoosts();
-        int col = 1;
-        for( String ability : abilities ){
-            if( col > 5 )
-                break;
-            ChoiceBox<Ability> abilityChoiceBox = new ChoiceBox<Ability>();
-            this.abilityBoostsGrid.add(abilityChoiceBox, col, 0);
-            ArrayList<Ability> abilityList = new ArrayList<>();
-            for( String substring : ability.split("/") ){
-                abilityList.add(Ability.toAbility(substring));
-            }
-            ObservableList<Ability> obsAbilityList = FXCollections.observableArrayList(abilityList);
-            abilityChoiceBox.setItems(obsAbilityList);
-            if( abilityList.size() == 1 )
-                abilityChoiceBox.getSelectionModel().selectFirst();
-            col += 1;
-        }
-        abilities = ancestry.getAbilityFlaws();
-        col = 1;
-        for( String ability : abilities ){
-            if( col > 5 )
-                break;
-            ChoiceBox<Ability> abilityChoiceBox = new ChoiceBox<Ability>();
-            this.abilityBoostsGrid.add(abilityChoiceBox, col, 1);
-            ArrayList<Ability> abilityList = new ArrayList<>();
-            for( String substring : ability.split("/") ){
-                abilityList.add(Ability.toAbility(substring));
-            }
-            ObservableList<Ability> obsAbilityList = FXCollections.observableArrayList(abilityList);
-            abilityChoiceBox.setItems(obsAbilityList);
-            if( abilityList.size() == 1 )
-                abilityChoiceBox.getSelectionModel().selectFirst();
-
-            col += 1;
-        }
+        this.updateAbilityScoreChoices();
 
         this.heritageBackgroundTab.setDisable(false);
     }
@@ -488,6 +671,8 @@ public class CharacterCreateController {
         this.backgroundFeat.setText(background.getFeat().getName());
 
         this.backgroundFeatDescription.setText(background.getFeat().getDescription());
+
+        this.updateAbilityScoreChoices();
 
         this.classTab.setDisable(false);
 
@@ -543,8 +728,8 @@ public class CharacterCreateController {
 
         this.updateClassFeatures();       
 
-
-
+        this.updateAbilityScoreChoices();
+        
         // Enable subclass tab if applicable, else enable class_features tab
         if( pfClass.hasSubclass() ){
             this.subclassTab.setDisable(false);
@@ -600,6 +785,9 @@ public class CharacterCreateController {
         this.pfClasses = new ArrayList<>();
         this.skills = new ArrayList<>();
         this.pfItems = new ArrayList<>();
+        this.abilityScores = new Hashtable<>();
+
+        this.updateAbilityScoreChoices();
 
         //this.expandingRowConstraints.setMinHeight(100);
         this.expandingRowConstraints.setPrefHeight(Control.USE_COMPUTED_SIZE);
@@ -681,6 +869,8 @@ public class CharacterCreateController {
         });
         // Read skill files
         // Read item files
+        //
+        
     }
 }
 
